@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/look_frag_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/w_20"
+                android:layout_marginTop="@dimen/h_30"
+                android:text="基础课学习记录:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/h_40" />
+
+            <com.whx.ott.widget.RecyclerViewTV
+                android:id="@+id/basic_frag_rc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/h_245"
+                android:layout_below="@+id/look_frag_tv"
+                android:focusable="false" />
+
+            <TextView
+                android:id="@+id/all_frag_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/basic_frag_rc"
+                android:layout_marginLeft="@dimen/w_20"
+                android:text="特色课学习记录:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/h_40" />
+
+            <com.whx.ott.widget.RecyclerViewTV
+                android:id="@+id/feature_frag_rc"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/h_245"
+                android:layout_below="@+id/all_frag_tv"
+                android:focusable="false" />
+
+            <TextView
+                android:id="@+id/all_frag_tv_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/feature_frag_rc"
+                android:layout_marginLeft="@dimen/w_20"
+                android:text="小初课学习记录:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/h_40" />
+
+            <com.whx.ott.widget.RecyclerViewTV
+                android:id="@+id/feature_frag_rc_country"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/h_245"
+                android:layout_below="@+id/all_frag_tv_country"
+                android:focusable="false" />
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <com.whx.ott.widget.MainUpView
+        android:id="@+id/mainUpView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?><!-- RecyclerView DEMO -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/background_new"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.whx.ott.widget.RecyclerViewTV
+            android:id="@+id/top_mine_rv"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/h_100"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/h_10"
+            android:focusable="false" />
+
+        <TextView
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/h_1"
+            android:layout_below="@id/top_mine_rv"
+            android:background="@color/white" />
+
+        <LinearLayout
+            android:id="@+id/top_mine_ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/line"
+            android:orientation="vertical"></LinearLayout>
+    </RelativeLayout>
+    <!-- 最顶层边框 -->
+
+    <com.whx.ott.widget.MainUpView
+        android:id="@+id/mainUpView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

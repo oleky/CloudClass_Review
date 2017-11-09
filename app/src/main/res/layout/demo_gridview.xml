@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:clipChildren="false">
+<com.whx.ott.widget.GridViewTV
+    android:id="@+id/gridView"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:numColumns="3"
+    android:layout_gravity="center"
+    android:clipChildren="false"
+    android:columnWidth="@dimen/w_250"
+    android:gravity="center_vertical"
+    android:scrollbars="none"
+    android:horizontalSpacing="@dimen/w_30"
+    android:verticalSpacing="@dimen/h_30">
+</com.whx.ott.widget.GridViewTV>
+
+    <com.whx.ott.widget.MainUpView
+        android:id="@+id/mainUpView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

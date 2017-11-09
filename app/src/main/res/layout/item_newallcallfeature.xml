@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="horizontal">
+
+
+    <TextView
+        android:id="@+id/item_allclass_feature_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="语文视频第一  "
+        android:textSize="@dimen/h_16" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="已播:"
+        android:textSize="@dimen/h_16" />
+
+    <TextView
+        android:id="@+id/item_allclass_feature_used"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1节"
+        android:textSize="@dimen/h_16" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="次  "
+        android:textSize="@dimen/h_16" />
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="总共:"-->
+        <!--android:textSize="20sp" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/item_allclass_feature_all"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="6节"-->
+        <!--android:textSize="20sp" />-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="次"-->
+        <!--android:textSize="20sp" />-->
+
+</LinearLayout>

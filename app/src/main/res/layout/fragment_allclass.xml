@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/w_54"
+        android:layout_marginTop="@dimen/h_10"
+        android:text="基础课:"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+
+    <RelativeLayout
+        android:id="@+id/allclass_ll_top"
+        android:layout_width="@dimen/w_400"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/w_54"
+        android:layout_marginTop="@dimen/h_20"
+
+        android:background="@drawable/rectchinese">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true">
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="基础课剩余课时:"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/classhour_mine_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5节"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/h_10"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/w_54"
+        android:layout_marginTop="@dimen/h_10"
+        android:text="特色课:"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+    <RelativeLayout
+        android:layout_width="@dimen/w_400"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/w_54"
+        android:layout_marginTop="@dimen/h_20"
+        android:background="@drawable/rectchemistry"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/allclass_ll_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/h_25"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="语文剩余课时:  "
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/yw_classhour_mine_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5节"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/w_10"
+                android:text="数学剩余课时:  "
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/sx_classhour_mine_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5节"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/allclass_ll_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/allclass_ll_1"
+            android:layout_marginTop="@dimen/h_20"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="物理剩余课时:  "
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/wl_classhour_mine_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5节"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/w_10"
+                android:text="英语剩余课时:  "
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/yy_classhour_mine_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5节"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/allclass_ll_2"
+            android:layout_marginTop="@dimen/h_20"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="化学剩余课时:  "
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/hx_classhour_mine_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5节"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/w_10"
+                android:text="生物剩余课时:  "
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/sw_classhour_mine_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5节"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

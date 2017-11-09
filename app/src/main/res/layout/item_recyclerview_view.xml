@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/w_300"
+    android:layout_height="@dimen/h_168"
+    android:layout_marginLeft="@dimen/w_40"
+    android:layout_marginTop="@dimen/h_50"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+    <ImageView
+        android:id="@+id/item_rv_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"/>
+    <ImageView
+        android:id="@+id/item_rv_iv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY" />
+    <TextView
+        android:id="@+id/item_rv_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="学科"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

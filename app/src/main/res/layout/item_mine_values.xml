@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/w_300"
+    android:layout_height="@dimen/h_168"
+    android:layout_marginLeft="@dimen/w_40"
+    android:layout_marginTop="@dimen/h_50"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+    <ImageView
+        android:id="@+id/item_mine_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"/>
+    <ImageView
+        android:id="@+id/item_mine_iv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY" />
+    <TextView
+        android:id="@+id/id_item_mine_year_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="课题"
+        android:textColor="@color/white"
+        android:textSize="@dimen/w_18"
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/item_mine_iv2"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/w_20"/>
+
+    <TextView
+        android:id="@+id/id_item_mine_term_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/w_12"
+        android:layout_alignBottom="@+id/id_item_mine_year_name"
+        android:layout_toEndOf="@+id/id_item_mine_year_name"
+        android:layout_marginStart="18dp" />
+
+    <TextView
+        android:id="@+id/id_item_mine_term_name1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_item_mine_term_name"
+        android:layout_marginTop="@dimen/h_6"
+        android:layout_marginLeft="@dimen/w_20"
+        android:textColor="@color/white"
+        android:textSize="@dimen/w_12" />
+
+    <TextView
+        android:id="@+id/id_item_mine_grade_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/id_item_mine_term_name1"
+        android:layout_marginLeft="@dimen/w_20"
+        android:layout_toRightOf="@+id/id_item_mine_term_name1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/w_12" />
+
+    <TextView
+        android:id="@+id/id_item_mine_class_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/id_item_mine_term_name1"
+        android:layout_below="@+id/id_item_mine_term_name1"
+        android:text=" 诗歌鉴赏以高分作文综合能力全面提升训练（上）"
+        android:layout_marginTop="@dimen/h_6"
+        android:textColor="@color/white"
+        android:layout_marginBottom="@dimen/h_1"
+        android:textSize="@dimen/w_14" />
+    <TextView
+        android:id="@+id/id_item_mine_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_item_mine_class_name"
+        android:text="播放时间: "
+        android:textColor="@color/white"
+        android:textSize="@dimen/w_14"
+        android:layout_marginLeft="@dimen/w_20"/>
+    <TextView
+        android:id="@+id/id_item_mine_create_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/id_item_mine_class_name"
+        android:text="2016-08-27 12:34:32"
+        android:textColor="@color/white"
+        android:textSize="@dimen/w_14"
+        android:layout_toEndOf="@+id/id_item_mine_tv"/>
+
+    />
+
+</RelativeLayout>

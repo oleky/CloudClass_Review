@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/background_new">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/h_56"
+        android:layout_marginTop="@dimen/h_58"
+        android:layout_marginLeft="@dimen/w_158"
+        android:layout_marginRight="@dimen/w_158"
+        android:background="@drawable/circle_2"
+        android:id="@+id/id_topsearch_home"
+        android:paddingLeft="@dimen/w_15"
+        android:paddingRight="@dimen/w_15"
+        android:gravity="center"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:inputType="text"
+        android:hint="请输入搜索的课程名"
+        android:imeOptions="actionSearch"
+        android:textColor="@color/white"
+        android:drawableRight="@drawable/search"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/h_1"
+        android:src="@color/white"
+        android:focusable="false"
+        android:layout_marginTop="@dimen/h_157"/>
+
+    <com.whx.ott.widget.RecyclerViewTV
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/id_gridview_search"
+        android:layout_marginTop="@dimen/h_215"
+        android:layout_marginLeft="@dimen/w_12"
+        android:layout_marginRight="@dimen/w_12"
+        android:layout_gravity="center"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:gravity="center">
+    </com.whx.ott.widget.RecyclerViewTV>
+
+    <com.whx.ott.widget.MainUpView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mainUpViewSearch">
+    </com.whx.ott.widget.MainUpView>
+</RelativeLayout>
