@@ -151,7 +151,7 @@ class LivePresenter(private val mContext: Context, private var mLiveView: LiveVi
                 .compose(RxUtil.rxScheduleHelper())
                 .subscribe({ result ->
                     if (result.code == "0") {
-                        val time:Double = result.data[0].town_money.toDouble()
+                        val time:Double = result.data[0].user_money.toDouble()
                         if (time >= 1) {
                             DelegatesExt.preference(mContext, "country_user_money", result.data[0].town_money)
                             mLiveView?.paySucc()
@@ -159,7 +159,10 @@ class LivePresenter(private val mContext: Context, private var mLiveView: LiveVi
                             mLiveView?.payFailed("余额不足，请及时充值")
                         }
                     }
-                }, { mLiveView?.payFailed("网络状况差") })
+                }, {error -> error.printStackTrace()
+                    mLiveView?.payFailed("网络状况差")
+
+                })
         }
     }
 

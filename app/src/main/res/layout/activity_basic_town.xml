@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/w_16"
-        android:text="分类："
+        android:text="年份："
         android:textColor="@color/white"
         android:layout_marginLeft="@dimen/w_52"
         android:focusable="false"
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/w_16"
-        android:text="阶段："
+        android:text="学期："
         android:textColor="@color/white"
         android:layout_marginLeft="@dimen/w_52"
         android:focusable="false"
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/w_16"
-        android:text="科目："
+        android:text="学科："
         android:textColor="@color/white"
         android:layout_marginLeft="@dimen/w_52"
         android:focusable="false"
@@ -61,13 +61,12 @@
         />
 
 
-
     <com.whx.ott.widget.RecyclerViewTV
         android:layout_width="wrap_content"
         android:layout_height="@dimen/h_42"
         android:id="@+id/id_years_new"
         android:layout_marginLeft="@dimen/w_112"
-        android:layout_marginTop="@dimen/h_11"
+        android:layout_marginTop="@dimen/h_15"
         android:clipChildren="false"
         android:clipToPadding="false"/>
 
@@ -111,12 +110,14 @@
         android:id="@+id/id_divider"
         android:layout_marginTop="@dimen/h_300"/>
 
-
         <com.whx.ott.widget.RecyclerViewTV
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:focusable="false"
-            android:layout_margin="@dimen/w_12"
+            android:layout_marginLeft="@dimen/w_12"
+            android:layout_marginRight="@dimen/w_12"
+            android:layout_marginTop="@dimen/h_66"
+            android:layout_marginBottom="@dimen/h_12"
             android:layout_below="@+id/id_divider"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"

@@ -11,112 +11,120 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/w_16"
-        android:text="分类："
+        android:layout_height="20dp"
+        android:textSize="14sp"
+        android:text="年份："
+        android:gravity="center"
         android:textColor="@color/white"
-        android:layout_marginLeft="@dimen/w_52"
+        android:layout_marginLeft="55dp"
         android:focusable="false"
         android:layout_alignBottom="@+id/id_years_new"
         />
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/w_16"
-        android:text="阶段："
+        android:layout_height="20dp"
+        android:textSize="14sp"
+        android:text="学年："
+        android:gravity="center"
         android:textColor="@color/white"
-        android:layout_marginLeft="@dimen/w_52"
+        android:layout_marginLeft="55dp"
         android:focusable="false"
         android:layout_alignBottom="@+id/id_terms_new"
         />
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/w_16"
+        android:layout_height="20dp"
+        android:textSize="14sp"
         android:text="年级："
+        android:gravity="center"
         android:textColor="@color/white"
-        android:layout_marginLeft="@dimen/w_52"
+        android:layout_marginLeft="55dp"
         android:focusable="false"
         android:layout_alignBottom="@+id/id_grades_new"
         />
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/w_16"
-        android:text="科目："
+        android:layout_height="20dp"
+        android:textSize="14sp"
+        android:text="学科："
+        android:gravity="center"
         android:textColor="@color/white"
-        android:layout_marginLeft="@dimen/w_52"
+        android:layout_marginLeft="55dp"
         android:focusable="false"
         android:layout_alignBottom="@+id/id_subjects_new"
         />
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/w_16"
+        android:layout_height="20dp"
+        android:textSize="14sp"
         android:text="教师："
+        android:gravity="center"
         android:textColor="@color/white"
-        android:layout_marginLeft="@dimen/w_52"
+        android:layout_marginLeft="55dp"
         android:focusable="false"
-        android:layout_alignBottom="@+id/id_teachers_new"
-        />
-
-
+        android:layout_alignBottom="@+id/id_teachers_new"/>
 
     <com.whx.ott.widget.RecyclerViewTV
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/h_42"
+        android:layout_height="20dp"
         android:id="@+id/id_years_new"
-        android:layout_marginLeft="@dimen/w_112"
-        android:layout_marginTop="@dimen/h_11"
+        android:layout_marginLeft="101dp"
+        android:layout_marginTop="10dp"
         android:clipChildren="false"
+        android:orientation="horizontal"
         android:clipToPadding="false"/>
 
     <com.whx.ott.widget.RecyclerViewTV
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/h_42"
+        android:layout_height="20dp"
         android:id="@+id/id_terms_new"
         android:layout_below="@+id/id_years_new"
-        android:layout_marginLeft="@dimen/w_112"
+        android:layout_marginLeft="101dp"
+        android:orientation="horizontal"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:layout_marginTop="@dimen/h_11" />
+        android:layout_marginTop="15dp" />
 
     <com.whx.ott.widget.RecyclerViewTV
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/h_42"
+        android:layout_height="20dp"
         android:id="@+id/id_grades_new"
+        android:orientation="horizontal"
         android:layout_below="@+id/id_terms_new"
-        android:layout_marginLeft="@dimen/w_112"
-        android:layout_marginTop="@dimen/h_11" />
+        android:layout_marginLeft="101dp"
+        android:layout_marginTop="15dp" />
 
     <com.whx.ott.widget.RecyclerViewTV
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/h_42"
+        android:layout_height="20dp"
+        android:orientation="horizontal"
         android:id="@+id/id_subjects_new"
         android:layout_below="@+id/id_grades_new"
-        android:layout_marginLeft="@dimen/w_112"
-        android:layout_marginTop="@dimen/h_11" />
+        android:layout_marginLeft="101dp"
+        android:layout_marginTop="15dp" />
 
     <com.whx.ott.widget.RecyclerViewTV
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/h_42"
+        android:layout_height="20dp"
+        android:orientation="horizontal"
         android:id="@+id/id_teachers_new"
         android:layout_below="@+id/id_subjects_new"
-        android:layout_marginLeft="@dimen/w_112"
-        android:layout_marginTop="@dimen/h_11" />
+        android:layout_marginLeft="101dp"
+        android:layout_marginTop="15dp" />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:src="@color/white"
         android:id="@+id/id_divider"
-        android:layout_marginTop="@dimen/h_300"/>
+        android:layout_below="@+id/id_teachers_new"
+        android:layout_marginTop="10dp"/>
 
 
         <com.whx.ott.widget.RecyclerViewTV
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:focusable="false"
-            android:layout_margin="@dimen/w_12"
+            android:layout_margin="26dp"
             android:layout_below="@+id/id_divider"
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
@@ -129,6 +137,7 @@
     <com.whx.ott.widget.MainUpView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:id="@+id/id_mainUpView_new">
     </com.whx.ott.widget.MainUpView>
 </RelativeLayout>

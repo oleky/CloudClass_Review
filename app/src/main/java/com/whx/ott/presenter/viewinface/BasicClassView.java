@@ -12,4 +12,6 @@ public interface BasicClassView {
     void getDate(List<CoursesBean> cList);
 
     void geturl(String url);
+
+    void moreDate(List<CoursesBean> mList);
 }

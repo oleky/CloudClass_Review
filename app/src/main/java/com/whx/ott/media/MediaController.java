@@ -61,28 +61,21 @@ public class MediaController extends FrameLayout implements IMediaController {
     private TextView tvRateNomal;
     private TextView tvRateSlow;
     private TextView tvRateHigh;
-    private ImageView ivBack;
-    private TextView tvTitle;
 
     private ActionBar mActionBar;
 
     private boolean mUseFastForward;
-    private String mTitle = "云教室视频";
 
     private AudioManager mAM;
     private Runnable mLastSeekBarRunnable;
     private boolean mDisableProgress = false;
     private OnClickSpeedAdjustListener mOnClickSpeedAdjustListener;
-    private OnBackListener mBackListener;
 
 
     public interface OnClickSpeedAdjustListener {
         void onClickNormal();
         void onClickFaster();
         void onClickSlower();
-    }
-    public interface OnBackListener {
-        void back();
     }
 
     public MediaController(Context context, AttributeSet attrs) {
@@ -107,9 +100,7 @@ public class MediaController extends FrameLayout implements IMediaController {
         }
     }
 
-    public void setControllerTitle(String title) {
-        mTitle = title;
-    }
+
 
 
     public MediaController(Context context, boolean useFastForward, boolean disableProgressBar) {
@@ -123,9 +114,6 @@ public class MediaController extends FrameLayout implements IMediaController {
         mUseFastForward = useFastForward;
     }
 
-    public void setBackListener(OnBackListener listener) {
-        mBackListener = listener;
-    }
 
     public void setOnClickSpeedAdjustListener(OnClickSpeedAdjustListener listener) {
         mOnClickSpeedAdjustListener = listener;
@@ -167,16 +155,16 @@ public class MediaController extends FrameLayout implements IMediaController {
 
     private void initControllerView(View v) {
         // By default these are hidden.
-        mPrevButton = (ImageButton) v.findViewById(R.id.prev);
+        mPrevButton = v.findViewById(R.id.prev);
         if (mPrevButton != null) {
             mPrevButton.setVisibility(View.GONE);
         }
-        mNextButton = (ImageButton) v.findViewById(R.id.next);
+        mNextButton = v.findViewById(R.id.next);
         if (mNextButton != null) {
             mNextButton.setVisibility(View.GONE);
         }
 
-        mFfwdButton = (ImageButton) v.findViewById(R.id.ffwd);
+        mFfwdButton = v.findViewById(R.id.ffwd);
         if (mFfwdButton != null) {
             mFfwdButton.setVisibility(GONE);
 //            mFfwdButton.setOnClickListener(mFfwdListener);
@@ -185,7 +173,7 @@ public class MediaController extends FrameLayout implements IMediaController {
 //            }
         }
 
-        mRewButton = (ImageButton) v.findViewById(R.id.rew);
+        mRewButton = v.findViewById(R.id.rew);
         if (mRewButton != null) {
             mRewButton.setVisibility(GONE);
 //            mRewButton.setOnClickListener(mRewListener);
@@ -193,30 +181,17 @@ public class MediaController extends FrameLayout implements IMediaController {
 //                mRewButton.setVisibility(mUseFastForward ? View.VISIBLE : View.GONE);
 //            }
         }
-        mPauseButton = (ImageButton) v.findViewById(R.id.pause);
+        mPauseButton = v.findViewById(R.id.pause);
         if (mPauseButton != null) {
             mPauseButton.requestFocus();
             mPauseButton.setOnClickListener(mPauseListener);
         }
 
-        ivBack = v.findViewById(R.id.iv_back);
-        tvTitle = v.findViewById(R.id.video_title);
 
-        if (tvTitle != null) {
-            tvTitle.setText(mTitle);
-        }
-        if (ivBack != null) {
-            ivBack.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
 
-                }
-            });
-        }
-
-        tvRateNomal = (TextView) v.findViewById(R.id.rate_nomal);
-        tvRateSlow = (TextView) v.findViewById(R.id.rate_slow);
-        tvRateHigh = (TextView) v.findViewById(R.id.rate_high);
+        tvRateNomal = v.findViewById(R.id.rate_nomal);
+        tvRateSlow = v.findViewById(R.id.rate_slow);
+        tvRateHigh = v.findViewById(R.id.rate_high);
         if (tvRateNomal != null) {
             tvRateNomal.setOnClickListener(mRateNomalListener);
 
@@ -229,10 +204,10 @@ public class MediaController extends FrameLayout implements IMediaController {
             tvRateHigh.setOnClickListener(mRateHighListener);
         }
 
-        mProgress = (SeekBar) v.findViewById(R.id.mediacontroller_progress);
+        mProgress = v.findViewById(R.id.mediacontroller_progress);
         if (mProgress != null) {
             if (mProgress instanceof SeekBar) {
-                SeekBar seeker = (SeekBar) mProgress;
+                SeekBar seeker = mProgress;
                 seeker.setOnSeekBarChangeListener(mSeekListener);
                 seeker.setThumbOffset(1);
             }
@@ -240,8 +215,8 @@ public class MediaController extends FrameLayout implements IMediaController {
             mProgress.setEnabled(!mDisableProgress);
         }
 
-        mEndTime = (TextView) v.findViewById(R.id.time);
-        mCurrentTime = (TextView) v.findViewById(R.id.time_current);
+        mEndTime = v.findViewById(R.id.time);
+        mCurrentTime = v.findViewById(R.id.time_current);
     }
 
     /**
@@ -283,7 +258,7 @@ public class MediaController extends FrameLayout implements IMediaController {
     }
 
     public interface OnShownListener {
-        public void onShown();
+        void onShown();
     }
 
     private OnShownListener mShownListener;
@@ -293,7 +268,7 @@ public class MediaController extends FrameLayout implements IMediaController {
     }
 
     public interface OnHiddenListener {
-        public void onHidden();
+        void onHidden();
     }
 
     private OnHiddenListener mHiddenListener;
@@ -476,7 +451,7 @@ public class MediaController extends FrameLayout implements IMediaController {
             if (!fromuser)
                 return;
 
-            final long newposition = (long) (mDuration * progress) / 1000;
+            final long newposition = mDuration * progress / 1000;
             String time = generateTime(newposition);
             if (mInstantSeeking) {
                 mHandler.removeCallbacks(mLastSeekBarRunnable);

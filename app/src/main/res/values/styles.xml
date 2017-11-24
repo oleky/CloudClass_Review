@@ -24,27 +24,15 @@
         <item name="android:layout_height">52dip</item>
     </style>
 
-    <style name="MediaButtonCompat.Previous">
-        <item name="android:src">@mipmap/vvc_ic_media_previous</item>
-    </style>
 
-    <style name="MediaButtonCompat.Next">
-        <item name="android:src">@mipmap/vvc_ic_media_next</item>
-    </style>
-
-    <style name="MediaButtonCompat.Play">
-        <item name="android:src">@mipmap/vvc_ic_media_play</item>
-    </style>
-
-    <style name="MediaButtonCompat.Ffwd">
-        <item name="android:src">@mipmap/vvc_ic_media_ff</item>
-    </style>
-
-    <style name="MediaButtonCompat.Rew">
-        <item name="android:src">@mipmap/vvc_ic_media_rew</item>
-    </style>
-
-    <style name="MediaButtonCompat.Pause">
-        <item name="android:src">@mipmap/vvc_ic_media_pause</item>
+    <style name="Custom_Progress" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:windowBackground">@color/half_trans</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
     </style>
 </resources>

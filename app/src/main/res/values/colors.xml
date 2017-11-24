@@ -23,4 +23,5 @@
     <!-- 点击后背景色 -->
     <color name="bg_code_after">#159c88</color>
     <color name="text_main">#333333</color>
+    <color name="half_trans">#80ffffff</color>
 </resources>

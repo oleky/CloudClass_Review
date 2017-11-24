@@ -8,9 +8,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,7 @@ import com.whx.ott.db.TownDBManager;
 import com.whx.ott.presenter.BasicClassPresenter;
 import com.whx.ott.presenter.viewinface.BasicClassView;
 import com.whx.ott.util.SharedpreferenceUtil;
+import com.whx.ott.widget.CustomProgressDialog;
 import com.whx.ott.widget.GridLayoutManagerTV;
 import com.whx.ott.widget.LinearLayoutManagerTV;
 import com.whx.ott.widget.MainUpView;
@@ -64,7 +67,7 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
     public static final String END          = "end";
     TestUrl test;
     private int start_item  = 0;            //分页开始
-    private int end_item    =start_item +100;//分页结束 共100条
+    private int end_item    =100;//分页结束 共100条
     private String macAdress = "";
     private RecyclerViewTV years_gp, terms_gp, grades_gp, subjects_gp, teachers_gp,results_gp;
     private View                oldView;
@@ -99,6 +102,7 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
         @Override
         public void handleMessage(Message msg) {
             int key = msg.what;
+            start_item = 0;
             switch (key) {
                 case 1:
                     singleList.set(0,(HashMap<String,String>)msg.obj);
@@ -163,13 +167,13 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
 
 
     private void initRecycler() {
-        years_gp    = (RecyclerViewTV) findViewById(R.id.id_years_new);
-        terms_gp    = (RecyclerViewTV) findViewById(R.id.id_terms_new);
-        grades_gp   = (RecyclerViewTV) findViewById(R.id.id_grades_new);
-        subjects_gp = (RecyclerViewTV) findViewById(R.id.id_subjects_new);
-        teachers_gp = (RecyclerViewTV) findViewById(R.id.id_teachers_new);
-        results_gp  = (RecyclerViewTV) findViewById(R.id.id_gridview_new);
-        mainUpView1 = (MainUpView)     findViewById(R.id.id_mainUpView_new);
+        years_gp    = findViewById(R.id.id_years_new);
+        terms_gp    = findViewById(R.id.id_terms_new);
+        grades_gp   = findViewById(R.id.id_grades_new);
+        subjects_gp = findViewById(R.id.id_subjects_new);
+        teachers_gp = findViewById(R.id.id_teachers_new);
+        results_gp  = findViewById(R.id.id_gridview_new);
+        mainUpView1 = findViewById(R.id.id_mainUpView_new);
 
         mainUpView1.setEffectBridge(new RecyclerViewBridge());
         mRecyclerViewBridge = (RecyclerViewBridge) mainUpView1.getEffectBridge();
@@ -218,10 +222,14 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
             @Override
             public void onItemClick(RecyclerViewTV parent, View itemView, int position) {
                 int count = parent.getChildCount();
-//                for (int i = 0; i < count; i++) {
+                for (int i = 0; i < count; i++) {
 //                    parent.getChildAt(i).setBackgroundResource(R.drawable.colorfulbg);
-//                }
+                    ((TextView) parent.getChildAt(i)).setTextSize(14);
+                    ((TextView) parent.getChildAt(i)).setTextColor(Color.WHITE);
+                }
 //                itemView.setBackgroundResource(R.drawable.item_rectangle);
+                ((TextView) itemView).setTextColor(Color.YELLOW);
+                ((TextView) itemView).setTextSize(16);
                 int id = yearList.get(position).getId();
                 //请求服务器，返回参数更新下面UI
                 Message msg = Message.obtain();
@@ -262,10 +270,14 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
             @Override
             public void onItemClick(RecyclerViewTV parent, View itemView, int position) {
               int count =  parent.getChildCount();
-//                for (int i = 0; i < count; i++) {
+                for (int i = 0; i < count; i++) {
 //                    parent.getChildAt(i).setBackgroundResource(R.drawable.colorfulbg);
-//                }
+                    ((TextView) parent.getChildAt(i)).setTextSize(14);
+                    ((TextView) parent.getChildAt(i)).setTextColor(Color.WHITE);
+                }
 //                itemView.setBackgroundResource(R.drawable.item_rectangle);
+                ((TextView) itemView).setTextColor(Color.YELLOW);
+                ((TextView) itemView).setTextSize(16);
 
                 int id = termList.get(position).getId();
                 String gradeids = termList.get(position).getGrade_ids();
@@ -305,11 +317,14 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
             @Override
             public void onItemClick(RecyclerViewTV parent, View itemView, int position) {
                 int count = parent.getChildCount();
-//                for (int i = 0; i < count; i++) {
+                for (int i = 0; i < count; i++) {
 //                    parent.getChildAt(i).setBackgroundResource(R.drawable.colorfulbg);
-//
-//                }
+                    ((TextView) parent.getChildAt(i)).setTextSize(14);
+                    ((TextView) parent.getChildAt(i)).setTextColor(Color.WHITE);
+                }
 //                itemView.setBackgroundResource(R.drawable.item_rectangle);
+                ((TextView) itemView).setTextColor(Color.YELLOW);
+                ((TextView) itemView).setTextSize(16);
 
                 int id = gradeList.get(position).getId();
                 //请求服务器，返回参数更新下面UI
@@ -339,11 +354,14 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
             @Override
             public void onItemClick(RecyclerViewTV parent, View itemView, int position) {
                 int count = parent.getChildCount();
-//                for (int i = 0; i < count; i++) {
+                for (int i = 0; i < count; i++) {
 //                    parent.getChildAt(i).setBackgroundResource(R.drawable.colorfulbg);
-//
-//                }
+                    ((TextView) parent.getChildAt(i)).setTextSize(14);
+                    ((TextView) parent.getChildAt(i)).setTextColor(Color.WHITE);
+                }
 //                itemView.setBackgroundResource(R.drawable.item_rectangle);
+                ((TextView) itemView).setTextColor(Color.YELLOW);
+                ((TextView) itemView).setTextSize(16);
 
                 teacherList = manager.getTeacherList(position + 1);
                 initTeacher();
@@ -377,11 +395,14 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
             @Override
             public void onItemClick(RecyclerViewTV parent, View itemView, int position) {
                 int count = parent.getChildCount();
-//                for (int i = 0; i < count; i++) {
+                for (int i = 0; i < count; i++) {
 //                    parent.getChildAt(i).setBackgroundResource(R.drawable.colorfulbg);
-//
-//                }
+                    ((TextView) parent.getChildAt(i)).setTextSize(14);
+                    ((TextView) parent.getChildAt(i)).setTextColor(Color.WHITE);
+                }
 //                itemView.setBackgroundResource(R.drawable.item_rectangle);
+                ((TextView) itemView).setTextColor(Color.YELLOW);
+                ((TextView) itemView).setTextSize(16);
 
                 int id = teacherList.get(position).getId();
                 //请求服务器，返回参数更新下面UI
@@ -409,22 +430,35 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
         map.put(SUBJECTID, mList.get(3).get(SUBJECTID));
         map.put(TEACHERID, mList.get(4).get(TEACHERID));
         mClassPresenter.getTownClassList(map);
-
         }
 
+    private void loadMore(List<Map<String,String>> mList,int start,int end) {
+        Map<String, String> map = new HashMap<>();
+        map.put(START, start + "");
+        map.put(END, end + "");
+        map.put("devid", macAdress);
+        map.put(YEARID, mList.get(0).get(YEARID));
+        map.put(TERMID, mList.get(1).get(TERMID));
+        map.put(GRADEID, mList.get(2).get(GRADEID));
+        map.put(SUBJECTID, mList.get(3).get(SUBJECTID));
+        map.put(TEACHERID, mList.get(4).get(TEACHERID));
+        mClassPresenter.loadmoreTownList(map);
+    }
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
 //        mRecyclerViewBridge.setFocusView(v, oldView, 1.05f);
-        v.animate().scaleX(1.05f).scaleY(1.05f).setDuration(300);
+        v.animate().scaleX(1.1f).scaleY(1.1f).setDuration(300);
         if (v instanceof TextView) {
             ((TextView) v).setTextColor(Color.YELLOW);
             ((TextView) v).setTextSize(16);
+            v.animate().scaleX(1.4f).scaleY(1.4f).setDuration(300);
         }
         if (oldView != null) {
             oldView.animate().scaleX(1.0f).scaleY(1.0f).setDuration(300);
             if (oldView instanceof TextView) {
                 ((TextView) oldView).setTextColor(Color.WHITE);
+                ((TextView) oldView).setTextSize(14);
             }
         }
         oldView = v;
@@ -433,49 +467,34 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
 
     @Override
     public void onItemPreSelected(RecyclerViewTV parent, View itemView, int position) {
-//        mRecyclerViewBridge.setUnFocusView(itemView);
         itemView.animate().scaleX(1.0f).scaleY(1.0f).setDuration(300);
-        if (itemView instanceof TextView) {
-            ((TextView) itemView).setTextColor(Color.WHITE);
-
-        }
     }
 
     @Override
     public void onItemSelected(RecyclerViewTV parent, View itemView, int position) {
-//        mRecyclerViewBridge.setFocusView(itemView, 1.05f);
-        itemView.animate().scaleX(1.05f).scaleY(1.05f).setDuration(300);
+        itemView.animate().scaleX(1.1f).scaleY(1.1f).setDuration(300);
         if (itemView instanceof TextView) {
-            ((TextView) itemView).setTextColor(Color.YELLOW);
-            ((TextView) itemView).setTextSize(16);
+            itemView.animate().scaleX(1.4f).scaleY(1.4f).setDuration(300);
         }
         if (oldView != null) {
             oldView.animate().scaleX(1.0f).scaleY(1.0f).setDuration(300);
-            if (oldView instanceof TextView) {
-                ((TextView) oldView).setTextColor(Color.WHITE);
-            }
         }
         oldView = itemView;
     }
 
     @Override
     public void onReviseFocusFollow(RecyclerViewTV parent, View itemView, int position) {
-//        mRecyclerViewBridge.setFocusView(itemView, 1.05f);
-        itemView.animate().scaleX(1.05f).scaleY(1.05f).setDuration(300);
+        itemView.animate().scaleX(1.1f).scaleY(1.1f).setDuration(300);
         if (itemView instanceof TextView) {
-            ((TextView) itemView).setTextColor(Color.YELLOW);
-            ((TextView) itemView).setTextSize(16);
+            itemView.animate().scaleX(1.4f).scaleY(1.4f).setDuration(300);
 
         }
         if (oldView != null) {
             oldView.animate().scaleX(1.0f).scaleY(1.0f).setDuration(300);
-            if (oldView instanceof TextView) {
-                ((TextView) oldView).setTextColor(Color.WHITE);
-            }
+
         }
         oldView = itemView;
     }
-
     private void updateGridView() {
 
         resultAdapter = new TownSearchResultAdapter(TownClassActivity.this);
@@ -515,8 +534,49 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
 
             }
         });
+
+        results_gp.setPagingableListener(new RecyclerViewTV.PagingableListener() {
+            @Override
+            public void onLoadMoreItems() {
+                if (courseList != null && courseList.size() > 0) {
+                    if (!isLoading) {
+                        CustomProgressDialog.show(TownClassActivity.this, "加载中···", false, null);
+                        loadHandler.sendEmptyMessageDelayed(10, 2000);
+                        isLoading = true;
+                    }
+                }
+            }
+        });
+
+        results_gp.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    int totalItemCount = recyclerView.getLayoutManager().getItemCount();
+                    int visibleItemCount = recyclerView.getChildCount();
+                    int firstVisibleItem = ((RecyclerViewTV) recyclerView).findFirstVisibleItemPosition();
+                    if (!((RecyclerViewTV) recyclerView).isLoading && totalItemCount - visibleItemCount <= firstVisibleItem) {
+                        if (!isLoading) {
+                            CustomProgressDialog.show(TownClassActivity.this, "加载中···", false, null);
+                            loadHandler.sendEmptyMessageDelayed(10, 2000);
+                            isLoading = true;
+                        }
+                    }
+                }
+            }
+        });
     }
 
+    private Handler loadHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            start_item += 100;
+            loadMore(singleList, start_item, end_item);
+        }
+    };
+
+    private boolean isLoading = false;
 
     @Override
     public void getDate(List<CoursesBean> cList) {
@@ -538,5 +598,18 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
         intent.putExtra("type", "town");
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    @Override
+    public void moreDate(List<CoursesBean> mList) {
+        CustomProgressDialog.dimiss();
+        if (mList != null && mList.size() > 0 && courseList != null) {
+            courseList.addAll(mList);
+            isLoading = false;
+            results_gp.setOnLoadMoreComplete();
+        }
+        resultAdapter.setData(courseList);
+        resultAdapter.notifyDataSetChanged();
+        isLoading = false;
     }
 }

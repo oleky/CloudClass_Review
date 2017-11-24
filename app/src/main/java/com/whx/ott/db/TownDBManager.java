@@ -113,11 +113,14 @@ public class TownDBManager {
         List<TeachersBean> list = new ArrayList<>();
         List<TeachersBean> mylist = new ArrayList<>();
         mylist = (List<TeachersBean>) SharedpreferenceUtil.queryObj2Sp(context, "town_teacherlist");
-        for (int i = 0; i < mylist.size(); i++) {
-            if (subjectid == mylist.get(i).getSubject_id()) {
-                list.add(new TeachersBean(mylist.get(i).getId(), subjectid, mylist.get(i).getTeacher_name()));
+        if (mylist != null && mylist.size() > 0) {
+            for (int i = 0; i < mylist.size(); i++) {
+                if (subjectid == mylist.get(i).getSubject_id()) {
+                    list.add(new TeachersBean(mylist.get(i).getId(), subjectid, mylist.get(i).getTeacher_name()));
+                }
             }
         }
+
         return list;
     }
 

@@ -143,10 +143,10 @@ public class NewHomeActivity extends Activity implements BaseInfoView,SearchView
              * 上线前解除注释，提交服务器position
              * ------------------------------------------------------------
              * */
-            if (!currentPos.equals(province + city + district)) {
-                //当与存储的位置不同时候，提交位置信息
-                mInfoPresenter.uploadAddress(user_id, user_name, province + city + district + "参考IP" + myIP, macAdress);
-            }
+//            if (!currentPos.equals(province + city + district)) {
+//                //当与存储的位置不同时候，提交位置信息
+//                mInfoPresenter.uploadAddress(user_id, user_name, province + city + district + "参考IP" + myIP, macAdress);
+//            }
         }
     }
 
@@ -225,7 +225,7 @@ public class NewHomeActivity extends Activity implements BaseInfoView,SearchView
     private void initFancyCoverFlow() {
         filmList = FilmInfoTest.getfilmInfo();
         adapter = new ImageAdapter(this, filmList);
-        fancyCoverFlow = (FancyCoverFlow) findViewById(R.id.fancyCoverFlow);
+        fancyCoverFlow = findViewById(R.id.fancyCoverFlow);
         // item之间的间隙可以近似认为是imageview的宽度与缩放比例的乘积的一半
         fancyCoverFlow.setSpacing(-150);
         fancyCoverFlow.setAdapter(adapter);
@@ -263,7 +263,7 @@ public class NewHomeActivity extends Activity implements BaseInfoView,SearchView
                         startActivity(intent2);
                         break;
                     case R.mipmap.gebie_icon:
-                        Intent intent3 = new Intent(NewHomeActivity.this, ExampleActivity.class);
+                        Intent intent3 = new Intent(NewHomeActivity.this, QrCodeLoginActivity.class);
                         intent3.putExtra("url", "http://vip.ls928.com/v.jsp");
                         startActivity(intent3);
                         break;
@@ -286,7 +286,7 @@ public class NewHomeActivity extends Activity implements BaseInfoView,SearchView
      * */
     private void initEditText() {
 
-        editText = (EditText) findViewById(R.id.search_gallery);
+        editText = findViewById(R.id.search_gallery);
         editText.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         editText.setOnEditorActionListener(mOnEditorActionListener);
         Drawable drawable = getResources().getDrawable(R.drawable.search);

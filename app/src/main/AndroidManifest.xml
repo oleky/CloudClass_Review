@@ -134,6 +134,11 @@
             android:name=".ui.TownClassActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"/>
+        <activity
+            android:name=".ui.QrCodeLoginActivity"
+            android:launchMode="singleTask"
+            android:configChanges="keyboard|keyboardHidden|screenSize|orientation"
+            android:screenOrientation="landscape"/>
 
         <activity
             android:name=".ui.WkWebActivity"

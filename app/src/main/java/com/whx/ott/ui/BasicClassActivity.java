@@ -62,7 +62,7 @@ public class BasicClassActivity extends Activity implements View.OnFocusChangeLi
 
     TestUrl test;
     private int start_item  = 0;            //分页开始
-    private int end_item    =start_item +100;//分页结束 共100条
+    private int end_item    =start_item +200;//分页结束 共100条
     private String macAdress = "";
     private RecyclerViewTV years_gp, terms_gp, grades_gp, subjects_gp, teachers_gp,results_gp;
     private View                oldView;
@@ -160,13 +160,13 @@ public class BasicClassActivity extends Activity implements View.OnFocusChangeLi
 
 
     private void initRecycler() {
-        years_gp    = (RecyclerViewTV) findViewById(R.id.id_years_new);
-        terms_gp    = (RecyclerViewTV) findViewById(R.id.id_terms_new);
-        grades_gp   = (RecyclerViewTV) findViewById(R.id.id_grades_new);
-        subjects_gp = (RecyclerViewTV) findViewById(R.id.id_subjects_new);
-        teachers_gp = (RecyclerViewTV) findViewById(R.id.id_teachers_new);
-        results_gp  = (RecyclerViewTV) findViewById(R.id.id_gridview_new);
-        mainUpView1 = (MainUpView)     findViewById(R.id.id_mainUpView_new);
+        years_gp    = findViewById(R.id.id_years_new);
+        terms_gp    = findViewById(R.id.id_terms_new);
+        grades_gp   = findViewById(R.id.id_grades_new);
+        subjects_gp = findViewById(R.id.id_subjects_new);
+        teachers_gp = findViewById(R.id.id_teachers_new);
+        results_gp  = findViewById(R.id.id_gridview_new);
+        mainUpView1 = findViewById(R.id.id_mainUpView_new);
 
         mainUpView1.setEffectBridge(new RecyclerViewBridge());
         mRecyclerViewBridge = (RecyclerViewBridge) mainUpView1.getEffectBridge();
@@ -218,9 +218,14 @@ public class BasicClassActivity extends Activity implements View.OnFocusChangeLi
             public void onItemClick(RecyclerViewTV parent, View itemView, int position) {
                 int count = parent.getChildCount();
                 for (int i = 0; i < count; i++) {
-                    parent.getChildAt(i).setBackgroundResource(R.drawable.colorfulbg);
+//                    parent.getChildAt(i).setBackgroundResource(R.drawable.colorfulbg);
+                    ((TextView) parent.getChildAt(i)).setTextSize(14);
+                    ((TextView) parent.getChildAt(i)).setTextColor(Color.WHITE);
                 }
-                itemView.setBackgroundResource(R.drawable.item_rectangle);
+//                itemView.setBackgroundResource(R.drawable.item_rectangle);
+                ((TextView) itemView).setTextColor(Color.YELLOW);
+                ((TextView) itemView).setTextSize(16);
+
                 int id = yearList.get(position).getId();
                 //请求服务器，返回参数更新下面UI
                 Message msg = Message.obtain();
@@ -262,9 +267,13 @@ public class BasicClassActivity extends Activity implements View.OnFocusChangeLi
             public void onItemClick(RecyclerViewTV parent, View itemView, int position) {
               int count =  parent.getChildCount();
                 for (int i = 0; i < count; i++) {
-                    parent.getChildAt(i).setBackgroundResource(R.drawable.colorfulbg);
+//                    parent.getChildAt(i).setBackgroundResource(R.drawable.colorfulbg);
+                    ((TextView) parent.getChildAt(i)).setTextSize(14);
+                    ((TextView) parent.getChildAt(i)).setTextColor(Color.WHITE);
                 }
-                itemView.setBackgroundResource(R.drawable.item_rectangle);
+//                itemView.setBackgroundResource(R.drawable.item_rectangle);
+                ((TextView) itemView).setTextColor(Color.YELLOW);
+                ((TextView) itemView).setTextSize(16);
 
                 int id = termList.get(position).getId();
                 String gradeids = termList.get(position).getGrade_ids();
@@ -305,10 +314,13 @@ public class BasicClassActivity extends Activity implements View.OnFocusChangeLi
             public void onItemClick(RecyclerViewTV parent, View itemView, int position) {
                 int count = parent.getChildCount();
                 for (int i = 0; i < count; i++) {
-                    parent.getChildAt(i).setBackgroundResource(R.drawable.colorfulbg);
-
+//                    parent.getChildAt(i).setBackgroundResource(R.drawable.colorfulbg);
+                    ((TextView) parent.getChildAt(i)).setTextSize(14);
+                    ((TextView) parent.getChildAt(i)).setTextColor(Color.WHITE);
                 }
-                itemView.setBackgroundResource(R.drawable.item_rectangle);
+//                itemView.setBackgroundResource(R.drawable.item_rectangle);
+                ((TextView) itemView).setTextColor(Color.YELLOW);
+                ((TextView) itemView).setTextSize(16);
 
                 int id = gradeList.get(position).getId();
                 //请求服务器，返回参数更新下面UI
@@ -339,10 +351,13 @@ public class BasicClassActivity extends Activity implements View.OnFocusChangeLi
             public void onItemClick(RecyclerViewTV parent, View itemView, int position) {
                 int count = parent.getChildCount();
                 for (int i = 0; i < count; i++) {
-                    parent.getChildAt(i).setBackgroundResource(R.drawable.colorfulbg);
-
+//                    parent.getChildAt(i).setBackgroundResource(R.drawable.colorfulbg);
+                    ((TextView) parent.getChildAt(i)).setTextSize(14);
+                    ((TextView) parent.getChildAt(i)).setTextColor(Color.WHITE);
                 }
-                itemView.setBackgroundResource(R.drawable.item_rectangle);
+//                itemView.setBackgroundResource(R.drawable.item_rectangle);
+                ((TextView) itemView).setTextColor(Color.YELLOW);
+                ((TextView) itemView).setTextSize(16);
 
                 teacherList = manager.getTeacherList(position + 1);
                 initTeacher();
@@ -377,10 +392,13 @@ public class BasicClassActivity extends Activity implements View.OnFocusChangeLi
             public void onItemClick(RecyclerViewTV parent, View itemView, int position) {
                 int count = parent.getChildCount();
                 for (int i = 0; i < count; i++) {
-                    parent.getChildAt(i).setBackgroundResource(R.drawable.colorfulbg);
-
+//                    parent.getChildAt(i).setBackgroundResource(R.drawable.colorfulbg);
+                    ((TextView) parent.getChildAt(i)).setTextSize(14);
+                    ((TextView) parent.getChildAt(i)).setTextColor(Color.WHITE);
                 }
-                itemView.setBackgroundResource(R.drawable.item_rectangle);
+//                itemView.setBackgroundResource(R.drawable.item_rectangle);
+                ((TextView) itemView).setTextColor(Color.YELLOW);
+                ((TextView) itemView).setTextSize(16);
 
                 int id = teacherList.get(position).getId();
                 //请求服务器，返回参数更新下面UI
@@ -412,29 +430,56 @@ public class BasicClassActivity extends Activity implements View.OnFocusChangeLi
     }
 
 
-
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        mRecyclerViewBridge.setFocusView(v, oldView, 1.05f);
+//        mRecyclerViewBridge.setFocusView(v, oldView, 1.05f);
+        v.animate().scaleX(1.1f).scaleY(1.1f).setDuration(300);
+        if (v instanceof TextView) {
+            ((TextView) v).setTextColor(Color.YELLOW);
+            ((TextView) v).setTextSize(16);
+            v.animate().scaleX(1.4f).scaleY(1.4f).setDuration(300);
+        }
+        if (oldView != null) {
+            oldView.animate().scaleX(1.0f).scaleY(1.0f).setDuration(300);
+            if (oldView instanceof TextView) {
+                ((TextView) oldView).setTextColor(Color.WHITE);
+                ((TextView) oldView).setTextSize(14);
+            }
+        }
         oldView = v;
+
     }
 
     @Override
     public void onItemPreSelected(RecyclerViewTV parent, View itemView, int position) {
-        mRecyclerViewBridge.setUnFocusView(itemView);
+        itemView.animate().scaleX(1.0f).scaleY(1.0f).setDuration(300);
+
     }
 
     @Override
     public void onItemSelected(RecyclerViewTV parent, View itemView, int position) {
-        mRecyclerViewBridge.setFocusView(itemView, 1.05f);
+        itemView.animate().scaleX(1.1f).scaleY(1.1f).setDuration(300);
+        if (itemView instanceof TextView) {
+            itemView.animate().scaleX(1.4f).scaleY(1.4f).setDuration(300);
+        }
+        if (oldView != null) {
+            oldView.animate().scaleX(1.0f).scaleY(1.0f).setDuration(300);
+        }
         oldView = itemView;
     }
 
     @Override
     public void onReviseFocusFollow(RecyclerViewTV parent, View itemView, int position) {
-        mRecyclerViewBridge.setFocusView(itemView, 1.05f);
+        itemView.animate().scaleX(1.1f).scaleY(1.1f).setDuration(300);
+        if (itemView instanceof TextView) {
+            itemView.animate().scaleX(1.4f).scaleY(1.4f).setDuration(300);
+        }
+        if (oldView != null) {
+            oldView.animate().scaleX(1.0f).scaleY(1.0f).setDuration(300);
+        }
         oldView = itemView;
     }
+
 
     private void updateGridView() {
 
@@ -483,6 +528,11 @@ public class BasicClassActivity extends Activity implements View.OnFocusChangeLi
         intent.putExtra("type","cloud");
         intent.putExtras(bundle);
         BasicClassActivity.this.startActivity(intent);
+    }
+
+    @Override
+    public void moreDate(List<CoursesBean> mList) {
+
     }
 
 

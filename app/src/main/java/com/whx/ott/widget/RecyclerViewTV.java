@@ -417,7 +417,7 @@ public class RecyclerViewTV extends RecyclerView implements PrvInterface {
     /////////////////// 按键加载更多 start start start //////////////////////////
 
     private PagingableListener mPagingableListener;
-    private boolean isLoading = false;
+    public boolean isLoading = false;
 
     public interface PagingableListener {
         void onLoadMoreItems();
@@ -539,8 +539,8 @@ public class RecyclerViewTV extends RecyclerView implements PrvInterface {
     private final ArrayList<OnItemKeyListener> mOnItemKeyListeners =
             new ArrayList<OnItemKeyListener>();
 
-    public static interface OnItemKeyListener {
-        public boolean dispatchKeyEvent(KeyEvent event);
+    public interface OnItemKeyListener {
+        boolean dispatchKeyEvent(KeyEvent event);
     }
 
     public void addOnItemKeyListener(OnItemKeyListener listener) {
@@ -568,6 +568,9 @@ public class RecyclerViewTV extends RecyclerView implements PrvInterface {
             vh.itemView.requestFocus();
     }
 
-
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+    }
 }
 

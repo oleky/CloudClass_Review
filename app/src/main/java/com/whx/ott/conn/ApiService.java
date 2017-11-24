@@ -113,7 +113,7 @@ public interface ApiService {
      * 高中云教室特色课扣课
      */
     @GET(Conn.NEW_SOULPAY)
-    Observable<CodeBean> highSoulPay(@QueryMap Map<String, String>map);
+    Observable<ParseLogin> highSoulPay(@QueryMap Map<String, String>map);
 
     /**
      * 增加高中云教室基础课播放记录
@@ -124,6 +124,7 @@ public interface ApiService {
     /**
      *增加高中云教室特色课播放记录
      */
+    @GET(Conn.ADD_SOULPLAYINFO)
     Observable<CodeBean> highSouPlay(@QueryMap Map<String, String> map);
 
 }

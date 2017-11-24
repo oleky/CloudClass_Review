@@ -1,11 +1,15 @@
 package com.whx.ott.ui
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.media.AudioManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.support.v7.app.ActionBar
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.text.TextUtils
 import android.util.Log
 import android.view.GestureDetector
@@ -14,26 +18,34 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.GlideDrawable
+import com.bumptech.glide.load.resource.gif.GifDrawable
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
+import com.bumptech.glide.request.target.Target
 import com.pili.pldroid.player.AVOptions
 import com.pili.pldroid.player.PLMediaPlayer
 import com.pili.pldroid.player.widget.PLVideoTextureView
 import com.whx.ott.R
 import com.whx.ott.bean.CoursesBean
 import com.whx.ott.beanfeature.SoulcoursesBean
-import com.whx.ott.extentions.DelegatesExt
 import com.whx.ott.extentions.dp2sp
 import com.whx.ott.extentions.generateTime
 import com.whx.ott.extentions.showToast
 import com.whx.ott.media.MediaController
 import com.whx.ott.presenter.LivePresenter
 import com.whx.ott.presenter.viewinface.LiveView
+import kotlinx.android.synthetic.main.activity_pl_video_view.*
+import java.lang.Exception
 import java.util.*
 
 /**
  * Created by oleky on 2017/11/2.
  */
-class CCPlayerActivity : Activity(),GestureDetector.OnGestureListener,
-        View.OnTouchListener,LiveView {
+class CCPlayerActivity : AppCompatActivity(), GestureDetector.OnGestureListener,
+        View.OnTouchListener, LiveView {
 
     private lateinit var mVideoView: PLVideoTextureView
     private lateinit var gesture_volume: RelativeLayout
@@ -42,6 +54,7 @@ class CCPlayerActivity : Activity(),GestureDetector.OnGestureListener,
     private lateinit var iv_gesture_progress: ImageView
     private lateinit var tv_gesture_progress_time: TextView
     private lateinit var tv_gesture_volume_percentage: TextView
+
     companion object {
         const val TAG = "WhxPlay"
         const val STEP_VOLUME = 2f
@@ -53,7 +66,7 @@ class CCPlayerActivity : Activity(),GestureDetector.OnGestureListener,
     private var firstScroll = false //每次触摸屏幕之后，第一次归零
     private var GESTURE_FLAG = 0
     private var mDisplayAspectRatio: Int = PLVideoTextureView.ASPECT_RATIO_16_9
-    private var curr_pos:Long = 0
+    private var curr_pos: Long = 0
 
     private var maxVolume: Int = 0
     private var currentVolume: Int = 0
@@ -65,7 +78,6 @@ class CCPlayerActivity : Activity(),GestureDetector.OnGestureListener,
     private var soulcoursesBean: SoulcoursesBean? = null
     private var model_id: Int? = 1
     private var type: String? = ""
-
 
 
     private var mGestureDetector: GestureDetector? = null
@@ -80,15 +92,14 @@ class CCPlayerActivity : Activity(),GestureDetector.OnGestureListener,
         initView()
 
         videoPath = intent.getStringExtra("videoPath")
-        coursesBean = intent.getSerializableExtra("courseBean") as CoursesBean
-        soulcoursesBean = intent.getSerializableExtra("soulcoursesBean") as SoulcoursesBean
+        coursesBean = intent.getSerializableExtra("courseBean") as? CoursesBean
+        soulcoursesBean = intent.getSerializableExtra("soulcoursesBean") as? SoulcoursesBean
         model_id = intent.getIntExtra("model_id", 1)
         type = intent.getStringExtra("type") as String
 
         val codec = intent.getIntExtra("mediaCodec", AVOptions.MEDIA_CODEC_SW_DECODE)
         val isLiveStreaming = false
         mLivePresenter = LivePresenter(this, this)
-
         videoTitle = if (model_id == 1) {
             coursesBean?.course_name
         } else {
@@ -113,9 +124,11 @@ class CCPlayerActivity : Activity(),GestureDetector.OnGestureListener,
                 setOnTouchListener(this@CCPlayerActivity)
                 displayAspectRatio = mDisplayAspectRatio
                 isLooping = false
-                start()
+//                start()
             }
         }
+        headerGif()
+
 
         videoTotalTime = mVideoView.duration
         mGestureDetector = GestureDetector(this, this)
@@ -124,14 +137,25 @@ class CCPlayerActivity : Activity(),GestureDetector.OnGestureListener,
         maxVolume = audiomanager!!.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
         currentVolume = audiomanager!!.getStreamVolume(AudioManager.STREAM_MUSIC)
 
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        val actionbar: ActionBar? = supportActionBar
+        actionbar?.setDisplayHomeAsUpEnabled(true)
+
         val mediaController = MediaController(this, !isLiveStreaming, isLiveStreaming)
+        mediaController.setSupportActionBar(actionbar)
         mediaController.setOnClickSpeedAdjustListener(mOnClickSpeedAdjustListener)
-        mediaController.setBackListener { this.finish() }
-        mediaController.setControllerTitle(videoTitle)
+
         mVideoView.setMediaController(mediaController)
         mTimer = Timer()
         mVideoTimerTask = VideoTimerTask()
         mTimer?.schedule(mVideoTimerTask, 1000, 1000)
+
+        if (TextUtils.isEmpty(videoTitle)) {
+            actionbar?.title = "云教室"
+        } else {
+            actionbar?.title = videoTitle
+        }
 
         when (model_id) {
             1 -> {
@@ -141,16 +165,11 @@ class CCPlayerActivity : Activity(),GestureDetector.OnGestureListener,
                     mLivePresenter?.addHighBasePlayInfo(coursesBean!!)
                 }
             }
-            2 ->{
+            2 -> {
                 mLivePresenter?.addHighSoulPlayInfo(soulcoursesBean!!)
             }
         }
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mVideoView.start()
     }
 
     override fun onDestroy() {
@@ -158,6 +177,8 @@ class CCPlayerActivity : Activity(),GestureDetector.OnGestureListener,
         mVideoView.stopPlayback()
         mVideoTimerTask?.cancel()
         mVideoTimerTask = null
+        mHandler.removeMessages(200)
+        mHandler.removeMessages(300)
     }
 
 
@@ -215,74 +236,109 @@ class CCPlayerActivity : Activity(),GestureDetector.OnGestureListener,
         true
     }
 
-    private val mOnErrorListener:PLMediaPlayer.OnErrorListener =
+    private val mOnErrorListener: PLMediaPlayer.OnErrorListener =
             PLMediaPlayer.OnErrorListener { _, errorCode ->
-        Log.e(TAG, "Error happened, errorCode = $errorCode")
-        when (errorCode) {
-            PLMediaPlayer.ERROR_CODE_IO_ERROR -> {
-                //SDK will do reconnecting automatically
-                Log.e(TAG, "IO Error")
-                false
+                Log.e(TAG, "Error happened, errorCode = $errorCode")
+                when (errorCode) {
+                    PLMediaPlayer.ERROR_CODE_IO_ERROR -> {
+                        //SDK will do reconnecting automatically
+                        Log.e(TAG, "IO Error")
+                        false
+                    }
+                    PLMediaPlayer.ERROR_CODE_OPEN_FAILED -> {
+                        showToast("无法打开当前视频，请检查网络重试")
+                        finish()
+                    }
+                    PLMediaPlayer.ERROR_CODE_SEEK_FAILED -> {
+                        Log.e(TAG, "failed to seek")
+                    }
+                    else -> {
+                    }
+                }
+                true
             }
-            PLMediaPlayer.ERROR_CODE_OPEN_FAILED ->{
-                showToast("无法打开当前视频，请检查网络重试")
+
+    private val mOnCompletionListener: PLMediaPlayer.OnCompletionListener =
+            PLMediaPlayer.OnCompletionListener {
+                showToast("播放完成")
                 finish()
             }
-            PLMediaPlayer.ERROR_CODE_SEEK_FAILED ->{
-                Log.e(TAG, "failed to seek")
-            }
-            else -> { }
-        }
-        true
-    }
-
-    private val mOnCompletionListener:PLMediaPlayer.OnCompletionListener =
-            PLMediaPlayer.OnCompletionListener {
-        showToast("播放完成")
-        finish()
-    }
 
     private var payed = false
-    private val mOnBufferingUpdateListener:PLMediaPlayer.OnBufferingUpdateListener =
-            PLMediaPlayer.OnBufferingUpdateListener{
-        _, percent ->
-        if (percent >= 40 && !payed) {
-            payed = true
-            when (type) {
-                "town" ->mLivePresenter?.townPay(coursesBean!!)
-                else ->{
-                    if (model_id == 1) {
-                        mLivePresenter?.highBasePay(coursesBean!!)
-                    } else {
-                        mLivePresenter?.highSoulPay(soulcoursesBean!!)
+    private val mOnBufferingUpdateListener: PLMediaPlayer.OnBufferingUpdateListener =
+            PLMediaPlayer.OnBufferingUpdateListener { _, percent ->
+                if (percent >= 40 && !payed) {
+                    payed = true
+                    when (type) {
+                        "town" -> mLivePresenter?.townPay(coursesBean!!)
+                        else -> {
+                            if (model_id == 1) {
+                                mLivePresenter?.highBasePay(coursesBean!!)
+                            } else {
+                                mLivePresenter?.highSoulPay(soulcoursesBean!!)
+                            }
+                        }
                     }
+                }
+            }
+
+    private val mOnClickSpeedAdjustListener: MediaController.OnClickSpeedAdjustListener =
+            object : MediaController.OnClickSpeedAdjustListener {
+                override fun onClickNormal() {
+                    mVideoView.setPlaySpeed(0X00010001)
+                }
+
+                override fun onClickFaster() {
+                    mVideoView.setPlaySpeed(0X00020001)
+                }
+
+                override fun onClickSlower() {
+                    mVideoView.setPlaySpeed(0X00010002)
+                }
+            }
+
+    var mHandler: Handler = @SuppressLint("HandlerLeak")
+    object : Handler() {
+        override fun handleMessage(msg: Message?) {
+            when (msg?.what) {
+                200 -> curr_pos = msg.obj as Long
+                300 -> mVideoView.seekTo(curr_pos)
+                1 -> {
+                    mVideoView.start()
+                    ad_image.visibility = View.GONE
                 }
             }
         }
     }
 
-    private val mOnClickSpeedAdjustListener:MediaController.OnClickSpeedAdjustListener =
-            object : MediaController.OnClickSpeedAdjustListener {
-        override fun onClickNormal() {
-            mVideoView.setPlaySpeed(0X00010001)
-        }
+    //加载gif广告
+    private var duration = 0
 
-        override fun onClickFaster() {
-            mVideoView.setPlaySpeed(0X00020001)
-        }
+    private fun headerGif() {
+        Glide.with(this)
+                .load(R.mipmap.cat_anim)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .error(R.drawable.ic_bg_menu)
+                .dontAnimate()
+                .listener(object : RequestListener<Int, GlideDrawable> {
+                    override fun onException(e: Exception?, model: Int?, target: Target<GlideDrawable>?, isFirstResource: Boolean): Boolean {
+                        return false
+                    }
 
-        override fun onClickSlower() {
-            mVideoView.setPlaySpeed(0X00010002)
-        }
-    }
+                    override fun onResourceReady(resource: GlideDrawable?, model: Int?, target: Target<GlideDrawable>?, isFromMemoryCache: Boolean, isFirstResource: Boolean): Boolean {
+                        //计算动画时常
+                        val drawable: GifDrawable = resource as GifDrawable
+                        val decoder = drawable.decoder
+                        for (i in 0 until drawable.frameCount) {
+                            duration += decoder.getDelay(i)
+                        }
+                        mHandler.sendEmptyMessageDelayed(1, duration.toLong()*5)
+                        return false
+                    }
 
-   var mHandler:Handler = object : Handler() {
-        override fun handleMessage(msg: Message?) {
-            when (msg?.what) {
-                200 -> curr_pos = msg.obj as Long
-                300 -> mVideoView.seekTo(curr_pos)
-            }
-        }
+                })
+                .into(GlideDrawableImageViewTarget(ad_image, 5))
+
     }
 
     /**
@@ -290,11 +346,11 @@ class CCPlayerActivity : Activity(),GestureDetector.OnGestureListener,
      */
     private inner class VideoTimerTask : TimerTask() {
         override fun run() {
-                val currentPos = mVideoView.currentPosition
-                val message = Message.obtain()
-                message.obj = currentPos
-                message.what = 200
-                mHandler.sendMessage(message)
+            val currentPos = mVideoView.currentPosition
+            val message = Message.obtain()
+            message.obj = currentPos
+            message.what = 200
+            mHandler.sendMessage(message)
         }
     }
 
@@ -359,7 +415,7 @@ class CCPlayerActivity : Activity(),GestureDetector.OnGestureListener,
                         currentVolume++
                     }
                     iv_gesture_volume.setImageResource(R.drawable.souhu_player_volume)
-                }else if (distanceY <= -dp2sp(STEP_VOLUME)) {
+                } else if (distanceY <= -dp2sp(STEP_VOLUME)) {
                     if (currentVolume > 0) {
                         currentVolume--
                         if (currentVolume == 0) {

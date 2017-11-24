@@ -50,11 +50,12 @@ public class BaseInfoPresenter extends Presenter {
         mContext = context;
         mService = new RetrofitClient().createApiClient();
         manager = new DBManager(context);
+        mTownDBManager = new TownDBManager(context);
     }
 
     public void getBaseInfo(String userid) {
         mService.highBaseInfo()
-                .compose(RxUtil.<BaseInfo>rxScheduleHelper())
+                .compose(RxUtil.rxScheduleHelper())
                 .subscribe(new Consumer<BaseInfo>() {
                     @Override
                     public void accept(BaseInfo info) throws Exception {
@@ -77,7 +78,7 @@ public class BaseInfoPresenter extends Presenter {
 
     public void getTownBaseInfo(String userid) {
         mService.townBaseInfo()
-                .compose(RxUtil.<BaseInfo>rxScheduleHelper())
+                .compose(RxUtil.rxScheduleHelper())
                 .subscribe(new Consumer<BaseInfo>() {
                     @Override
                     public void accept(BaseInfo info) throws Exception {
@@ -97,7 +98,7 @@ public class BaseInfoPresenter extends Presenter {
 
     public void getAddress(String userid) {
         mService.userPos(userid)
-                .compose(RxUtil.<ParseLogin>rxScheduleHelper())
+                .compose(RxUtil.rxScheduleHelper())
                 .subscribe(new Consumer<ParseLogin>() {
                     @Override
                     public void accept(ParseLogin parseLogin) throws Exception {
@@ -120,7 +121,7 @@ public class BaseInfoPresenter extends Presenter {
 
     public void uploadAddress(String userid, String username, final String loaction, String mac) {
         mService.uploadPosition(userid,username,loaction,mac)
-                .compose(RxUtil.<ParseLogin>rxScheduleHelper())
+                .compose(RxUtil.rxScheduleHelper())
                 .subscribe(new Consumer<ParseLogin>() {
                     @Override
                     public void accept(ParseLogin parseLogin) throws Exception {

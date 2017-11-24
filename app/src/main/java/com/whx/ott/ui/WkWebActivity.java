@@ -1,6 +1,7 @@
 package com.whx.ott.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.net.Uri;
@@ -30,6 +31,8 @@ import com.whx.ott.bean.ParseLogin;
 import com.whx.ott.conn.Conn;
 import com.whx.ott.conn.JsonAddTownInfo;
 import com.whx.ott.conn.TownNumToString;
+import com.whx.ott.presenter.LivePresenter;
+import com.whx.ott.presenter.viewinface.LiveView;
 import com.whx.ott.util.SharedpreferenceUtil;
 import com.whx.ott.util.X5WebView;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -41,7 +44,7 @@ import okhttp3.Call;
  * Created by oleky on 2017/9/27.
  */
 
-public class WkWebActivity extends Activity {
+public class WkWebActivity extends Activity implements LiveView{
 
     /**
      * 作为一个浏览器的示例展示出来，采用android+web的模式
@@ -61,7 +64,7 @@ public class WkWebActivity extends Activity {
 
     private boolean hasPayed;
     private String videoPath;
-
+    private LivePresenter mLivePresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,18 +80,19 @@ public class WkWebActivity extends Activity {
 
         setContentView(R.layout.activity_wkweb);
 
-        mViewParent = (ViewGroup) findViewById(R.id.webView1);
+        mViewParent = findViewById(R.id.webView1);
         mTestHandler.sendEmptyMessageDelayed(MSG_INIT_UI, 10);
         coursesBean = (CoursesBean) getIntent().getSerializableExtra("courseBean");
         model_id = getIntent().getIntExtra("model_id", 1);
         videoPath = getIntent().getStringExtra("videoPath");
         hasPayed = false;
-
+        mLivePresenter = new LivePresenter(this, this);
         user_id = (String) SharedpreferenceUtil.getData(this, "user_id", "");
         user_name = (String) SharedpreferenceUtil.getData(this, "user_name", "");
         macAdress = (String) SharedpreferenceUtil.getData(this, "dev_id", "");
 
-        new JsonAddTownInfo(this, coursesBean).addTownPlay();
+        mLivePresenter.addTownPlayInfo(coursesBean);
+
     }
 
 
@@ -133,7 +137,7 @@ public class WkWebActivity extends Activity {
             @Override
             public void onShowCustomView(View view, CustomViewCallback customViewCallback) {
                 View fileview = LayoutInflater.from(WkWebActivity.this).inflate(R.layout.filechooser_layout, null);
-                FrameLayout normalView = (FrameLayout) findViewById(R.id.web_filechooser);
+                FrameLayout normalView = findViewById(R.id.web_filechooser);
 //                ViewGroup viewGroup = (ViewGroup) normalView.getParent();
                 ViewGroup viewGroup = (ViewGroup) fileview;
                 viewGroup.removeView(normalView);
@@ -163,7 +167,8 @@ public class WkWebActivity extends Activity {
                  * 这里写入你自定义的window alert
                  */
                 if (arg2.contains("课程")) {
-                    addCountryPay();
+//                    addCountryPay();
+                    mLivePresenter.townPay(coursesBean);
                 }
                 arg3.confirm();
                 return true;
@@ -276,49 +281,18 @@ public class WkWebActivity extends Activity {
         }
     };
 
-    /**
-     * 乡镇基础课扣费
-     */
+    @Override
+    public void paySucc() {
+        Toast.makeText(this, "扣费成功", Toast.LENGTH_SHORT).show();
+    }
 
-    public void addCountryPay() {
-        OkHttpUtils.get()
-                .url(Conn.BASEURL + Conn.COUNTRY_PAY)
-                .addParams("devid", macAdress)
-                .addParams("user_id", user_id)
-                .addParams("user_name", user_name)
-                .addParams("model_id", coursesBean.getModel_id() + "")
-                .addParams("model_name", "乡镇云教室基础课程")
-                .addParams("course_id", coursesBean.getId() + "")
-                .addParams("course_name", coursesBean.getCourse_name())
-                .addParams("teacher_id", coursesBean.getTeacher_id() + "")
-                .addParams("teacher_name", TownNumToString.searchTeacher(coursesBean.getTeacher_id()))
-                .addParams("deduct_time", coursesBean.getCourse_length() + "")
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
+    @Override
+    public void payFailed(String errorMsg) {
+        Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show();
+    }
 
-                    }
+    @Override
+    public void getUrl(String url) {
 
-                    @Override
-                    public void onResponse(String response, int id) {
-                        data = ParseLogin.getUserInfo(response);
-                        if (data.getCode() != null && data.getCode().equals("0")) {
-                            double time = Double.parseDouble(data.getData().get(0).getTown_money());
-                            if (time >= 1) {
-                                Log.e("Time", "---剩余时长" + time);
-                                SharedpreferenceUtil.saveData(WkWebActivity.this, "country_user_money", data.getData().get(0).getTown_money());
-                                Toast.makeText(WkWebActivity.this, "扣费成功", Toast.LENGTH_SHORT).show();
-                                mTestHandler.sendEmptyMessage(1001);
-                            } else {
-                                Toast.makeText(WkWebActivity.this, "试看时间已过，请及时充值", Toast.LENGTH_SHORT).show();
-                                WkWebActivity.this.finish();
-                            }
-                        } else {
-                            Toast.makeText(WkWebActivity.this, "试看时间已过，请及时充值", Toast.LENGTH_SHORT).show();
-                            WkWebActivity.this.finish();
-                        }
-                    }
-                });
     }
 }
