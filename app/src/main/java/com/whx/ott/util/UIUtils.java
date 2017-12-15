@@ -13,7 +13,7 @@ import android.graphics.PorterDuffXfermode;
  */
 public class UIUtils {
     // 根据原图绘制圆形图片
-    static public Bitmap createCircleImage(Bitmap source, int min){
+   public static  Bitmap createCircleImage(Bitmap source, int min){
         final Paint paint = new Paint();
         paint.setAntiAlias(true);
         if (0 == min){

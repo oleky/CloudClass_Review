@@ -4,16 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageButton android:id="@+id/pause"
-                 android:layout_width="36dp"
-                 android:layout_height="36dp"
-                 android:layout_gravity="center_vertical"
-                 android:gravity="center"
-                 android:layout_centerInParent="true"
-                 android:scaleType="centerCrop"
-                 android:background="@null"
-                 android:adjustViewBounds="true"
-                 android:src="@drawable/icon_record_pause" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -33,6 +23,19 @@
             android:visibility="visible"
             android:focusable="false"
             android:orientation="horizontal">
+
+
+            <ImageButton android:id="@+id/pause"
+                         android:layout_width="36dp"
+                         android:layout_height="36dp"
+                         android:layout_gravity="center_vertical"
+                         android:gravity="center"
+                         android:layout_centerInParent="true"
+                         android:scaleType="centerCrop"
+                         android:background="@null"
+                         android:adjustViewBounds="true"
+                         android:layout_marginRight="10dp"
+                         android:src="@drawable/icon_record_pause" />
 
             <ImageButton android:id="@+id/prev"
                          android:layout_width="24dp"

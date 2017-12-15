@@ -12,7 +12,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -27,7 +26,6 @@ import com.whx.ott.bean.ParseTopspeedEng;
 import com.whx.ott.bean.ResultBean;
 import com.whx.ott.bean.Soulplates;
 import com.whx.ott.bean.SubjectsBean;
-import com.whx.ott.bean.TestUrl;
 import com.whx.ott.beanfeature.ParseFeature;
 import com.whx.ott.beanfeature.SoulcoursesBean;
 import com.whx.ott.bridge.RecyclerViewBridge;
@@ -46,11 +44,8 @@ import java.util.List;
 import java.util.Map;
 
 
-import javax.crypto.spec.PSource;
-import javax.security.auth.login.LoginException;
 
 import okhttp3.Call;
-import okhttp3.OkHttpClient;
 
 /**
  * setSelectedItemAtCentered 设置一直在中间. (如果设置 false，那么请使用setSelectedItemOffset来设置相差的边距)
@@ -83,7 +78,6 @@ public class FeatureRcActivity extends Activity implements RecyclerViewTV.OnItem
     private DBManager manager = new DBManager(this);
 
     private static String TAG = "FeatureRcActivity";
-    private ParseTopspeedEng parseTopspeedEng;
     private List<ResultBean> resultBeanLists;
     private ResultBean resultBean;
     private String ENG_BASE = "http://114.215.66.250/whx/course/clickNumber?";
@@ -100,11 +94,11 @@ public class FeatureRcActivity extends Activity implements RecyclerViewTV.OnItem
 
     private void initView() {
         mContext = FeatureRcActivity.this;
-        top_menu_rv = (RecyclerViewTV) findViewById(R.id.top_menu_rv);
-        mRecyclerView = (RecyclerViewTV) findViewById(R.id.content_feature_rv);
-        mainUpView1 = (MainUpView) findViewById(R.id.mainUpView1);
+        top_menu_rv = findViewById(R.id.top_menu_rv);
+        mRecyclerView = findViewById(R.id.content_feature_rv);
+        mainUpView1 = findViewById(R.id.mainUpView1);
         mainUpView1.setEffectBridge(new RecyclerViewBridge());
-        title_name_tv = (TextView) findViewById(R.id.feature_rv_tv);
+        title_name_tv = findViewById(R.id.feature_rv_tv);
         // 注意这里，需要使用 RecyclerViewBridge 的移动边框 Bridge.
         mRecyclerViewBridge = (RecyclerViewBridge) mainUpView1.getEffectBridge();
 //        all.setNextFocusDownId();

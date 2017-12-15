@@ -42,6 +42,7 @@ public class SearchResultAdapter extends BaseRecyclerViewAdapter<CoursesBean> {
         String strcoursename    = getItemData(position).getCourse_name();
         int teacherid           = getItemData(position).getTeacher_id();
 
+
         /**
          * 教师头像目前却
          * */
@@ -80,12 +81,12 @@ public class SearchResultAdapter extends BaseRecyclerViewAdapter<CoursesBean> {
         ImageView teacherbg;
         public MyViewHolder(View itemView) {
             super(itemView);
-            teacherbg   = (ImageView) itemView.findViewById(R.id.teacherpic_search);
-            yearname    = (TextView) itemView.findViewById(R.id.id_yearname_search);
-            termname    = (TextView) itemView.findViewById(R.id.id_termname_search);
-            subjectname = (TextView) itemView.findViewById(R.id.id_subjectname_search);
-            coursename = (TextView) itemView.findViewById(R.id.id_teachername_search);
-            gradename   = (TextView) itemView.findViewById(R.id.id_gradename_search);
+            teacherbg   = itemView.findViewById(R.id.teacherpic_search);
+            yearname    = itemView.findViewById(R.id.id_yearname_search);
+            termname    = itemView.findViewById(R.id.id_termname_search);
+            subjectname = itemView.findViewById(R.id.id_subjectname_search);
+            coursename = itemView.findViewById(R.id.id_teachername_search);
+            gradename   = itemView.findViewById(R.id.id_gradename_search);
         }
 
         @Override

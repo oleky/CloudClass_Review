@@ -10,9 +10,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,16 +23,15 @@ import com.whx.ott.adapter.TownSearchResultAdapter;
 import com.whx.ott.adapter.YearsAdapter;
 import com.whx.ott.bean.CoursesBean;
 import com.whx.ott.bean.GradesBean;
-import com.whx.ott.bean.ParseJichu;
+import com.whx.ott.bean.JichuResult;
 import com.whx.ott.bean.SubjectsBean;
 import com.whx.ott.bean.TeachersBean;
 import com.whx.ott.bean.TermsBean;
-import com.whx.ott.bean.TestUrl;
+import com.whx.ott.bean.VideoPathBean;
 import com.whx.ott.bean.YearsBean;
 import com.whx.ott.bridge.RecyclerViewBridge;
-import com.whx.ott.conn.Conn;
 import com.whx.ott.db.TownDBManager;
-import com.whx.ott.presenter.BasicClassPresenter;
+import com.whx.ott.presenter.HighClassPresenter;
 import com.whx.ott.presenter.viewinface.BasicClassView;
 import com.whx.ott.util.SharedpreferenceUtil;
 import com.whx.ott.widget.CustomProgressDialog;
@@ -42,15 +39,11 @@ import com.whx.ott.widget.GridLayoutManagerTV;
 import com.whx.ott.widget.LinearLayoutManagerTV;
 import com.whx.ott.widget.MainUpView;
 import com.whx.ott.widget.RecyclerViewTV;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import okhttp3.Call;
 
 /**
  * Created by oleky on 2016/9/1.
@@ -65,7 +58,7 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
     public static final String TEACHERID    = "teacher_id";
     public static final String START        = "start";
     public static final String END          = "end";
-    TestUrl test;
+    VideoPathBean test;
     private int start_item  = 0;            //分页开始
     private int end_item    =100;//分页结束 共100条
     private String macAdress = "";
@@ -78,7 +71,7 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
     private SubjectsAdapter     subjectsAdapter;
     private TeachersAdapter     teachersAdapter;
     private TownSearchResultAdapter resultAdapter;
-    ParseJichu                  jichu;
+    JichuResult jichu;
     MainUpView                  mainUpView1;
     RecyclerViewBridge          mRecyclerViewBridge;
 
@@ -95,7 +88,7 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
     Map<String, String> map4 = new HashMap<>();
     Map<String, String> map5 = new HashMap<>();
     TownDBManager manager = new TownDBManager(this);
-    private BasicClassPresenter mClassPresenter;
+    private HighClassPresenter mClassPresenter;
     private CoursesBean mCoursesBean;
 
     Handler handler = new Handler(){
@@ -133,7 +126,7 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic_town);
-        mClassPresenter = new BasicClassPresenter(this);
+        mClassPresenter = new HighClassPresenter(this);
         initData();
         initRecycler();
 

@@ -11,8 +11,8 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.whx.ott.R;
-import com.whx.ott.ui.LoginActivity;
-import com.whx.ott.ui.NewHomeActivity;
+import com.whx.ott.ui.AgentLoginActivity;
+import com.whx.ott.ui.HomeActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.https.HttpsUtils;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
@@ -62,8 +62,8 @@ public class YunApplication extends Application {
          */
         Beta.smallIconId = R.mipmap.ic_launcher;
 
-        Beta.canShowUpgradeActs.add(LoginActivity.class);
-        Beta.canShowUpgradeActs.add(NewHomeActivity.class);
+        Beta.canShowUpgradeActs.add(AgentLoginActivity.class);
+        Beta.canShowUpgradeActs.add(HomeActivity.class);
 
         //      when test app,turn the third paramater into true
         Bugly.init(this, "7ac2329e73", false);

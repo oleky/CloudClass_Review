@@ -19,7 +19,6 @@ import com.whx.ott.R;
 import com.whx.ott.adapter.SearchResultAdapter;
 import com.whx.ott.bean.CoursesBean;
 import com.whx.ott.bean.ParseSearch;
-import com.whx.ott.bean.TestUrl;
 import com.whx.ott.bridge.RecyclerViewBridge;
 
 import com.whx.ott.presenter.SearchPresenter;
@@ -62,9 +61,9 @@ public class SearchActivity extends Activity implements View.OnClickListener,
     }
 
     private void initview() {
-        editText = (EditText) findViewById(R.id.id_topsearch_home);
-        gridView = (RecyclerViewTV) findViewById(R.id.id_gridview_search);
-        mainUpView1 = (MainUpView) findViewById(R.id.mainUpViewSearch);
+        editText = findViewById(R.id.id_topsearch_home);
+        gridView = findViewById(R.id.id_gridview_search);
+        mainUpView1 = findViewById(R.id.mainUpViewSearch);
         editText.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         editText.setOnEditorActionListener(mOnEditorActionListener);
         Drawable drawable = getResources().getDrawable(R.drawable.search);
@@ -197,7 +196,8 @@ public class SearchActivity extends Activity implements View.OnClickListener,
             bundle.putSerializable("courseBean", mCoursesBean);
             intent.putExtra("videoPath", videoPath);
             intent.putExtra("model_id",1);
-            intent.putExtra("type","cloud");
+            intent.putExtra("type_id", 1);
+            intent.putExtra("type_name", "云教室");
             intent.putExtras(bundle);
             SearchActivity.this.startActivity(intent);
         }

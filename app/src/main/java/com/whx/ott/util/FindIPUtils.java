@@ -1,5 +1,9 @@
 package com.whx.ott.util;
 
+
+import android.content.Context;
+import android.widget.Toast;
+
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -13,21 +17,20 @@ public class FindIPUtils {
 
     private IPListener mIPListener;
 
-    public void catchIP(IPListener listener) {
+    public void taobaoIP(IPListener listener) {
         this.mIPListener = listener;
         OkHttpUtils.get()
-                .url("http://www.3322.org/dyndns/getip")
+                .url("https://www.taobao.com/help/getip.php")
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
+                        e.printStackTrace();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        if (response != null) {
-                            mIPListener.findIP(response);
-                        }
+                        mIPListener.findIP(response);
                     }
                 });
     }

@@ -1,7 +1,6 @@
 package com.whx.ott.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.net.Uri;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,18 +25,10 @@ import android.widget.Toast;
 
 import com.whx.ott.R;
 import com.whx.ott.bean.CoursesBean;
-import com.whx.ott.bean.ParseLogin;
-import com.whx.ott.conn.Conn;
-import com.whx.ott.conn.JsonAddTownInfo;
-import com.whx.ott.conn.TownNumToString;
 import com.whx.ott.presenter.LivePresenter;
 import com.whx.ott.presenter.viewinface.LiveView;
 import com.whx.ott.util.SharedpreferenceUtil;
 import com.whx.ott.util.X5WebView;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
-
-import okhttp3.Call;
 
 /**
  * Created by oleky on 2017/9/27.
@@ -57,10 +47,6 @@ public class WkWebActivity extends Activity implements LiveView{
     private int model_id;
 
     private CoursesBean coursesBean;  //基础课类
-    private String macAdress;
-    private String user_id;
-    private String user_name;
-    ParseLogin data;
 
     private boolean hasPayed;
     private String videoPath;
@@ -87,11 +73,7 @@ public class WkWebActivity extends Activity implements LiveView{
         videoPath = getIntent().getStringExtra("videoPath");
         hasPayed = false;
         mLivePresenter = new LivePresenter(this, this);
-        user_id = (String) SharedpreferenceUtil.getData(this, "user_id", "");
-        user_name = (String) SharedpreferenceUtil.getData(this, "user_name", "");
-        macAdress = (String) SharedpreferenceUtil.getData(this, "dev_id", "");
-
-        mLivePresenter.addTownPlayInfo(coursesBean);
+        mLivePresenter.addJichuInfo(coursesBean, "2", "雄博士");
 
     }
 
@@ -167,8 +149,7 @@ public class WkWebActivity extends Activity implements LiveView{
                  * 这里写入你自定义的window alert
                  */
                 if (arg2.contains("课程")) {
-//                    addCountryPay();
-                    mLivePresenter.townPay(coursesBean);
+                    mLivePresenter.jichuPay(coursesBean,"2","雄博士");
                 }
                 arg3.confirm();
                 return true;
@@ -289,6 +270,7 @@ public class WkWebActivity extends Activity implements LiveView{
     @Override
     public void payFailed(String errorMsg) {
         Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override

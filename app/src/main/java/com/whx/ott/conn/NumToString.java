@@ -32,45 +32,76 @@ public class NumToString {
     public static String searchYears(int id) {
         yearList = baseInfo.getYears();
         String yearName = "";
-        yearName = yearList.get(id-1).getYear_name();
+//        yearName = yearList.get(id-1).getYear_name();
+        for (YearsBean bean : yearList) {
+            if (bean.getId() == id) {
+                yearName = bean.getYear_name();
+                return yearName;
+            }
+        }
         return yearName;
     }
 
     public static String searchTerms(int id) {
         termList = baseInfo.getTerms();
         String termName = "";
-        termName = termList.get(id-1).getTerm_name();
+//        termName = termList.get(id-1).getTerm_name();
+        for (TermsBean bean : termList) {
+            if (bean.getId() == id) {
+                termName = bean.getTerm_name();
+                return termName;
+            }
+        }
         return termName;
     }
 
     public static String searchGrades(int id) {
         String gradeName = "";
         gradeList = baseInfo.getGrades();
-        gradeName = gradeList.get(id-1).getGrade_name();
-
+        for (GradesBean bean :
+                gradeList) {
+            if (bean.getId() == id) {
+                return bean.getGrade_name();
+            }
+        }
         return gradeName;
     }
 
     public static String searchSubject(int id) {
         String subjectName = "";
         subjectList = baseInfo.getSubjects();
-        subjectName = subjectList.get(id-1).getSubject_name();
-
+//        subjectName = subjectList.get(id-1).getSubject_name();
+        for (SubjectsBean bean :
+                subjectList) {
+            if (bean.getId() == id) {
+                return bean.getSubject_name();
+            }
+        }
         return subjectName;
     }
 
     public static String searchTeacher(int id) {
         String teacherName = "";
         teacherList = baseInfo.getTeachers();
-        teacherName = teacherList.get(id-1).getTeacher_name();
-
+//        teacherName = teacherList.get(id-1).getTeacher_name();
+        for (TeachersBean bean:
+                teacherList) {
+            if (bean.getId() == id) {
+                return bean.getTeacher_name();
+            }
+        }
         return teacherName;
     }
     public static String searSoulplate(int id) {
         String souplatename = "";
         soulplateList = baseInfo.getSoulplates();
-        souplatename = soulplateList.get(id-1).getSoulplate_name();
-
+//        souplatename = soulplateList.get(id-1).getSoulplate_name();
+        for (Soulplates bean:
+                soulplateList) {
+            if (bean.getId() == id) {
+                return bean.getSoulplate_name();
+            }
+        }
         return souplatename;
     }
 

@@ -91,6 +91,7 @@ public class UpdateAppManager {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
                     }
 
                     @Override
@@ -103,7 +104,14 @@ public class UpdateAppManager {
                                 //更新数据
                                 apk_path = getversion.getData().get(0).getApp_url();
                                 update_describe = getversion.getData().get(0).getApp_message();
-                                showNoticeDialog();
+                                String isForce = getversion.getData().get(0).getIs_force();
+                                Log.e("UPdata", "强制：" + isForce);
+                                //0.强制，1 非强制
+                                if ("1".equals(isForce) ) {
+                                    showCancleableDialog();
+                                } else {
+                                    showNoticeDialog();
+                                }
 
                             }
                         }
@@ -113,20 +121,31 @@ public class UpdateAppManager {
 
 
     /**
-     * 显示提示更新对话框
+     * 显示强制更新更新对话框
      */
     private void showNoticeDialog() {
         new AlertDialog.Builder(context)
                 .setTitle("检测到新版本！")
                 .setMessage(update_describe)
-                .setPositiveButton("立刻下载", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        showDownloadDialog();
-                    }
+                .setPositiveButton("立刻下载", (dialog, which) -> {
+                    dialog.dismiss();
+                    showDownloadDialog();
                 }).setCancelable(false).create().show();
     }
+
+    private void showCancleableDialog() {
+        new AlertDialog.Builder(context)
+                .setTitle("检测到新版本！")
+                .setMessage(update_describe)
+                .setPositiveButton("立刻下载", (dialog, which) -> {
+                    dialog.dismiss();
+                    showDownloadDialog();
+                })
+                .setNegativeButton("不更新", (dialog, which) -> dialog.dismiss())
+                .setCancelable(false).create().show();
+    }
+
+
 
     /**
      * 显示下载进度对话框

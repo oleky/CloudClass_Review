@@ -26,10 +26,9 @@ import com.whx.ott.beanfeature.ParseSearchSoul;
 import com.whx.ott.beanfeature.SoulLastBean;
 import com.whx.ott.bridge.RecyclerViewBridge;
 import com.whx.ott.conn.Conn;
-import com.whx.ott.conn.JsonGetUserInfo;
 import com.whx.ott.conn.NumToString;
 import com.whx.ott.db.DBManager;
-import com.whx.ott.model.TopMenuPresenter;
+import com.whx.ott.presenter.TopMenuPresenter;
 import com.whx.ott.util.SharedpreferenceUtil;
 import com.whx.ott.widget.LinearLayoutManagerTV;
 import com.whx.ott.widget.MainUpView;
@@ -99,24 +98,23 @@ public class NewAllClassFragment extends Fragment {
     }
 
     private void initView(View view) {
-        classhour_tv = (TextView) view.findViewById(R.id.classhour_mine_tv);
-        top_menu_rv = (RecyclerViewTV) view.findViewById(R.id.allclass_top_menu_rv);
-        mRecyclerView = (RecyclerViewTV) view.findViewById(R.id.new_allclass_feature_bow);
-        mainUpView1 = (MainUpView) view.findViewById(R.id.mainUpView1);
+//        classhour_tv = (TextView) view.findViewById(R.id.classhour_mine_tv);
+        top_menu_rv = view.findViewById(R.id.allclass_top_menu_rv);
+        mRecyclerView = view.findViewById(R.id.new_allclass_feature_bow);
+        mainUpView1 = view.findViewById(R.id.mainUpView1);
         mainUpView1.setEffectBridge(new RecyclerViewBridge());
-        title_name_tv = (TextView) view.findViewById(R.id.new_allclass_top_tv);
-        classhour_tv = (TextView) view.findViewById(R.id.classhour_mine_newtv);
-        subject_tv = (TextView) view.findViewById(R.id.new_allclass_subject_tv);
-        tv_town_money = (TextView) view.findViewById(R.id.classhour_mine_newtvcountry);
+        title_name_tv = view.findViewById(R.id.new_allclass_top_tv);
+        classhour_tv = view.findViewById(R.id.classhour_mine_newtv);
+        subject_tv = view.findViewById(R.id.new_allclass_subject_tv);
+        tv_town_money = view.findViewById(R.id.classhour_mine_newtvcountry);
 //        subjectnum_tv = (TextView) view.findViewById(R.id.new_allclass_subjectnum_tv);
-        feature_classname = (RecyclerViewTV) view.findViewById(R.id.new_allclass_feature_name);
+        feature_classname = view.findViewById(R.id.new_allclass_feature_name);
         // 注意这里，需要使用 RecyclerViewBridge 的移动边框 Bridge.
         mRecyclerViewBridge = (RecyclerViewBridge) mainUpView1.getEffectBridge();
         manager = new DBManager(getActivity());
     }
 
     private void initData() {
-        getTime();
         soulLastBeanList = new ArrayList<>();
         MineFeatureList = new ArrayList<>();
         //存储标题集合
@@ -125,29 +123,6 @@ public class NewAllClassFragment extends Fragment {
             names.add(soulplatesLists.get(i).getSoulplate_name());
         }
 
-    }
-
-    private void getTime() {
-        JsonGetUserInfo.getUserAddress(user_id, new JsonGetUserInfo.LocListener() {
-            @Override
-            public void getLoc(String pos) {
-            }
-
-            @Override
-            public void getMoney(String money) {
-                classhour_tv.setText(money + " 课时");
-            }
-
-            @Override
-            public void getTownMoney(String money) {
-                tv_town_money.setText(money + " 课时");
-            }
-
-            @Override
-            public void getTownTime(String time) {
-                SharedpreferenceUtil.saveData(getActivity(), "town_time", time);
-            }
-        });
     }
 
     private void initTopMenu() {

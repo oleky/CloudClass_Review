@@ -7,6 +7,7 @@ public class VersionBean {
     private int app_version;
     private String app_url;
     private String app_message;
+    private String is_force;
 
     public String getApp_message() {
         return app_message;
@@ -18,6 +19,14 @@ public class VersionBean {
 
     public int getApp_version() {
         return app_version;
+    }
+
+    public String getIs_force() {
+        return is_force;
+    }
+
+    public void setIs_force(String is_force) {
+        this.is_force = is_force;
     }
 
     public void setApp_version(int app_version) {

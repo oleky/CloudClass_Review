@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.whx.ott.R;
 import com.whx.ott.beanfeature.ParseMineModification;
 import com.whx.ott.conn.Conn;
-import com.whx.ott.ui.LoginActivity;
+import com.whx.ott.ui.AgentLoginActivity;
 import com.whx.ott.util.SharedpreferenceUtil;
 import com.whx.ott.widget.MainUpView;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -60,19 +60,17 @@ public class ModificationFragment extends Fragment implements View.OnClickListen
 
     private void initView(View view) {
 
-        et_old_pass = (EditText) view.findViewById(R.id.modification_frg_et_one);
-        et_new_pass = (EditText) view.findViewById(R.id.modification_frg_et_two);
-        et_new_pass2 = (EditText) view.findViewById(R.id.modification_frg_et_three);
-        password_btn = (Button) view.findViewById(R.id.modification_frg_password);
-        password_tv = (TextView) view.findViewById(R.id.textView4);
-        old_tv = (TextView) view.findViewById(R.id.modification_frg_tv);
+        et_old_pass = view.findViewById(R.id.modification_frg_et_one);
+        et_new_pass = view.findViewById(R.id.modification_frg_et_two);
+        et_new_pass2 = view.findViewById(R.id.modification_frg_et_three);
+        password_btn = view.findViewById(R.id.modification_frg_password);
+        password_tv = view.findViewById(R.id.textView4);
+        old_tv = view.findViewById(R.id.modification_frg_tv);
 
 
         password_btn.setOnClickListener(this);
         viewOnFocusChange(password_btn);
-//        viewOnFocusChange(et_old_pass);
-//        viewOnFocusChange(et_new_pass);
-//        viewOnFocusChange(et_new_pass2);
+
     }
     private  void viewOnFocusChange(final View view){
         view.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -127,7 +125,7 @@ public class ModificationFragment extends Fragment implements View.OnClickListen
                             old_tv.setText("*您输入的旧密码有误");
                         } else {
                             Toast.makeText(getActivity(), "修改密码成功", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getActivity(), LoginActivity.class);
+                            Intent intent = new Intent(getActivity(), AgentLoginActivity.class);
                             getActivity().startActivity(intent);
                         }
                     }

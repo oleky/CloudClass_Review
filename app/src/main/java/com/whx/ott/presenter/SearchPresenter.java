@@ -4,7 +4,7 @@ package com.whx.ott.presenter;
 
 import com.whx.ott.bean.CoursesBean;
 import com.whx.ott.bean.ParseSearch;
-import com.whx.ott.bean.TestUrl;
+import com.whx.ott.bean.VideoPathBean;
 import com.whx.ott.conn.ApiService;
 import com.whx.ott.conn.RetrofitClient;
 import com.whx.ott.presenter.viewinface.SearchView;
@@ -32,7 +32,7 @@ public class SearchPresenter extends Presenter{
 
     public void searchCourse(String courseName, String mac,int start, int limit) {
         mService.seach(courseName,mac,start+"",start+limit+"")
-                .compose(RxUtil.<ParseSearch>rxScheduleHelper())
+                .compose(RxUtil.rxScheduleHelper())
                 .subscribe(new Consumer<ParseSearch>() {
                     @Override
                     public void accept(ParseSearch parseSearch) throws Exception {
@@ -60,12 +60,12 @@ public class SearchPresenter extends Presenter{
 
     public void geturl(String filename, String devid) {
         mService.liveUrl(filename,devid)
-                .compose(RxUtil.<TestUrl>rxScheduleHelper())
-                .subscribe(new Consumer<TestUrl>() {
+                .compose(RxUtil.rxScheduleHelper())
+                .subscribe(new Consumer<VideoPathBean>() {
                     @Override
-                    public void accept(TestUrl testUrl) throws Exception {
+                    public void accept(VideoPathBean videoPathBean) throws Exception {
                         if (mSearchView != null) {
-                            String url = testUrl.getUrl();
+                            String url = videoPathBean.getUrl();
                             mSearchView.getUrl(url);
                         }
                     }

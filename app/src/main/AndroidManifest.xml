@@ -77,7 +77,7 @@
         <service android:name="com.amap.api.location.APSService" >
         </service>
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.SplashActivity"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
             android:screenOrientation="landscape">
             <intent-filter>
@@ -85,12 +85,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.AgentLoginActivity"
             android:launchMode="singleTask"
             android:configChanges="keyboard|keyboardHidden|navigation|orientation"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"/>
+
         <!--<activity android:name=".ui.HomeActivity" />-->
         <activity android:name=".ui.SearchActivity"
             android:launchMode="singleTask"
@@ -108,22 +109,16 @@
         <activity android:name=".ui.VideoDataActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"/>
-        <activity android:name=".ui.BasicClassActivity"
+        <activity android:name=".ui.HighClassActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"/>
         <activity android:name=".ui.MineNewRcActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"/>
 
-        <activity
-            android:name=".ui.ExampleActivity"
-            android:hardwareAccelerated="true"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".ui.NewHomeActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape"/>
+        <activity android:name=".ui.HomeActivity"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="landscape"/>
 
         <!-- Bugly升级SDK配置开始  -->
         <activity
@@ -134,11 +129,7 @@
             android:name=".ui.TownClassActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"/>
-        <activity
-            android:name=".ui.QrCodeLoginActivity"
-            android:launchMode="singleTask"
-            android:configChanges="keyboard|keyboardHidden|screenSize|orientation"
-            android:screenOrientation="landscape"/>
+
 
         <activity
             android:name=".ui.WkWebActivity"

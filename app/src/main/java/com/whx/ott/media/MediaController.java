@@ -145,7 +145,6 @@ public class MediaController extends FrameLayout implements IMediaController {
     /**
      * Create the view that holds the widgets that control playback. Derived
      * classes can override this to create their own.
-     *
      * @return The controller view.
      */
     protected View makeControllerView() {

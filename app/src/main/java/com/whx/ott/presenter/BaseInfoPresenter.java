@@ -1,10 +1,10 @@
 package com.whx.ott.presenter;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.whx.ott.bean.BaseInfo;
 import com.whx.ott.bean.GradesBean;
-import com.whx.ott.bean.ParseLogin;
 import com.whx.ott.bean.Soulplates;
 import com.whx.ott.bean.SubjectsBean;
 import com.whx.ott.bean.TeachersBean;
@@ -14,16 +14,12 @@ import com.whx.ott.conn.ApiService;
 import com.whx.ott.conn.RetrofitClient;
 import com.whx.ott.db.DBManager;
 import com.whx.ott.db.TownDBManager;
-import com.whx.ott.presenter.viewinface.BaseInfoView;
 import com.whx.ott.util.RxUtil;
 import com.whx.ott.util.SharedpreferenceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -32,7 +28,6 @@ import io.reactivex.functions.Consumer;
 
 public class BaseInfoPresenter extends Presenter {
 
-    private BaseInfoView mInfoView;
     private Context mContext;
     private ApiService mService;
 
@@ -45,15 +40,14 @@ public class BaseInfoPresenter extends Presenter {
     private List<TeachersBean> teacherList = new ArrayList<>();
     private List<Soulplates> soulplateList = new ArrayList<>();
 
-    public BaseInfoPresenter(BaseInfoView infoView, Context context) {
-        mInfoView = infoView;
+    public BaseInfoPresenter( Context context) {
         mContext = context;
         mService = new RetrofitClient().createApiClient();
         manager = new DBManager(context);
         mTownDBManager = new TownDBManager(context);
     }
 
-    public void getBaseInfo(String userid) {
+    public void getBaseInfo() {
         mService.highBaseInfo()
                 .compose(RxUtil.rxScheduleHelper())
                 .subscribe(new Consumer<BaseInfo>() {
@@ -69,14 +63,12 @@ public class BaseInfoPresenter extends Presenter {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        if (null != mInfoView) {
-                            mInfoView.getFailed("请检查网络");
-                        }
+                        Toast.makeText(mContext, "请检查网络", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
-    public void getTownBaseInfo(String userid) {
+    public void getTownBaseInfo() {
         mService.townBaseInfo()
                 .compose(RxUtil.rxScheduleHelper())
                 .subscribe(new Consumer<BaseInfo>() {
@@ -87,45 +79,6 @@ public class BaseInfoPresenter extends Presenter {
                             SharedpreferenceUtil.saveObj2Sp(mContext, "town_base_info", info);
                             insertTownData(info);
                         }
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        throwable.printStackTrace();
-                    }
-                });
-    }
-
-    public void getAddress(String userid) {
-        mService.userPos(userid)
-                .compose(RxUtil.rxScheduleHelper())
-                .subscribe(new Consumer<ParseLogin>() {
-                    @Override
-                    public void accept(ParseLogin parseLogin) throws Exception {
-                        if (null != mInfoView) {
-                            String code = parseLogin.getCode();
-                            if ("0".equals(code)) {
-                                mInfoView.userAddress(parseLogin.getData().get(0).getAddress_name());
-                                SharedpreferenceUtil.saveData(mContext, "user_money", parseLogin.getData().get(0).getUser_money());
-                                SharedpreferenceUtil.saveData(mContext, "user_validetime", parseLogin.getData().get(0).getValide_time());
-                            }
-                        }
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-
-                    }
-                });
-    }
-
-    public void uploadAddress(String userid, String username, final String loaction, String mac) {
-        mService.uploadPosition(userid,username,loaction,mac)
-                .compose(RxUtil.rxScheduleHelper())
-                .subscribe(new Consumer<ParseLogin>() {
-                    @Override
-                    public void accept(ParseLogin parseLogin) throws Exception {
-                        SharedpreferenceUtil.saveData(mContext, "localposition", loaction);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -182,8 +135,5 @@ public class BaseInfoPresenter extends Presenter {
 
     @Override
     public void onDestory() {
-        if (null != mInfoView) {
-            mInfoView = null;
-        }
     }
 }

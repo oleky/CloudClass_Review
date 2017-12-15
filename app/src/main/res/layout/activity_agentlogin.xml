@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+                android:id="@+id/rl_top"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_horizontal"
+    android:background="@color/black">
+    <ImageView
+        android:id="@+id/logo_login"
+        android:layout_width="@dimen/w_250"
+        android:layout_height="@dimen/h_350"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/icon_new"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_stulogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo_login"
+        android:layout_above="@+id/tv_copyright"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/username_et"
+            android:layout_alignBottom="@+id/username_et"
+            android:layout_marginRight="@dimen/w_10"
+            android:layout_toStartOf="@+id/username_et"
+            android:text="学生账号:"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/username_et"
+            android:layout_width="@dimen/w_300"
+            android:layout_height="@dimen/h_60"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/h_45"
+            android:background="@drawable/et_user_selector"
+            android:gravity="center"
+            android:hint="请输入账号"
+            android:maxLines="1"
+            android:padding="0dp"
+            android:textColorHint="@color/white"
+            android:singleLine="true"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/userpassword_et"
+            android:layout_alignBottom="@+id/userpassword_et"
+            android:layout_alignStart="@+id/tv_name"
+            android:text="学生密码:"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/userpassword_et"
+            android:layout_width="@dimen/w_300"
+            android:layout_height="@dimen/h_60"
+            android:layout_below="@+id/username_et"
+            android:layout_toEndOf="@+id/tv_name"
+            android:layout_marginTop="@dimen/h_30"
+            android:background="@drawable/et_user_selector"
+            android:gravity="center"
+            android:hint="请输入密码"
+            android:padding="0dp"
+            android:textColorHint="@color/white"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="@dimen/w_290"
+            android:layout_height="@dimen/h_40"
+            android:layout_below="@+id/userpassword_et"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/h_40"
+            android:background="@drawable/p768btn"
+            android:focusable="true"
+            android:padding="0dp"
+            android:focusableInTouchMode="true"
+            android:text="登录"
+            android:textColor="#333333"
+            android:textSize="@dimen/loginSize" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ln_agentlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo_login"
+        android:layout_above="@id/tv_copyright"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/h_34"
+            android:text="云教室终端校验"
+            android:textSize="@dimen/w_20"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/w_20"
+            android:layout_marginBottom="@dimen/h_20"
+            android:textColor="@color/white"/>
+        <LinearLayout
+            android:id="@+id/ln_safevarify"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/iv_qrcode"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/erweima"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"/>
+            <Button
+                android:id="@+id/btn_fresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/h_50"
+                android:text="点击刷新二维码"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:background="@color/bg_code_after"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="正在校验···"
+            android:textColor="@color/yellow"
+            android:textSize="@dimen/w_20"
+            android:layout_marginTop="@dimen/h_20"
+            android:layout_marginBottom="@dimen/h_10"
+            android:gravity="center"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_copyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#7c7f8c"
+        android:text="北京王后雄教育科技有限公司荣誉出品"
+        android:textSize="@dimen/w_20"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:focusable="false"
+        android:layout_marginBottom="@dimen/h_40"/>
+
+    <com.whx.ott.widget.MainUpView
+        android:id="@+id/id_mainUpView_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

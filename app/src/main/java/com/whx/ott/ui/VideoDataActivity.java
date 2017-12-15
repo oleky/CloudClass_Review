@@ -12,12 +12,10 @@ import android.widget.Toast;
 
 import com.whx.ott.R;
 import com.whx.ott.adapter.VideoDataAdapter;
-import com.whx.ott.bean.SubjectsBean;
-import com.whx.ott.bean.TestUrl;
+import com.whx.ott.bean.VideoPathBean;
 import com.whx.ott.beanfeature.SoulcoursesBean;
 import com.whx.ott.bridge.RecyclerViewBridge;
 import com.whx.ott.conn.Conn;
-import com.whx.ott.db.DBManager;
 import com.whx.ott.util.SharedpreferenceUtil;
 import com.whx.ott.widget.GridLayoutManagerTV;
 import com.whx.ott.widget.MainUpView;
@@ -29,9 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
-
-import static android.R.attr.orientation;
-import static android.R.attr.switchMinWidth;
 
 /**
  * Created by HelloWorld on 2016/9/1.
@@ -51,7 +46,7 @@ public class VideoDataActivity extends Activity {
     private List<SoulcoursesBean> soulcoursesBeanList;
     private int tag;
     private List<List<SoulcoursesBean>> lists = new ArrayList<>();
-    TestUrl test;
+    VideoPathBean test;
     private TextView top_tv_name;
     private TextView video_item_rv_tv;
 
@@ -73,12 +68,12 @@ public class VideoDataActivity extends Activity {
     }
 
     private void initView() {
-        video_rv = (RecyclerViewTV) findViewById(R.id.video_rv);
-        videoname_tv = (TextView) findViewById(R.id.videoname_tv);
-        names_tv = (TextView) findViewById(R.id.videoname_tv);
+        video_rv = findViewById(R.id.video_rv);
+        videoname_tv = findViewById(R.id.videoname_tv);
+        names_tv = findViewById(R.id.videoname_tv);
 //        top_tv_name = (TextView) findViewById(R.id.video_tv_top);
 //        video_item_rv_tv = (TextView) findViewById(R.id.video_item_rv_tv);
-        mainUpView1 = (MainUpView) findViewById(R.id.mainUpView1);
+        mainUpView1 = findViewById(R.id.mainUpView1);
         mainUpView1.setEffectBridge(new RecyclerViewBridge());
         mRecyclerViewBridge = (RecyclerViewBridge) mainUpView1.getEffectBridge();
 
@@ -206,7 +201,7 @@ public class VideoDataActivity extends Activity {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        test = TestUrl.getdata(response);
+                        test = VideoPathBean.getdata(response);
                         Intent intent = new Intent(VideoDataActivity.this, CCPlayerActivity.class);
                         Bundle bundle = new Bundle();
                         String videoPath = test.getUrl();
