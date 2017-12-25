@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_basic"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/newfeaturebg"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/rv_name_feature"
+        android:layout_marginLeft="70dp"
+        android:focusable="false"
+        android:text="类型："
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/rv_years_feature"
+        android:layout_marginLeft="70dp"
+        android:focusable="false"
+        android:text="年份："
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/rv_subjects_feature"
+        android:layout_marginLeft="70dp"
+        android:focusable="false"
+        android:text="科目："
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/rv_teachers_feature"
+        android:layout_marginLeft="70dp"
+        android:focusable="false"
+        android:text="教师："
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+
+    <com.whx.ott.widget.RecyclerViewTV
+        android:id="@+id/rv_years_feature"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginLeft="@dimen/w_120"
+        android:layout_marginTop="30dp"
+        android:clipChildren="false"
+        android:clipToPadding="false" />
+
+    <com.whx.ott.widget.RecyclerViewTV
+        android:id="@+id/rv_name_feature"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/rv_years_feature"
+        android:layout_marginLeft="@dimen/w_120"
+        android:layout_marginTop="10dp"
+        android:clipChildren="false"
+        android:clipToPadding="false" />
+
+    <com.whx.ott.widget.RecyclerViewTV
+        android:id="@+id/rv_subjects_feature"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/rv_name_feature"
+        android:layout_marginLeft="@dimen/w_120"
+        android:layout_marginTop="10dp" />
+
+
+    <com.whx.ott.widget.RecyclerViewTV
+        android:id="@+id/rv_teachers_feature"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/rv_subjects_feature"
+        android:layout_marginLeft="@dimen/w_120"
+        android:layout_marginTop="10dp" />
+
+    <ImageView
+        android:id="@+id/id_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/rv_teachers_feature"
+        android:layout_marginTop="17dp"
+        android:src="@color/white" />
+
+
+    <com.whx.ott.widget.RecyclerViewTV
+        android:id="@+id/rv_classname_feature"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/id_divider"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:focusable="false">
+    </com.whx.ott.widget.RecyclerViewTV>
+
+    <com.whx.ott.widget.MainUpView
+        android:id="@+id/mainUpView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </com.whx.ott.widget.MainUpView>
+</RelativeLayout>

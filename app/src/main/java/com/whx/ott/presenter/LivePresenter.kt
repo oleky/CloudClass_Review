@@ -40,7 +40,7 @@ class LivePresenter( mContext: Context, private var mLiveView: LiveView?) : Pres
 
     /**
      * 新版本增加基础课播放记录（高中与小初通用，用type区分
-     * type:1 云教室，type：2雄博士
+     * type:1 雄博士，type：2云教室
      * */
     fun addJichuInfo(bean: CoursesBean,type_id:String,type_name:String) {
         val map = HashMap<String, String>()
@@ -61,7 +61,7 @@ class LivePresenter( mContext: Context, private var mLiveView: LiveView?) : Pres
             put("course_id", "${bean.id}")
             put("course_name", bean.course_name?:"")
 
-            if (type_id == "1") { //高中基础课
+            if (type_id == "2") { //高中基础课
                 put("subject_name", NumToString.searchSubject(bean.subject_id))
                 put("grade_name", NumToString.searchGrades(bean.grade_id))
                 put("year_name",NumToString.searchYears(bean.year_id))
@@ -105,7 +105,7 @@ class LivePresenter( mContext: Context, private var mLiveView: LiveView?) : Pres
             put("subject_id",bean.subject_id?:"")
             put("course_id", bean.id?:"")
             put("course_name", bean.soulcourse_name?:"")
-            if (type_id == "1") {
+            if (type_id == "2") {
                 put("teacher_name", NumToString.searchTeacher(bean.teacher_id))
                 put("subject_name", NumToString.searchSubject(bean.subject_id!!.toInt()))
                 put("year_name",NumToString.searchYears(bean.year_id))
@@ -144,7 +144,7 @@ class LivePresenter( mContext: Context, private var mLiveView: LiveView?) : Pres
             put("course_id", "${bean.id}")
             put("course_name", bean.course_name?:"")
 
-            if (type_id == "1") { //高中基础课
+            if (type_id == "2") { //高中基础课
                 put("subject_name", NumToString.searchSubject(bean.subject_id))
                 put("grade_name", NumToString.searchGrades(bean.grade_id))
                 put("year_name",NumToString.searchYears(bean.year_id))
@@ -194,7 +194,7 @@ class LivePresenter( mContext: Context, private var mLiveView: LiveView?) : Pres
             put("subject_id",bean.subject_id?:"")
             put("course_id", bean.id?:"")
             put("course_name", bean.soulcourse_name?:"")
-            if (type_id == "1") {
+            if (type_id == "2") {
                 put("teacher_name", NumToString.searchTeacher(bean.teacher_id))
                 put("subject_name", NumToString.searchSubject(bean.subject_id!!.toInt()))
                 put("year_name",NumToString.searchYears(bean.year_id))

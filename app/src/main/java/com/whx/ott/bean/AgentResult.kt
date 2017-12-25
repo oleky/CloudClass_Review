@@ -7,4 +7,6 @@ class AgentResult {
     var code: Int? = -1
     var meg: String? = null
     var userinfo: AgentBean? = null
+    var boxinfo: BoxBean? = null
+
 }

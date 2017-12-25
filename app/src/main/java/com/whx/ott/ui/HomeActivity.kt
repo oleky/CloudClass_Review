@@ -47,6 +47,9 @@ class HomeActivity : Activity(), SearchView {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
         mInfoPresenter?.getBaseInfo()
         mInfoPresenter?.getTownBaseInfo()
+        btn_exit.setOnClickListener {
+            initBack()
+        }
 
     }
 
@@ -64,7 +67,7 @@ class HomeActivity : Activity(), SearchView {
                         startActivity(intent)
                     }
                     R.mipmap.tese_icon ->{
-                        val intent = Intent(this@HomeActivity, FeatureRcActivity::class.java)
+                        val intent = Intent(this@HomeActivity, NewFeatureActivity::class.java)
                         val soulplateList: MutableList<Soulplates> = SharedpreferenceUtil.queryObj2Sp(this@HomeActivity, "soulplatelist") as MutableList<Soulplates>
                         intent.putExtra("soulplate_list", soulplateList as Serializable)
                         startActivity(intent)

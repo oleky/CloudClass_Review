@@ -95,34 +95,40 @@ public interface ApiService {
 
 
     /**
-     * 增加基础课（小初/高中）播放记录
+     * 增加基础课（小初&高中）播放记录
      */
     @FormUrlEncoded
     @POST(Conn.ADD_BASEPLAY_LOG)
     Observable<ApiResult> addJichuPlay(@FieldMap Map<String, String> map);
 
     /**
-     * 增加特色课（小初/高中）播放记录
+     * 增加特色课（小初&高中）播放记录
      */
     @FormUrlEncoded
     @POST(Conn.ADD_TESEPLAY_LOG)
     Observable<ApiResult> addTesePlay(@FieldMap Map<String, String> map);
 
     /**
-     * 基础课扣费（小初/高中
+     * 基础课扣费（小初&高中
      */
     @FormUrlEncoded
     @POST(Conn.ADD_BASEPAY_LOG)
     Observable<ApiResult> jichuPay(@FieldMap Map<String, String> map);
 
     /**
-     * 特色课扣费（小初/高中
+     * 特色课扣费（小初&高中
      */
     @FormUrlEncoded
     @POST(Conn.ADD_TESEPAY_LOG)
     Observable<ApiResult> tesePay(@FieldMap Map<String, String> map);
 
-
+    /**
+     * 二维码轮训
+     */
+    @FormUrlEncoded
+    @POST(Conn.SCANFLAG)
+    Observable<ApiResult> scanFlag(@Field("user_id") String agentid,
+                                   @Field("dev_mac") String mac);
 
 
     //---------------------------原接口作废------------------

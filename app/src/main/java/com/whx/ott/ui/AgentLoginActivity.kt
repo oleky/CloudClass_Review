@@ -18,6 +18,8 @@ import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.QRCodeWriter
 import com.whx.ott.R
+import com.whx.ott.conn.Conn
+import com.whx.ott.conn.RetrofitClient
 import com.whx.ott.extentions.DelegatesExt
 import com.whx.ott.extentions.showToast
 import com.whx.ott.presenter.AgentPresenter
@@ -58,8 +60,7 @@ class AgentLoginActivity : Activity(),View.OnClickListener,AgentView {
     private var agentName: String = ""
     private var devId: String = ""
     //测试用
-    private val apiurl = "http://api.121drhero.com/public/index.php/interfaces/two/scanlogin/addteacheruuid"
-    private val internalurl = "http://api.121drhero.com/public/index.php/interfaces/two/scanlogin/scanteachermessage"
+    private val internalurl = Conn.BASEURL+Conn.SCANFLAG
 
     private val mHandler = @SuppressLint("HandlerLeak")
     object: Handler(){
@@ -67,7 +68,7 @@ class AgentLoginActivity : Activity(),View.OnClickListener,AgentView {
             when (msg?.what) {
                 1 -> {
                     createQrImage(result, iv_qrcode)
-                    internalApi(result,internalurl)
+                    internalApi(internalurl)
                 }
                 2 ->{
                     tv_result.text = "验证完成，您可以登录学生账号了！"
@@ -122,7 +123,6 @@ class AgentLoginActivity : Activity(),View.OnClickListener,AgentView {
 
             R.id.btn_fresh ->{
                 btn_fresh.visibility = View.GONE
-//                getuuid(apiurl)
                 mHandler.sendEmptyMessageDelayed(1, 200)
             }
         }
@@ -145,8 +145,11 @@ class AgentLoginActivity : Activity(),View.OnClickListener,AgentView {
             } else {
                 result = "$agentname&$agentID&$devId&$myIP&true"
             }
+            Log.e("myIP",myIP)
 
             val encodestr = "whx"+Base64.encode(result.toByteArray(charset("utf-8")))
+            Log.e("Base64", encodestr)
+
             result = encodestr
 
             //TODO 对二维码信息:agentID,uuid
@@ -220,7 +223,8 @@ class AgentLoginActivity : Activity(),View.OnClickListener,AgentView {
 
     private var mDisposable: Disposable? = null
 
-    private fun internalApi(uuid: String,interurl:String) {
+
+    private fun internalApi(interurl:String) {
         mDisposable =  Observable.interval(1, TimeUnit.SECONDS)
                 .filter {
                     aLong ->
@@ -236,7 +240,8 @@ class AgentLoginActivity : Activity(),View.OnClickListener,AgentView {
             Observable.create { emmiter ->
                 OkHttpUtils.post()
                         .url(interurl)
-                        .addParams("uuid", uuid)
+                        .addParams("user_id", agentID)
+                        .addParams("dev_mac",devId)
                         .build()
                         .execute(object : StringCallback() {
                             override fun onError(call: Call, e: Exception, id: Int) {
@@ -248,9 +253,16 @@ class AgentLoginActivity : Activity(),View.OnClickListener,AgentView {
                                 try {
                                     val jsonObject = JSONObject(response)
                                     val code = jsonObject.optInt("code")
-                                    if (code == 200) {
-                                        emmiter.onNext(code)
+                                    val data = jsonObject.getJSONArray("data")
+                                    if (data.length() > 0) {
+                                        val obj:JSONObject = data.get(0) as JSONObject
+                                        val flag = obj.optInt("flag")
+
+                                        if (flag == 1) {
+                                            emmiter.onNext(code)
+                                        }
                                     }
+
                                 } catch (e1: JSONException) {
                                     e1.printStackTrace()
                                     emmiter.onError(e1)

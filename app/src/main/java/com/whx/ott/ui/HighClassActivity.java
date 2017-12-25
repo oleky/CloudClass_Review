@@ -128,7 +128,7 @@ public class HighClassActivity extends Activity implements View.OnFocusChangeLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_basic_new);
+        setContentView(R.layout.activity_basic_high);
         try {
             PLNetworkManager.getInstance().startDnsCacheService(this, DEFAULT_PLAYBACK_DOMAIN_ARRAY);
         } catch (UnknownHostException e) {
@@ -531,7 +531,7 @@ public class HighClassActivity extends Activity implements View.OnFocusChangeLis
         bundle.putSerializable("courseBean", mCoursesBean);
         intent.putExtra("videoPath", videoPath);
         intent.putExtra("model_id",1);
-        intent.putExtra("type_id", 1);
+        intent.putExtra("type_id", 2);
         intent.putExtra("type_name", "云教室");
         intent.putExtras(bundle);
         HighClassActivity.this.startActivity(intent);

@@ -96,9 +96,6 @@
         <activity android:name=".ui.SearchActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"/>
-        <activity android:name=".ui.FeatureRcActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape"/>
         <activity
             android:name=".ui.CCPlayerActivity"
             android:configChanges="keyboardHidden|keyboard|navigation|orientation"
@@ -106,12 +103,9 @@
             android:screenOrientation="landscape"
             android:theme="@style/FullscreenTheme"/>
 
-        <activity android:name=".ui.VideoDataActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape"/>
         <activity android:name=".ui.HighClassActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape"/>
+                  android:launchMode="singleTask"
+                  android:screenOrientation="landscape"/>
         <activity android:name=".ui.MineNewRcActivity"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"/>
@@ -128,6 +122,7 @@
         <activity
             android:name=".ui.TownClassActivity"
             android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
             android:screenOrientation="landscape"/>
 
 
@@ -137,7 +132,10 @@
             android:hardwareAccelerated="true"
             android:screenOrientation="landscape"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
-
+        <activity
+            android:name=".ui.NewFeatureActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"/>
 
         <!-- Bugly升级SDK配置结束-->
     </application>

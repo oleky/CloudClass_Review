@@ -5,124 +5,163 @@
     android:layout_height="match_parent">
 
 
-
-        <TextView
-            android:id="@+id/modification_frg_1_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:text="旧的密码:  "
-            android:textColor="@color/white"
-            android:textSize="@dimen/w_20"
-            android:layout_alignBaseline="@+id/modification_frg_et_one"
-            android:layout_alignBottom="@+id/modification_frg_et_one"
-            android:layout_toStartOf="@+id/modification_frg_et_one" />
-
-        <EditText
-            android:id="@+id/modification_frg_et_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ed_frag_modify_selector"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/h_100"
-            android:gravity="center"
-            android:hint="请输入密码"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:padding="0dp"
-            android:singleLine="true" />
-
-
     <TextView
-        android:id="@+id/modification_frg_tv"
+        android:id="@+id/modification_frg_1_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/modification_frg_et_one"
+        android:layout_alignBottom="@+id/modification_frg_et_one"
+        android:layout_toStartOf="@+id/modification_frg_et_one"
         android:focusable="false"
-        android:text="*您输入的旧密码有误"
-        android:textColor="@color/red"
-        android:textSize="@dimen/h_25"
-        android:layout_below="@+id/modification_frg_et_one"
+        android:text="旧密码:  "
+        android:textColor="@color/white"
+        android:textSize="@dimen/w_20" />
+
+    <EditText
+        android:id="@+id/modification_frg_et_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="71dp"
+        android:background="@drawable/ed_frag_modify_selector"
+        android:hint="请输入密码"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:paddingLeft="15dp"
+        android:singleLine="true"
+        android:textSize="10sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_modification_import"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignStart="@+id/modification_frg_et_one"
-        android:layout_marginTop="@dimen/h_10"
-        android:visibility="gone"/>
+        android:layout_marginTop="51dp"
+        android:focusable="false"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:text="新的密码:  "
-            android:textColor="@color/white"
-            android:textSize="@dimen/w_20"
-            android:layout_alignBaseline="@+id/modification_frg_et_two"
-            android:layout_alignBottom="@+id/modification_frg_et_two"
-            android:layout_toStartOf="@+id/modification_frg_et_two" />
-
-        <EditText
-            android:id="@+id/modification_frg_et_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/h_70"
-            android:layout_below="@+id/modification_frg_et_one"
-            android:background="@drawable/ed_frag_modify_selector"
-            android:gravity="center"
-            android:hint="请输入新密码"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:padding="0dp"
-            android:singleLine="true" />
-
-
+        <ImageView
+            android:id="@+id/icon_iv_import"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_gravity="center"
+            android:background="@drawable/error_icon" />
 
         <TextView
+            android:id="@+id/modification_frg_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:focusable="false"
-            android:text="确认密码:  "
-
-            android:textColor="@color/white"
-            android:textSize="@dimen/w_20"
-            android:layout_alignBaseline="@+id/modification_frg_et_three"
-            android:layout_alignBottom="@+id/modification_frg_et_three"
-            android:layout_toStartOf="@+id/modification_frg_et_three" />
-
-        <EditText
-            android:id="@+id/modification_frg_et_three"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/modification_frg_et_two"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/h_70"
-            android:background="@drawable/ed_frag_modify_selector"
-            android:gravity="center"
-            android:hint="请输入新密码"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:padding="0dp"
-            android:singleLine="true" />
+            android:text="请输入正确的密码"
+            android:textColor="#ff9900"
+            android:textSize="10sp" />
+    </LinearLayout>
 
 
     <TextView
-        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/modification_frg_et_two"
+        android:layout_alignBottom="@+id/modification_frg_et_two"
+        android:layout_toStartOf="@+id/modification_frg_et_two"
         android:focusable="false"
-        android:text="*您输入的2次新密码不一致"
-        android:textColor="@color/red"
-        android:textSize="@dimen/h_25"
-        android:layout_below="@+id/modification_frg_et_three"
-        android:layout_alignStart="@+id/modification_frg_et_three"
-        android:layout_marginTop="@dimen/h_10"
-        android:visibility="gone"/>
+        android:text="新密码:  "
+        android:textColor="@color/white"
+        android:textSize="@dimen/w_20" />
 
+    <EditText
+        android:id="@+id/modification_frg_et_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/modification_frg_et_one"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/ed_frag_modify_selector"
+        android:hint="请输入新密码"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:paddingLeft="15dp"
+        android:singleLine="true"
+        android:textSize="10sp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/modification_frg_et_three"
+        android:layout_alignBottom="@+id/modification_frg_et_three"
+        android:layout_toStartOf="@+id/modification_frg_et_three"
+        android:focusable="false"
+        android:text="新密码:  "
+        android:textColor="@color/white"
+        android:textSize="@dimen/w_20" />
+
+    <EditText
+        android:id="@+id/modification_frg_et_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/modification_frg_et_two"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/ed_frag_modify_selector"
+        android:hint="请再次输入新密码"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:paddingLeft="15dp"
+        android:singleLine="true"
+        android:textSize="10sp" />
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/textView4"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignStart="@+id/modification_frg_et_three"-->
+    <!--android:layout_below="@+id/modification_frg_et_three"-->
+    <!--android:layout_marginTop="@dimen/h_10"-->
+    <!--android:focusable="false"-->
+    <!--android:text="*您输入的2次新密码不一致"-->
+    <!--android:textColor="@color/red"-->
+    <!--android:textSize="@dimen/h_25"-->
+    <!--android:visibility="gone" />-->
+
+    <LinearLayout
+        android:id="@+id/ll_modification_newpass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/modification_frg_et_three"
+        android:layout_below="@+id/modification_frg_et_three"
+        android:layout_marginTop="5dp"
+        android:focusable="false"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/icon_iv_modification"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_gravity="center"
+            android:background="@drawable/error_icon" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:focusable="false"
+            android:text="您输入的2次新密码不一致"
+            android:textColor="#ff9900"
+            android:textSize="10sp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/modification_frg_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/modification_frg_et_three"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/h_70"
         android:background="@drawable/modificition"
         android:text="确认修改"

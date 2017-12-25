@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_title_mine"
+    android:layout_width="110dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="20dp"
+    android:drawableBottom="@drawable/looked_divider_0"
+    android:drawablePadding="15dp"
+    android:focusable="true"
+    android:gravity="center"
+    android:text="测试"
+    android:textColor="@color/white"
+    android:textSize="18sp">
+</TextView>

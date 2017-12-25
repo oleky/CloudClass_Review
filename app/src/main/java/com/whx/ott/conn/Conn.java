@@ -6,12 +6,13 @@ package com.whx.ott.conn;
  */
 public interface Conn {
 //    String BASEURL = "http://60.205.148.237/cloudapi/";
-    String BASEURL = "http://192.168.1.132:8080/cloudapi/";
+//    String BASEURL = "http://192.168.1.132:8080/cloudapi/";
+    String BASEURL = "http://39.107.61.98/cloudapi/";
     //1.登录 post
-    String USER_LOGIN = "index.php?m=Home&c=User&a=login";
+//    String USER_LOGIN = "index.php?m=Home&c=User&a=login";
 
 
-    //2.获取基础信息Get
+    //2.高中基础信息Get
     String GET_BASEINFO = "index.php?m=Home&c=Index&a=baseinfo";
 
     //3.获取基础课信息Get
@@ -34,19 +35,19 @@ public interface Conn {
     //9.特色课信息
     String GET_FEATURE = "index.php?m=Home&c=Course&a=soulcourseinfo";
 
-    //10.基础课点播记录
-    String LOOKED_BASIC = "index.php?m=Home&c=Playinfo&a=getbaseplayinfo";
-
-    //11.特色课点播记录
-    String LOOKED_FEATURE = "index.php?m=Home&c=Playinfo&a=getsoulplayinfo";
+//    //10.基础课点播记录
+//    String LOOKED_BASIC = "index.php?m=Home&c=Playinfo&a=getbaseplayinfo";
+//
+//    //11.特色课点播记录
+//    String LOOKED_FEATURE = "index.php?m=Home&c=Playinfo&a=getsoulplayinfo";
     //12.全局搜索
     String SEARCHCOURSE = "index.php?m=Home&c=Scourse&a=searinfo";
     //13.检查更新
     String CHECKVERSON = "index.php?m=Home&c=App&a=getValue";
     //14.特色课点播信息
-    String ALL_CLASS = "index.php?m=Home&c=User&a=getsoulcourse";
+//    String ALL_CLASS = "index.php?m=Home&c=User&a=getsoulcourse";
     //15.修改密码接口信息
-    String MODIFY = "index.php?m=Home&c=User&a=modifypass";
+//    String MODIFY = "index.php?m=Home&c=User&a=modifypass";
 
 //    //16.测试个别指导
 //    String GET_GEURL = "index.php?m=Home&c=Video&a=guideinfo";
@@ -60,7 +61,7 @@ public interface Conn {
 //    String NEW_SOULPAY = "index.php?m=Home&c=Payinfo&a=addnewsoulpayinfo";
 
     //20.新版特色课记录
-    String NEWALL_CLASS = "index.php?m=Home&c=User&a=getnewsoulcourse";
+//    String NEWALL_CLASS = "index.php?m=Home&c=User&a=getnewsoulcourse";
 
     //21.新特色课英语接口
     String ENG_BASE = "http://114.215.66.250/whx/course/clickNumber?";
@@ -78,7 +79,7 @@ public interface Conn {
 //    String COUNTRY_PAY = "index.php?m=Home&c=Payinfo&a=townshipaddpayinfo";
 
     //26.获取所有乡镇云教室的播放历史记录
-    String COUNTRY_SHIP = "index.php?m=Home&c=Playinfo&a=gettownshipbaseplayinfo";
+//    String COUNTRY_SHIP = "index.php?m=Home&c=Playinfo&a=gettownshipbaseplayinfo";
 
     /**
      * ----------12月新版本云教室---------------
@@ -105,10 +106,24 @@ public interface Conn {
     //7.增加学生特色课扣费记录
     String ADD_TESEPAY_LOG = "index.php?m=Home&c=Recordlog&a=addstukindpaylog";
 
-    //8.提交IP地址和具体位置内容
 
-    String SUBMIT_IP_ADDRESS = "index.php?m=Home&c=User&a=submitipaddress";
+    //学生的基础课扣课记录信息
+    String BASE_CLASSED_RECORD = "index.php?m=Home&c=User&a=getbystuidbaselogs";
 
+    //学生的特色课扣课记录信息
+    String FEATURE_CLASSED_RECORD = "index.php?m=Home&c=User&a=getbystuidkindlogs";
+
+    //校验学生输入的旧密码是否正确
+    String STU_VALIDEOLD = "index.php?m=Home&c=Student&a=valideoldpassword";
+
+    //修改学生的密码
+    String STU_NEWPASSWORD = "index.php?m=Home&c=Student&a=modifypassword";
+
+    //获取学生的看课权限信息
+    String STU_JURISDICTION = "index.php?m=Home&c=Student&a=getstuviewauth";
+
+    //二维码轮训接口
+    String SCANFLAG = "index.php?m=Home&c=User&a=scanpolicemessage";
 
 
 }

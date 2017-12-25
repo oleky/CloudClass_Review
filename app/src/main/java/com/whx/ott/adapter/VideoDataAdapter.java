@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.whx.ott.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,18 +21,23 @@ public class VideoDataAdapter extends RecyclerView.Adapter<VideoDataAdapter.MyVi
     private List<Integer> ivs;
     private Context context;
     private OnItemClickListener listener;
+    private List<Integer> textcolors;
+    private String years_name;
 
-    public VideoDataAdapter(List<String> names, List<Integer> ivs, Context context) {
+
+    public VideoDataAdapter(List<String> names, String years_name, List<Integer> ivs, List<Integer> textcolors, Context context) {
         this.names = names;
+        this.years_name = years_name;
         this.ivs = ivs;
         this.context = context;
+        this.textcolors = textcolors;
         notifyDataSetChanged();
     }
 
     public interface OnItemClickListener {
-        public void onItemClick(View itemView, int position);
+        void onItemClick(View itemView, int position);
 
-        public void onItemLongClick(View itemView, int position);
+        void onItemLongClick(View itemView, int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -51,6 +55,27 @@ public class VideoDataAdapter extends RecyclerView.Adapter<VideoDataAdapter.MyVi
     public void onBindViewHolder(MyViewHoder holder, int position) {
         holder.iv.setImageResource(ivs.get(position % 1));
         holder.tv.setText(names.get(position));
+        holder.tv_year.setTextColor(textcolors.get(0));
+        int soul_id = textcolors.get(0);
+        if (soul_id == 1) {
+            holder.tv.setTextColor(context.getResources().getColor(R.color.jmyc));
+            holder.tv_year.setTextColor(context.getResources().getColor(R.color.jmyc));
+        } else if (soul_id == 2) {
+            holder.tv.setTextColor(context.getResources().getColor(R.color.dnb));
+            holder.tv_year.setTextColor(context.getResources().getColor(R.color.dnb));
+        } else if (soul_id == 3) {
+            holder.tv.setTextColor(context.getResources().getColor(R.color.xxyd));
+            holder.tv_year.setTextColor(context.getResources().getColor(R.color.xxyd));
+        } else if (soul_id == 6) {
+            holder.tv.setTextColor(context.getResources().getColor(R.color.gktxy));
+            holder.tv_year.setTextColor(context.getResources().getColor(R.color.gktxy));
+        } else if (soul_id == 7) {
+            holder.tv.setTextColor(context.getResources().getColor(R.color.xxyd));
+            holder.tv_year.setTextColor(context.getResources().getColor(R.color.xxyd));
+        } else {
+            holder.tv.setTextColor(context.getResources().getColor(R.color.dnb));
+            holder.tv_year.setTextColor(context.getResources().getColor(R.color.dnb));
+        }
         setUpEvent(holder);
     }
 
@@ -82,13 +107,15 @@ public class VideoDataAdapter extends RecyclerView.Adapter<VideoDataAdapter.MyVi
     }
 
     class MyViewHoder extends RecyclerView.ViewHolder {
+        private TextView tv_year;
         private TextView tv;
         private ImageView iv;
 
         public MyViewHoder(View itemView) {
             super(itemView);
-            iv = (ImageView) itemView.findViewById(R.id.item_rv_iv);
-            tv = (TextView) itemView.findViewById(R.id.item_rv_tv);
+            iv = itemView.findViewById(R.id.item_rv_iv);
+            tv = itemView.findViewById(R.id.item_rv_tv);
+            tv_year = itemView.findViewById(R.id.item_year_tv);
         }
     }
 }

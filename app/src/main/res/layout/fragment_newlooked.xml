@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.whx.ott.widget.RecyclerViewTV
+        android:id="@+id/rv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:nextFocusDown="@+id/rv_record_newlooked" />
+
+
+    <TextView
+        android:id="@+id/tv_null"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/rv_title"
+        android:focusable="false" />
+
+
+    <com.whx.ott.widget.RecyclerViewTV
+        android:id="@+id/rv_record_newlooked"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tv_null"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="false">
+    </com.whx.ott.widget.RecyclerViewTV>
+
+    <com.whx.ott.widget.MainUpView
+        android:id="@+id/mainUpView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </com.whx.ott.widget.MainUpView>
+</RelativeLayout>

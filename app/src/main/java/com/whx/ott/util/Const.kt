@@ -5,6 +5,10 @@ package com.whx.ott.util
  */
 class Const {
     companion object {
+
+        /**
+         * typeid:1 小初 ，2，高中
+         * */
         val AGENT_ID = "agent_id" //代理上id
         val USER_ID = "user_id" //学生id/教师id
         val USER_NAME = "user_name" //登录名

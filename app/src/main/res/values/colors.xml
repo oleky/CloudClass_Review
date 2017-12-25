@@ -24,4 +24,14 @@
     <color name="bg_code_after">#159c88</color>
     <color name="text_main">#333333</color>
     <color name="half_trans">#80ffffff</color>
+
+    <color name="new_feature">#fff77b</color>
+    <color name="jmyc">#772966</color>
+    <color name="dnb">#4c326e</color>
+    <color name="gktxy">#8ca550</color>
+    <color name="gsjdc">#a6794f</color>
+    <color name="dcjyf">#388981</color>
+    <color name="xxyd">#884058</color>
+    <color name="ceshi">#ff00ff</color>
+    <color name="side">#207fd5</color>
 </resources>

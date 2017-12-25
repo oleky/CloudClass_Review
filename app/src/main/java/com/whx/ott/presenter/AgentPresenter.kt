@@ -34,7 +34,7 @@ class AgentPresenter(mContext: Context, private var mLoginView: AgentView?) : Pr
 
     init {
         macAddress = MacUtil.getMacAddress() //1-1000
-        macAddress = "d8:96:e0:03:1a:aa" //测试用
+        macAddress = "00:04:a3:01:82:98" //测试用
         if (TextUtils.isEmpty(macAddress)) {
             macAddress = MacUtil.getLocalMacAddressFromIp(mContext)?:"00:00:00:00:00:00"
         }
@@ -85,8 +85,8 @@ class AgentPresenter(mContext: Context, private var mLoginView: AgentView?) : Pr
                             mLoginView?.agentLoginFailed("您的代理期限已经到期，请与客服联系")
                         } else {
                             agentID = result.userinfo?.user_id
-                            val lastIP = result.userinfo?.last_ip ?: ""
-                            val lastAddress=result.userinfo?.address_name?:""
+                            val lastIP = result.boxinfo?.ip_address ?: ""
+                            val lastAddress=result.boxinfo?.address?:""
                             val agentName = result.userinfo?.user_name ?: ""
 
                             mLoginView?.agentLoginSucc(agentID,agentName,macAddress, lastIP,lastAddress)

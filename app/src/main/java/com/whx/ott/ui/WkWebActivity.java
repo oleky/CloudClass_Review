@@ -73,7 +73,7 @@ public class WkWebActivity extends Activity implements LiveView{
         videoPath = getIntent().getStringExtra("videoPath");
         hasPayed = false;
         mLivePresenter = new LivePresenter(this, this);
-        mLivePresenter.addJichuInfo(coursesBean, "2", "雄博士");
+        mLivePresenter.addJichuInfo(coursesBean, "1", "雄博士");
 
     }
 
@@ -149,7 +149,7 @@ public class WkWebActivity extends Activity implements LiveView{
                  * 这里写入你自定义的window alert
                  */
                 if (arg2.contains("课程")) {
-                    mLivePresenter.jichuPay(coursesBean,"2","雄博士");
+                    mLivePresenter.jichuPay(coursesBean,"1","雄博士");
                 }
                 arg3.confirm();
                 return true;

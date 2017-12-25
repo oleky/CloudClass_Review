@@ -24,6 +24,7 @@
         android:hint="请输入搜索的课程名"
         android:imeOptions="actionSearch"
         android:textColor="@color/white"
+        android:visibility="gone"
         android:drawableRight="@drawable/search"/>
 
     <com.whx.ott.widget.FancyCoverFlow
@@ -41,4 +42,14 @@
         app:unselectedAlpha="0.6"
         app:unselectedScale="0.7" >
     </com.whx.ott.widget.FancyCoverFlow>
+
+
+    <Button
+        android:id="@+id/btn_exit"
+        android:layout_width="140dp"
+        android:layout_height="@dimen/h_68"
+        android:text="退出当前学生账号"
+        android:layout_marginTop="@dimen/h_30"
+        android:layout_alignParentRight="true"
+       android:layout_marginRight="@dimen/w_50"/>
 </RelativeLayout>
