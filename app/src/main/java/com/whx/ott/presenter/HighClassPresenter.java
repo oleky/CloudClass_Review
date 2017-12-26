@@ -1,5 +1,7 @@
 package com.whx.ott.presenter;
 
+import android.util.Log;
+
 import com.whx.ott.bean.JichuResult;
 import com.whx.ott.bean.VideoPathBean;
 import com.whx.ott.conn.ApiService;
@@ -76,22 +78,36 @@ public class HighClassPresenter extends Presenter {
         mService.townCourses(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<JichuResult>() {
-                    @Override
-                    public void accept(JichuResult jichuResult) throws Exception {
-                        if (mClassView != null) {
-                            mClassView.moreDate(jichuResult.getCourses());
-                        }
+                .subscribe(jichuResult -> {
+                    if (mClassView != null) {
+                        mClassView.moreDate(jichuResult.getCourses());
                     }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        throwable.printStackTrace();
-                        if (null != mClassView) {
-                            mClassView.moreDate(null);
-                        }
+                }, throwable -> {
+                    throwable.printStackTrace();
+                    if (null != mClassView) {
+                        mClassView.moreDate(null);
                     }
                 });
+    }
+
+    //新系统获取播放地址
+    public void geturl(String filename,String devid, String bancode,String modeCode,String yearCode) {
+
+        mService.videoUrl(filename,devid,bancode,modeCode,yearCode)
+                .compose(RxUtil.rxScheduleHelper())
+                .subscribe(videoPathBean -> {
+                    if (mClassView != null) {
+                        String url = videoPathBean.getUrl();
+                        Log.e("VideoUrl", "视频地址" + url);
+                        mClassView.geturl(url);
+                    }
+                }, throwable -> {
+                    throwable.printStackTrace();
+                    if (mClassView != null) {
+                        mClassView.geturl("");
+                    }
+                });
+
     }
 
     public void geturl(String filename, String devid) {
@@ -113,6 +129,8 @@ public class HighClassPresenter extends Presenter {
                         }
                     }
                 });
+
+
     }
 
 

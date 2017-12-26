@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.TextureView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -564,7 +565,12 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
                 } else {
                     //跳转播放视频
                     if (file_name.contains(".")) {
-                        mClassPresenter.geturl(file_name, macAdress);
+                        if (!TextUtils.isEmpty(bean.getCode_num())) {
+                            String codes[] = bean.getCode_num().split("_");
+                            String yearId = "year_"+bean.getYear_id();
+                            mClassPresenter.geturl(file_name, macAdress,codes[0],codes[1],yearId);
+                        }
+
                     } else {
                         //wkweb 地址
                         String videoPath = "http://studycenter.vko.cn/thdGoods/play?videoId="+file_name+"&thirdId=1008";
@@ -574,7 +580,8 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
                         bundle.putSerializable("courseBean", bean);
                         intent.putExtra("videoPath", videoPath);
                         intent.putExtra("model_id",1);
-                        intent.putExtra("type", "town");
+                        intent.putExtra("type_id", 1);
+                        intent.putExtra("type_name", "雄博士");
                         intent.putExtras(bundle);
                         TownClassActivity.this.startActivity(intent);
                     }
@@ -643,7 +650,8 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
         bundle.putSerializable("courseBean", mCoursesBean);
         intent.putExtra("videoPath", videoPath);
         intent.putExtra("model_id",1);
-        intent.putExtra("type", "town");
+        intent.putExtra("type_id", 1);
+        intent.putExtra("type_name", "雄博士");
         intent.putExtras(bundle);
         startActivity(intent);
     }

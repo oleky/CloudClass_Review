@@ -222,7 +222,7 @@ class CCPlayerActivity : AppCompatActivity(), GestureDetector.OnGestureListener,
                         false
                     }
                     PLMediaPlayer.ERROR_CODE_OPEN_FAILED -> {
-                        showToast("无法打开当前视频，请检查网络重试")
+                        showToast("无法打开当前视频")
                         finish()
                     }
                     PLMediaPlayer.ERROR_CODE_SEEK_FAILED -> {

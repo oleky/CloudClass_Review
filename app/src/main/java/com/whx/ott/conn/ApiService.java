@@ -82,6 +82,16 @@ public interface ApiService {
                                       @Query("devid") String mac);
 
     /**
+     * 获取视频url地址
+     * */
+    @GET(Conn.VIDEOURL)
+    Observable<VideoPathBean>videoUrl(@Query("file_name")String filename,
+                                      @Query("devid")String mac,
+                                      @Query("ban_code")String bancode,
+                                      @Query("mode_code")String modecode,
+                                      @Query("year_code")String yearcode);
+
+    /**
      * 获取基础课课程列表
      */
     @GET(Conn.GET_BASICCLASS)

@@ -32,7 +32,9 @@ public interface Conn {
     //8.获取视频url地址
     String GET_VIDEOURL = "index.php?m=Home&c=Video&a=baseinfo";
 
-    //9.特色课信息
+
+
+    //9.特色课筛选信息
     String GET_FEATURE = "index.php?m=Home&c=Course&a=soulcourseinfo";
 
 //    //10.基础课点播记录
@@ -124,6 +126,9 @@ public interface Conn {
 
     //二维码轮训接口
     String SCANFLAG = "index.php?m=Home&c=User&a=scanpolicemessage";
+
+    //8.新系统获取播放地址
+    String VIDEOURL = "index.php?m=Home&c=Video&a=newbaseinfo";
 
 
 }

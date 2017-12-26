@@ -10,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -634,12 +635,17 @@ public class NewFeatureActivity extends Activity {
                 SoulcoursesBean soulcoursesBean = soulcoursesBeanList.get(position);
                 Log.e("soulcoursesBean", "===>" + soulcoursesBean.getSoulcourse_name() + "  " + soulcoursesBean.getFile_name());
                 String file_name = soulcoursesBean.getFile_name();
-                if (TextUtils.isEmpty(file_name)) {
+                if (TextUtils.isEmpty(file_name)|| TextUtils.isEmpty(soulcoursesBean.getCode_num())) {
                     //判断file_name 是否为空，如果为空无此视频
                     Toast.makeText(NewFeatureActivity.this, "资源不存在", Toast.LENGTH_SHORT).show();
                 } else {
                     //跳转播放视频
-                    getFeatureUrl(Conn.BASEURL + Conn.GET_VIDEOURL, file_name, soulcoursesBean);
+                    String codes[] = soulcoursesBean.getCode_num().split("_");
+                    String yearId = "year_"+soulcoursesBean.getYear_id();
+                    if (codes.length > 2) {
+                        getFeatureUrl(Conn.BASEURL + Conn.VIDEOURL, file_name, soulcoursesBean,codes[0],codes[1],yearId);
+
+                    }
                 }
 
             }
@@ -731,11 +737,14 @@ public class NewFeatureActivity extends Activity {
                 });
     }
 
-    private void getFeatureUrl(String path, String filename, final SoulcoursesBean bean) {
+    private void getFeatureUrl(String path, String filename, final SoulcoursesBean bean,String bancode,String modecode,String yearcode) {
         OkHttpUtils.get()
                 .url(path)
                 .addParams("file_name", filename)
                 .addParams("devid", macAdress)
+                .addParams("ban_code",bancode)
+                .addParams("mode_code",modecode)
+                .addParams("year_code",yearcode)
                 .build()
                 .execute(new StringCallback() {
                     @Override

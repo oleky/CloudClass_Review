@@ -77,7 +77,10 @@ class LivePresenter( mContext: Context, private var mLiveView: LiveView?) : Pres
         }.let {
             mService.addJichuPlay(it)
                     .compose(RxUtil.rxScheduleHelper())
-                    .subscribe({ },
+                    .subscribe({
+                        result ->
+                        Log.e("REsult",result.meg)
+                    },
                             { error ->error.printStackTrace() })
         }
 
@@ -117,7 +120,10 @@ class LivePresenter( mContext: Context, private var mLiveView: LiveView?) : Pres
         }.let {
             mService.addTesePlay(it)
                     .compose(RxUtil.rxScheduleHelper())
-                    .subscribe({},
+                    .subscribe({
+                        result->
+                        Log.e("AddTesePlaylog",result.meg)
+                    },
                             { error ->error.printStackTrace() })
         }
     }

@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.view.TextureView;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -502,10 +503,17 @@ public class HighClassActivity extends Activity implements View.OnFocusChangeLis
                 CoursesBean bean = courseList.get(position);
                 mCoursesBean = bean;
                 String file_name = bean.getFile_name();
-                if (TextUtils.isEmpty(file_name)) {
+                String code_num = bean.getCode_num();
+                String yearId = "year_"+bean.getYear_id();
+                if (TextUtils.isEmpty(file_name)||TextUtils.isEmpty(code_num)) {
                     Toast.makeText(HighClassActivity.this, "资源不存在", Toast.LENGTH_SHORT).show();
                 } else {
-                    mClassPresenter.geturl(file_name, macAdress);
+                    String codes[] = code_num.split("_");
+                    if (codes.length > 2) {
+                        mClassPresenter.geturl(file_name,macAdress,codes[0],codes[1],yearId);
+                    }
+//                    mClassPresenter.geturl(file_name, macAdress);
+
                 }
 
             }
@@ -527,14 +535,20 @@ public class HighClassActivity extends Activity implements View.OnFocusChangeLis
     public void geturl(String url) {
         Intent intent = new Intent(HighClassActivity.this, CCPlayerActivity.class);
         Bundle bundle = new Bundle();
-        String videoPath = !TextUtils.isEmpty(url) ? url : "";
-        bundle.putSerializable("courseBean", mCoursesBean);
-        intent.putExtra("videoPath", videoPath);
-        intent.putExtra("model_id",1);
-        intent.putExtra("type_id", 2);
-        intent.putExtra("type_name", "云教室");
-        intent.putExtras(bundle);
-        HighClassActivity.this.startActivity(intent);
+        if (TextUtils.isEmpty(url)) {
+            Toast.makeText(this, "播放地址为空，请重试", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
+            String videoPath = url;
+            bundle.putSerializable("courseBean", mCoursesBean);
+            intent.putExtra("videoPath", videoPath);
+            intent.putExtra("model_id",1);
+            intent.putExtra("type_id", 2);
+            intent.putExtra("type_name", "云教室");
+            intent.putExtras(bundle);
+            HighClassActivity.this.startActivity(intent);
+        }
+
     }
 
     @Override
