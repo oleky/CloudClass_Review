@@ -128,4 +128,13 @@ public class TownDBManager {
         SharedpreferenceUtil.saveObj2Sp(context, "town_soulplatelist", soulplateList);
     }
 
+    /**
+     * 获取小初阶段表list
+     */
+    public List<Soulplates> getSoulplateList() {
+        List<Soulplates> list = new ArrayList<>();
+        list = (List<Soulplates>) SharedpreferenceUtil.queryObj2Sp(context, "town_soulplatelist");
+        return list;
+    }
+
 }

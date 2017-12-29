@@ -10,7 +10,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,13 +66,10 @@ public class NewFeatureActivity extends Activity {
     private int Key;
     public int soulNum;
     private String URL = Conn.BASEURL + Conn.GET_FEATURE;
-    //    private String URL = Conn.CESHI + Conn.GET_FEATURE;
     private List<List<SoulcoursesBean>> mLists = new ArrayList<>(); //存放接口返回值数据
     private DBManager manager = new DBManager(this);
     private VideoDataAdapter videoDataAdapter;
     private String TAG = NewFeatureActivity.class.getSimpleName();
-    private ParseTopspeedEng parseTopspeedEng;
-    private List<ResultBean> resultBeanLists;
     private ResultBean resultBean;
     private String type;
     private VideoPathBean test;
@@ -128,6 +124,7 @@ public class NewFeatureActivity extends Activity {
         mainUpView.setEffectBridge(new RecyclerViewBridge());
         mRecyclerViewBridge = (RecyclerViewBridge) mainUpView.getEffectBridge();
         soulplates = (List<Soulplates>) getIntent().getExtras().getSerializable("soulplate_list");
+        macAdress = (String) SharedpreferenceUtil.getData(this, "dev_id", "");
     }
 
     private void yearsView() {
@@ -185,9 +182,7 @@ public class NewFeatureActivity extends Activity {
     private void onTitleItemClick(int position) {
         years_name = yearsBeanList.get(position).getYear_name();
         year_id = yearsBeanList.get(position).getId();
-//        Message msg = Message.obtain();
         handler.sendEmptyMessageDelayed(1, 300);
-//        MyRcGlData();
     }
 
     //添加顶部标题
@@ -269,7 +264,7 @@ public class NewFeatureActivity extends Activity {
         }
     }
 
-    private void teacherView(final int subject_id) {
+    private void teacherView(int subject_id) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rv_teachers.setLayoutManager(layoutManager);
@@ -403,6 +398,7 @@ public class NewFeatureActivity extends Activity {
                 onViewItem(itemView, parent);
                 mRecyclerViewBridge.setFocusView(itemView, oldView, 1.05f);
                 oldView = itemView;
+
                 int subject_id = subjectsBeanList.get(position).getId();
                 onViewItemClick1(subject_id);
             }
@@ -424,13 +420,6 @@ public class NewFeatureActivity extends Activity {
         for (int i = 0; i < subjectsBeanList.size(); i++) {
             subjectLists.add(subjectsBeanList.get(i).getSubject_name());
         }
-        ivs.add(R.drawable.jmycbg);
-        ivs.add(R.drawable.dnbbg);
-        ivs.add(R.drawable.sytskbg);
-        ivs.add(R.drawable.gsjdcbg);
-        ivs.add(R.drawable.dcjyfbg);
-        ivs.add(R.drawable.gktxybg);
-        ivs.add(R.drawable.xxydbg);
         names.clear();
         for (int i = 0; i < soulplates.size(); i++) {
             String name = soulplates.get(i).getSoulplate_name();
@@ -475,6 +464,7 @@ public class NewFeatureActivity extends Activity {
                         parseFeature = ParseFeature.getFeatureData(response);
                         if (null != parseFeature) {
                             soulcoursesBeanList = parseFeature.getSoulcourses();
+
                         }
                         if (mLists != null) {
                             mLists.clear();
@@ -484,15 +474,12 @@ public class NewFeatureActivity extends Activity {
                         if (mLists.get(0).size() != 0) {
                             if (Key == 0) {
                                 //根据所选标题
-                                soulcourData();
                                 initVideoRc();
                             } else {
                                 Toast.makeText(NewFeatureActivity.this, "用户没有权限访问", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            tvs.clear();
                             initVideoRc();
-                            Toast.makeText(NewFeatureActivity.this, "目前没有开放此课程", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -539,28 +526,29 @@ public class NewFeatureActivity extends Activity {
                                 Toast.makeText(NewFeatureActivity.this, "用户没有权限访问", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(NewFeatureActivity.this, "目前没有开放此课程", Toast.LENGTH_SHORT).show();
+                            soulcoursesBeanList.clear();
+                            MyFeatureEng(type, soulcoursesBeanList);
                         }
                     }
                 });
 
     }
 
-    private void MyFeatureEng(final String type, final List<SoulcoursesBean> soulcoursesBeanList) {
+    private void MyFeatureEng(String type, List<SoulcoursesBean> soulcoursesBeanList) {
         GridLayoutManagerTV gridLayoutManagerEng = new GridLayoutManagerTV(this, 2);
         gridLayoutManagerEng.setOrientation(LinearLayoutManager.HORIZONTAL);
         rv_classnames.setLayoutManager(gridLayoutManagerEng);
         rv_classnames.setFocusable(false);
-        ivs.clear();
-        textcolors.clear();
-        if (soulNum == 4) {
-            ivs.add(R.drawable.gsjdcbg);
-            textcolors.add(soulNum);
-        } else if (soulNum == 5) {
-            ivs.add(R.drawable.dcjyfbg);
-            textcolors.add(soulNum);
-        }
-        topspeedEngAdapter = new TopspeedEngAdapter(NewFeatureActivity.this, soulcoursesBeanList, years_name, ivs, textcolors);
+//        ivs.clear();
+//        textcolors.clear();
+//        if (soulNum == 4) {
+//            ivs.add(R.drawable.gsjdcbg);
+//            textcolors.add(soulNum);
+//        } else if (soulNum == 5) {
+//            ivs.add(R.drawable.dcjyfbg);
+//            textcolors.add(soulNum);
+//        }
+        topspeedEngAdapter = new TopspeedEngAdapter(NewFeatureActivity.this, soulcoursesBeanList);
         rv_classnames.setAdapter(topspeedEngAdapter);
         topspeedEngAdapter.notifyDataSetChanged();
         rv_classnames.setOnItemListener(new RecyclerViewTV.OnItemListener() {
@@ -600,31 +588,8 @@ public class NewFeatureActivity extends Activity {
         gridlayoutManager.setOrientation(GridLayoutManager.HORIZONTAL);
         rv_classnames.setLayoutManager(gridlayoutManager);
         rv_classnames.setFocusable(false);
-        ivs.clear();
-        textcolors.clear();
-        textcolors.add(soulNum);
-        switch (soulNum) {
-            case 1:
-                ivs.add(R.drawable.jmycbg);
-                break;
-            case 2:
-                ivs.add(R.drawable.dnbbg);
-                break;
-            case 3:
-                ivs.add(R.drawable.sytskbg);
-                break;
-            case 6:
-                ivs.add(R.drawable.gktxybg);
-                break;
-            case 7:
-                ivs.add(R.drawable.xxydbg);
-                break;
-            default:
-                ivs.add(R.drawable.jmycbg);
-                textcolors.add(1);
-                break;
-        }
-        videoDataAdapter = new VideoDataAdapter(tvs, years_name, ivs, textcolors, this);
+
+        videoDataAdapter = new VideoDataAdapter(soulcoursesBeanList, this);
         rv_classnames.setAdapter(videoDataAdapter);
         videoDataAdapter.notifyDataSetChanged();
         videoDataAdapter.setOnItemClickListener(new VideoDataAdapter.OnItemClickListener() {
@@ -635,17 +600,12 @@ public class NewFeatureActivity extends Activity {
                 SoulcoursesBean soulcoursesBean = soulcoursesBeanList.get(position);
                 Log.e("soulcoursesBean", "===>" + soulcoursesBean.getSoulcourse_name() + "  " + soulcoursesBean.getFile_name());
                 String file_name = soulcoursesBean.getFile_name();
-                if (TextUtils.isEmpty(file_name)|| TextUtils.isEmpty(soulcoursesBean.getCode_num())) {
+                if (TextUtils.isEmpty(file_name)) {
                     //判断file_name 是否为空，如果为空无此视频
                     Toast.makeText(NewFeatureActivity.this, "资源不存在", Toast.LENGTH_SHORT).show();
                 } else {
                     //跳转播放视频
-                    String codes[] = soulcoursesBean.getCode_num().split("_");
-                    String yearId = "year_"+soulcoursesBean.getYear_id();
-                    if (codes.length > 2) {
-                        getFeatureUrl(Conn.BASEURL + Conn.VIDEOURL, file_name, soulcoursesBean,codes[0],codes[1],yearId);
-
-                    }
+                    getFeatureUrl(Conn.BASEURL + Conn.VIDEOURL, file_name, soulcoursesBean);
                 }
 
             }
@@ -688,17 +648,6 @@ public class NewFeatureActivity extends Activity {
 
     }
 
-    private void soulcourData() {
-        tvs = new ArrayList<String>();
-        if (soulcoursesBeanList != null) {
-            for (int i = 0; i < soulcoursesBeanList.size(); i++) {
-                tvs.add(soulcoursesBeanList.get(i).getSoulcourse_name());
-            }
-        } else {
-            Toast.makeText(this, "目前没有视频可以播放", Toast.LENGTH_SHORT).show();
-        }
-        macAdress = (String) SharedpreferenceUtil.getData(this, "dev_id", "");
-    }
 
     /**
      * 获取播放地址
@@ -732,19 +681,20 @@ public class NewFeatureActivity extends Activity {
 //                        intent.putExtra("status", status);
                         Log.e("path", "---------" + videoPath);
                         intent.putExtras(bundle);
-                        NewFeatureActivity.this.startActivity(intent);
+                        startActivity(intent);
                     }
                 });
     }
 
-    private void getFeatureUrl(String path, String filename, final SoulcoursesBean bean,String bancode,String modecode,String yearcode) {
+    private void getFeatureUrl(String path, String filename, final SoulcoursesBean bean) {
+        String[] strarray = bean.getCode_num().split("_");
         OkHttpUtils.get()
                 .url(path)
                 .addParams("file_name", filename)
                 .addParams("devid", macAdress)
-                .addParams("ban_code",bancode)
-                .addParams("mode_code",modecode)
-                .addParams("year_code",yearcode)
+                .addParams("ban_code", strarray[0])
+                .addParams("mode_code", strarray[1])
+                .addParams("year_code", "year_" + year_id + "")
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -764,7 +714,7 @@ public class NewFeatureActivity extends Activity {
                         intent.putExtra("type_id", 2);
                         intent.putExtra("type_name", "云教室");
                         intent.putExtras(bundle);
-                        NewFeatureActivity.this.startActivity(intent);
+                        startActivity(intent);
                     }
                 });
     }

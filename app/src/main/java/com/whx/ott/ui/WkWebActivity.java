@@ -25,9 +25,9 @@ import android.widget.Toast;
 
 import com.whx.ott.R;
 import com.whx.ott.bean.CoursesBean;
+import com.whx.ott.beanfeature.SoulcoursesBean;
 import com.whx.ott.presenter.LivePresenter;
 import com.whx.ott.presenter.viewinface.LiveView;
-import com.whx.ott.util.SharedpreferenceUtil;
 import com.whx.ott.util.X5WebView;
 
 /**
@@ -47,6 +47,7 @@ public class WkWebActivity extends Activity implements LiveView{
     private int model_id;
 
     private CoursesBean coursesBean;  //基础课类
+    private SoulcoursesBean soulcoursesBean; //特色课累
 
     private boolean hasPayed;
     private String videoPath;
@@ -69,11 +70,17 @@ public class WkWebActivity extends Activity implements LiveView{
         mViewParent = findViewById(R.id.webView1);
         mTestHandler.sendEmptyMessageDelayed(MSG_INIT_UI, 10);
         coursesBean = (CoursesBean) getIntent().getSerializableExtra("courseBean");
+        soulcoursesBean = (SoulcoursesBean) getIntent().getSerializableExtra("soulcoursesBean");
         model_id = getIntent().getIntExtra("model_id", 1);
         videoPath = getIntent().getStringExtra("videoPath");
         hasPayed = false;
         mLivePresenter = new LivePresenter(this, this);
-        mLivePresenter.addJichuInfo(coursesBean, "1", "雄博士");
+
+        if (model_id == 1) {
+            mLivePresenter.addJichuInfo(coursesBean, "1", "雄博士");
+        } else {
+            mLivePresenter.addTesePlayInfo(soulcoursesBean, "1", "雄博士");
+        }
 
     }
 
@@ -149,7 +156,11 @@ public class WkWebActivity extends Activity implements LiveView{
                  * 这里写入你自定义的window alert
                  */
                 if (arg2.contains("课程")) {
-                    mLivePresenter.jichuPay(coursesBean,"1","雄博士");
+                    if (model_id == 1) {
+                        mLivePresenter.jichuPay(coursesBean, "1", "雄博士");
+                    } else {
+                        mLivePresenter.tesePay(soulcoursesBean, "1", "雄博士");
+                    }
                 }
                 arg3.confirm();
                 return true;

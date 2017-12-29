@@ -23,4 +23,7 @@ class SoulcoursesBean : Serializable {
     var file_name: String? = null
     var flow_length: String? = null
     var code_num: String? = null
+    var grade_id: String? = null
+    var grade_name: String? = null
+
 }

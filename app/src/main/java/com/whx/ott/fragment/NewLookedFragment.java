@@ -40,7 +40,7 @@ import okhttp3.Call;
  * Created by HelloWorld on 2017/11/10.
  */
 
-public class NewLookedFragment extends Fragment {
+public class NewLookedFragment extends Fragment implements RecyclerViewTV.OnItemListener {
     private RecyclerViewTV rv_title;
     private MainUpView mainUpView;
     private RecyclerViewBridge mRecyclerViewBridge;
@@ -56,12 +56,14 @@ public class NewLookedFragment extends Fragment {
     private List<String> time_basise;
     private List<String> subject_name_basise;
     private List<String> Grade_name_basise;
-    private List<String> names_feature;
-    private List<String> time_feature;
-    private List<String> subject_name_feature;
+    private List<String> names_feature, name_feature_country;
+    private List<String> time_feature, time_feature_country;
+    private List<String> subject_name_feature, subject_name_feature_country;
+    private List<String> model_feature, grade_feature;
     private List<BaseClassBean> baseClassBeanList;
     private List<FeatureClassBean> featureClassBeanList;
     private String user_id, stu_id;
+    private List<FeatureClassBean> featureClassBeans;
 
     @Nullable
     @Override
@@ -91,7 +93,7 @@ public class NewLookedFragment extends Fragment {
         classKinds.add("基础课");
         classKinds.add("特色课");
         classKinds.add("小初课");
-
+        classKinds.add("特色课(小初)");
         names_basise = new ArrayList<String>();
         names_feature = new ArrayList<String>();
         time_basise = new ArrayList<String>();
@@ -103,6 +105,11 @@ public class NewLookedFragment extends Fragment {
         time_basecountry = new ArrayList<>();
         grade_name_base_country = new ArrayList<>();
         subject_name_base_country = new ArrayList<>();
+        featureClassBeans = new ArrayList<>();
+        model_feature = new ArrayList<>();
+        time_feature_country = new ArrayList<>();
+        name_feature_country = new ArrayList<>();
+        grade_feature = new ArrayList<>();
 //        macAdress = (String) SharedpreferenceUtil.getData(getActivity(), "dev_id", "");
     }
 
@@ -130,6 +137,11 @@ public class NewLookedFragment extends Fragment {
                 break;
             case 2:
                 countryRecordView();
+                break;
+            case 3:
+                countryfeatureRecordView();
+                break;
+            default:
                 break;
         }
     }
@@ -231,7 +243,38 @@ public class NewLookedFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rv_record.setLayoutManager(layoutManager);
         rv_record.setFocusable(false);
-        NewLookedRecordAdapter recordAdapter = new NewLookedRecordAdapter(time_feature, names_feature, Grade_name_basise, getActivity());
+        NewLookedRecordAdapter recordAdapter = new NewLookedRecordAdapter(time_feature, names_feature, model_feature, getActivity());
+//        NewLookedRecordAdapter recordAdapter = new NewLookedRecordAdapter(featureClassBeans, getActivity());
+        rv_record.setAdapter(recordAdapter);
+        recordAdapter.notifyDataSetChanged();
+        rv_record.setOnItemListener(new RecyclerViewTV.OnItemListener() {
+            @Override
+            public void onItemPreSelected(RecyclerViewTV parent, View itemView, int position) {
+                mRecyclerViewBridge.setUnFocusView(itemView);
+            }
+
+            @Override
+            public void onItemSelected(RecyclerViewTV parent, View itemView, int position) {
+                mRecyclerViewBridge.setFocusView(itemView, 1.05f);
+                oldView = itemView;
+            }
+
+            @Override
+            public void onReviseFocusFollow(RecyclerViewTV parent, View itemView, int position) {
+                mRecyclerViewBridge.setFocusView(itemView, 1.05f);
+                oldView = itemView;
+            }
+        });
+
+    }
+
+    private void countryfeatureRecordView() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rv_record.setLayoutManager(layoutManager);
+        rv_record.setFocusable(false);
+        NewLookedRecordAdapter recordAdapter = new NewLookedRecordAdapter(time_feature_country, name_feature_country, grade_feature, getActivity());
+//        NewLookedRecordAdapter recordAdapter = new NewLookedRecordAdapter(featureClassBeans, getActivity());
         rv_record.setAdapter(recordAdapter);
         recordAdapter.notifyDataSetChanged();
         rv_record.setOnItemListener(new RecyclerViewTV.OnItemListener() {
@@ -345,9 +388,17 @@ public class NewLookedFragment extends Fragment {
                         featureClassBeanList = parseMineFeaturnClassed.getData();
                         if (code == 0 && featureClassBeanList != null) {
                             for (int i = 0; i < featureClassBeanList.size(); i++) {
-                                names_feature.add(featureClassBeanList.get(i).getCourse_name());
-                                time_feature.add(featureClassBeanList.get(i).getCreate_time());
-                                subject_name_feature.add(featureClassBeanList.get(i).getSubject_name());
+                                String type = featureClassBeanList.get(i).getType_name();
+                                if (type.equals("云教室")) {
+                                    names_feature.add(featureClassBeanList.get(i).getCourse_name());
+                                    time_feature.add(featureClassBeanList.get(i).getCreate_time());
+                                    subject_name_feature.add(featureClassBeanList.get(i).getSubject_name());
+                                    model_feature.add(featureClassBeanList.get(i).getModel_name());
+                                } else if (type.equals("雄博士")) {
+                                    name_feature_country.add(featureClassBeanList.get(i).getCourse_name());
+                                    time_feature_country.add(featureClassBeanList.get(i).getCreate_time());
+                                    grade_feature.add(featureClassBeanList.get(i).getGrade_name());
+                                }
                             }
                         } else {
                             Toast.makeText(getActivity(), parseMineFeaturnClassed.getMeg(), Toast.LENGTH_SHORT).show();
@@ -356,4 +407,18 @@ public class NewLookedFragment extends Fragment {
                 });
     }
 
+    @Override
+    public void onItemPreSelected(RecyclerViewTV parent, View itemView, int position) {
+
+    }
+
+    @Override
+    public void onItemSelected(RecyclerViewTV parent, View itemView, int position) {
+
+    }
+
+    @Override
+    public void onReviseFocusFollow(RecyclerViewTV parent, View itemView, int position) {
+
+    }
 }

@@ -2,6 +2,7 @@ package com.whx.ott.presenter
 
 
 import android.content.Context
+import android.text.TextUtils
 import android.util.Log
 
 import com.whx.ott.bean.CoursesBean
@@ -92,6 +93,7 @@ class LivePresenter( mContext: Context, private var mLiveView: LiveView?) : Pres
      * 新版增加特色课播放记录（通用笑出，高中
      * */
     fun addTesePlayInfo(bean: SoulcoursesBean,type_id: String,type_name: String) {
+        Log.e("YearName",NumToString.searchYears(bean.year_id))
         val map = HashMap<String, String>()
         map.apply {
             put("user_id", agent_id)
@@ -109,13 +111,23 @@ class LivePresenter( mContext: Context, private var mLiveView: LiveView?) : Pres
             put("course_id", bean.id?:"")
             put("course_name", bean.soulcourse_name?:"")
             if (type_id == "2") {
+                put("grade_id","")
                 put("teacher_name", NumToString.searchTeacher(bean.teacher_id))
                 put("subject_name", NumToString.searchSubject(bean.subject_id!!.toInt()))
                 put("year_name",NumToString.searchYears(bean.year_id))
+                put("grade_name", "")
+
             } else {
+                put("grade_id",bean.grade_id?:"")
                 put("year_name",TownNumToString.searchYears(bean.year_id))
                 put("subject_name",TownNumToString.searchSubject(bean.subject_id!!.toInt()))
                 put("teacher_name", TownNumToString.searchTeacher(bean.teacher_id))
+                val grad = bean.grade_id
+                if (grad==null||grad=="") {
+                    put("grade_name", "")
+                } else {
+                    put("grade_name",TownNumToString.searchGrades(grad.toInt()))
+                }
             }
         }.let {
             mService.addTesePlay(it)
@@ -201,13 +213,22 @@ class LivePresenter( mContext: Context, private var mLiveView: LiveView?) : Pres
             put("course_id", bean.id?:"")
             put("course_name", bean.soulcourse_name?:"")
             if (type_id == "2") {
+                put("grade_id","")
+                put("grade_name","")
                 put("teacher_name", NumToString.searchTeacher(bean.teacher_id))
                 put("subject_name", NumToString.searchSubject(bean.subject_id!!.toInt()))
                 put("year_name",NumToString.searchYears(bean.year_id))
             } else {
+                put("grade_id",bean.grade_id?:"")
                 put("year_name",TownNumToString.searchYears(bean.year_id))
                 put("subject_name",TownNumToString.searchSubject(bean.subject_id!!.toInt()))
                 put("teacher_name", TownNumToString.searchTeacher(bean.teacher_id))
+                val grad = bean.grade_id
+                if (grad==null||grad=="") {
+                    put("grade_name", "")
+                } else {
+                    put("grade_name",TownNumToString.searchGrades(grad.toInt()))
+                }
             }
         }.let {
             mService.tesePay(it)

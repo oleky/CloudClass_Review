@@ -93,7 +93,7 @@ public class TownNumToString {
         }
         return teacherName;
     }
-    public static String searSoulplate(int id) {
+    public static String searchSoulplate(int id) {
         String souplatename = "";
         soulplateList = baseInfo.getSoulplates();
 //        souplatename = soulplateList.get(id-1).getSoulplate_name();

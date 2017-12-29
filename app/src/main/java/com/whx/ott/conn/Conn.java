@@ -130,5 +130,8 @@ public interface Conn {
     //8.新系统获取播放地址
     String VIDEOURL = "index.php?m=Home&c=Video&a=newbaseinfo";
 
+    //小初特色课获取视频列表
+    String TOWN_TESELIST = "index.php?m=Home&c=Course&a=xcsoulcourseinfo";
+
 
 }

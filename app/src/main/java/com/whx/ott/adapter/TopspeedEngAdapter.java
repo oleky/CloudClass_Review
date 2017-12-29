@@ -32,11 +32,16 @@ public class TopspeedEngAdapter extends RecyclerView.Adapter<TopspeedEngAdapter.
         this.textcolors = textcolors;
     }
 
+    public TopspeedEngAdapter(Context context, List<SoulcoursesBean> tvs) {
+        this.context = context;
+        this.tvs = tvs;
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View item = LayoutInflater.from(context).inflate(R.layout.item_videodata, parent,
                 false);
-        TopspeedEngAdapter.MyViewHolder holder = new TopspeedEngAdapter.MyViewHolder(item);
+        MyViewHolder holder = new MyViewHolder(item);
 
         return holder;
     }
@@ -44,14 +49,13 @@ public class TopspeedEngAdapter extends RecyclerView.Adapter<TopspeedEngAdapter.
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tv.setText(tvs.get(position).getSoulcourse_name());
-        holder.iv.setImageResource(ivs.get(0));
-        int soul_id = textcolors.get(0);
+        String soul_id = tvs.get(position).getSoulplate_id();
         holder.tv_year.setText(years + "系列");
         holder.itemView.setTag(position);
-        if (soul_id == 4) {
+        if (soul_id.equals(4 + "")) {
             holder.tv.setTextColor(context.getResources().getColor(R.color.gsjdc));
             holder.tv_year.setTextColor(context.getResources().getColor(R.color.gsjdc));
-        } else if (soul_id == 5) {
+        } else if (soul_id.equals(5 + "")) {
             holder.tv_year.setTextColor(context.getResources().getColor(R.color.dcjyf));
             holder.tv.setTextColor(context.getResources().getColor(R.color.dcjyf));
         }

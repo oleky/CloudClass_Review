@@ -136,15 +136,18 @@ public class MineNewRcActivity extends Activity implements RecyclerViewTV.OnItem
                 onViewItemClick(itemView, position);
             }
         });
-        Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                top_menu_rv.requestFocusFromTouch();
-                top_menu_rv.getChildAt(0).callOnClick();
-            }
-        };
-        handler.sendMessageDelayed(handler.obtainMessage(), 188);
+        if (handler != null) {
+            handler.sendMessageDelayed(handler.obtainMessage(), 188);
+
+        }
     }
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            top_menu_rv.requestFocusFromTouch();
+            top_menu_rv.getChildAt(0).callOnClick();
+        }
+    };
 
     private void onViewItem(View itemView, RecyclerViewTV parent) {
         int count = parent.getChildCount();
@@ -207,6 +210,11 @@ public class MineNewRcActivity extends Activity implements RecyclerViewTV.OnItem
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler = null;
+    }
 
     @Override
     public void onItemPreSelected(RecyclerViewTV parent, View itemView, int position) {

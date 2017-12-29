@@ -124,6 +124,11 @@
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
             android:screenOrientation="landscape"/>
+        <activity
+            android:name=".ui.TownFeatureActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            android:screenOrientation="landscape"/>
 
 
         <activity

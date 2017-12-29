@@ -7,6 +7,7 @@ import com.whx.ott.bean.BaseInfo;
 import com.whx.ott.bean.LoginResult;
 import com.whx.ott.bean.JichuResult;
 import com.whx.ott.bean.ParseSearch;
+import com.whx.ott.bean.TownTeseResult;
 import com.whx.ott.bean.VideoPathBean;
 
 import java.util.Map;
@@ -103,6 +104,12 @@ public interface ApiService {
     @GET(Conn.TOWN_SELECT)
     Observable<JichuResult> townCourses(@QueryMap Map<String, String> map);
 
+
+    /**
+     * 获取乡镇特色课课程列表
+     */
+    @GET(Conn.TOWN_TESELIST)
+    Observable<TownTeseResult> townTeseCourses(@QueryMap Map<String, String> map);
 
     /**
      * 增加基础课（小初&高中）播放记录

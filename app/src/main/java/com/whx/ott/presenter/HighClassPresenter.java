@@ -3,10 +3,12 @@ package com.whx.ott.presenter;
 import android.util.Log;
 
 import com.whx.ott.bean.JichuResult;
+import com.whx.ott.bean.TownTeseResult;
 import com.whx.ott.bean.VideoPathBean;
 import com.whx.ott.conn.ApiService;
 import com.whx.ott.conn.RetrofitClient;
 import com.whx.ott.presenter.viewinface.BasicClassView;
+import com.whx.ott.presenter.viewinface.TeseClassView;
 import com.whx.ott.util.RxUtil;
 
 import java.util.Map;
@@ -23,12 +25,21 @@ public class HighClassPresenter extends Presenter {
 
     private BasicClassView mClassView;
     private ApiService mService;
+    private TeseClassView mTeseClassView;
 
     public HighClassPresenter(BasicClassView classView) {
         mClassView = classView;
         mService = new RetrofitClient().createApiClient();
     }
 
+    public HighClassPresenter(TeseClassView classView) {
+        mTeseClassView = classView;
+        mService = new RetrofitClient().createApiClient();
+    }
+
+    /**
+     * 高中基础课筛选后课程列表
+     * */
     public void getBasicClassList(Map<String,String> map) {
         mService.basicCourses(map)
                 .subscribeOn(Schedulers.io())
@@ -50,6 +61,10 @@ public class HighClassPresenter extends Presenter {
                     }
                 });
     }
+
+    /**
+     * 小初基础课筛选后课程列表
+     * */
     public void getTownClassList(Map<String,String> map) {
         mService.townCourses(map)
                 .subscribeOn(Schedulers.io())
@@ -74,6 +89,33 @@ public class HighClassPresenter extends Presenter {
 
     }
 
+    /**
+     * 小初基础课筛选后课程列表
+     * */
+    public void getTownSoulplateList(Map<String,String> map) {
+        mService.townTeseCourses(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<TownTeseResult>() {
+                    @Override
+                    public void accept(TownTeseResult teseResult) throws Exception {
+                        if (mTeseClassView != null) {
+                            mTeseClassView.getDate(teseResult.getXcsoulcourses());
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        throwable.printStackTrace();
+                        if (null != mTeseClassView) {
+                            mTeseClassView.getDate(null);
+                        }
+                    }
+                });
+
+
+    }
+
     public void loadmoreTownList(Map<String, String> map) {
         mService.townCourses(map)
                 .subscribeOn(Schedulers.io())
@@ -86,6 +128,22 @@ public class HighClassPresenter extends Presenter {
                     throwable.printStackTrace();
                     if (null != mClassView) {
                         mClassView.moreDate(null);
+                    }
+                });
+    }
+
+    public void loadmoreTownSoulList(Map<String, String> map) {
+        mService.townTeseCourses(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(jichuResult -> {
+                    if (mTeseClassView != null) {
+                        mTeseClassView.moreDate(jichuResult.getXcsoulcourses());
+                    }
+                }, throwable -> {
+                    throwable.printStackTrace();
+                    if (null != mTeseClassView) {
+                        mTeseClassView.moreDate(null);
                     }
                 });
     }

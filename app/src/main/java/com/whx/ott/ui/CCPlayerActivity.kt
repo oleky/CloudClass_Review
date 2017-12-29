@@ -164,6 +164,7 @@ class CCPlayerActivity : AppCompatActivity(), GestureDetector.OnGestureListener,
         mVideoTimerTask = null
         mHandler.removeMessages(200)
         mHandler.removeMessages(300)
+        mHandler.removeMessages(1)
     }
 
 

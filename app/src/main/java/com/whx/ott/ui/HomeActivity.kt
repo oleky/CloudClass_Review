@@ -76,6 +76,10 @@ class HomeActivity : Activity(), SearchView {
                         val intent = Intent(this@HomeActivity, TownClassActivity::class.java)
                         startActivity(intent)
                     }
+                    R.mipmap.town_tese ->{
+                        val intent = Intent(this@HomeActivity, TownFeatureActivity::class.java)
+                        startActivity(intent)
+                    }
                     R.mipmap.me_icon ->{
                         val intent = Intent(this@HomeActivity, MineNewRcActivity::class.java)
                         startActivity(intent)

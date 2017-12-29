@@ -91,5 +91,5 @@ dependencies {
     implementation 'com.qiniu:happy-dns:0.2.+'
     implementation files('libs/AMap_Location_V3.2.1_20161228.jar')
     implementation project(':qrcode')
-    api files('libs/pldroid-player-2.0.4.jar')
+    implementation files('libs/pldroid-player-2.0.6.jar')
 }
