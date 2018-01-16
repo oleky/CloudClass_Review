@@ -88,6 +88,21 @@ public class HighClassPresenter extends Presenter {
 
 
     }
+    public void loadmoreTownList(Map<String, String> map) {
+        mService.townCourses(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(jichuResult -> {
+                    if (mClassView != null) {
+                        mClassView.moreDate(jichuResult.getCourses());
+                    }
+                }, throwable -> {
+                    throwable.printStackTrace();
+                    if (null != mClassView) {
+                        mClassView.moreDate(null);
+                    }
+                });
+    }
 
     /**
      * 小初基础课筛选后课程列表
@@ -116,21 +131,6 @@ public class HighClassPresenter extends Presenter {
 
     }
 
-    public void loadmoreTownList(Map<String, String> map) {
-        mService.townCourses(map)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(jichuResult -> {
-                    if (mClassView != null) {
-                        mClassView.moreDate(jichuResult.getCourses());
-                    }
-                }, throwable -> {
-                    throwable.printStackTrace();
-                    if (null != mClassView) {
-                        mClassView.moreDate(null);
-                    }
-                });
-    }
 
     public void loadmoreTownSoulList(Map<String, String> map) {
         mService.townTeseCourses(map)

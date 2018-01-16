@@ -141,12 +141,10 @@ class AgentLoginActivity : Activity(),View.OnClickListener,AgentView {
             tv_result.text = "检测到您是首次使用新系统登录\n请在2分钟内使用手机app，在掌上云教室app中扫描上方二维码进行身份验证"
             if (!TextUtils.isEmpty(lastip) && lastip != myIP) {
                 tv_result.text = "检测到您的网络发生了变化\n请在2分钟内使用手机app，在掌上云教室app中扫描上方二维码进行安全验证"
-                result = "$agentname&$agentID&$devId&$myIP&falsel"
+                result = "$agentname&$agentID&$devId&$myIP&false"
             } else {
                 result = "$agentname&$agentID&$devId&$myIP&true"
             }
-            Log.e("myIP",myIP)
-
             val encodestr = "whx"+Base64.encode(result.toByteArray(charset("utf-8")))
             Log.e("Base64", encodestr)
 

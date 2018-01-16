@@ -25,6 +25,7 @@ public class VideoDataAdapter extends RecyclerView.Adapter<VideoDataAdapter.MyVi
     private List<Integer> textcolors;
     private String years_name;
     private List<SoulcoursesBean> soulcoursesBeans;
+    private String year;
 
     public VideoDataAdapter(List<String> names, String years_name, List<Integer> ivs, List<Integer> textcolors, Context context) {
         this.names = names;
@@ -35,9 +36,10 @@ public class VideoDataAdapter extends RecyclerView.Adapter<VideoDataAdapter.MyVi
         notifyDataSetChanged();
     }
 
-    public VideoDataAdapter(List<SoulcoursesBean> soulcoursesBeans, Context context) {
+    public VideoDataAdapter(List<SoulcoursesBean> soulcoursesBeans, String year, Context context) {
         this.context = context;
         this.soulcoursesBeans = soulcoursesBeans;
+        this.year = year;
     }
 
     public interface OnItemClickListener {
@@ -63,6 +65,7 @@ public class VideoDataAdapter extends RecyclerView.Adapter<VideoDataAdapter.MyVi
 //        holder.tv.setText(names.get(position));
         holder.tv.setText(soulcoursesBeans.get(position).getSoulcourse_name());
 //        holder.tv_year.setTextColor(textcolors.get(0));
+        holder.tv_year.setText(year + "系列");
         String soul_id = soulcoursesBeans.get(position).getSoulplate_id();
         if (soul_id.equals(1 + "")) {
             holder.tv.setTextColor(context.getResources().getColor(R.color.jmyc));

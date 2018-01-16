@@ -31,6 +31,9 @@ class AgentPresenter(mContext: Context, private var mLoginView: AgentView?) : Pr
     private var userName: String? by DelegatesExt.preference(mContext, Const.USER_NAME, "")
     private var realName:String? by DelegatesExt.preference(mContext,Const.STU_REAL_NAME,"")
 
+    //用于判断代理权限是否过期，过期为true
+    private var highAbility:Boolean? by DelegatesExt.preference(mContext,"high_ab",false)
+    private var townAbility:Boolean? by DelegatesExt.preference(mContext,"town_ab",false)
 
     init {
         macAddress = MacUtil.getMacAddress() //1-1000
@@ -84,6 +87,8 @@ class AgentPresenter(mContext: Context, private var mLoginView: AgentView?) : Pr
                         if (hightime <= timestamp && towntime <= timestamp) {
                             mLoginView?.agentLoginFailed("您的代理期限已经到期，请与客服联系")
                         } else {
+                            highAbility = hightime <= timestamp
+                            townAbility = towntime<= timestamp
                             agentID = result.userinfo?.user_id
                             val lastIP = result.boxinfo?.ip_address ?: ""
                             val lastAddress=result.boxinfo?.address?:""

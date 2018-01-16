@@ -71,7 +71,7 @@ public interface Conn {
     //22.乡镇云教室基础属性
     String TOWN_BASEINFO = "index.php?m=Home&c=Index&a=townshipbaseinfo";
 
-    //23。乡镇云教室筛选
+    //23。乡镇云教室基础课筛选
     String TOWN_SELECT = "index.php?m=Home&c=Course&a=townshipcourseinfo";
 
 //    //24.增加乡镇云教室的播放记录

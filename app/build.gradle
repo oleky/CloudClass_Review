@@ -12,7 +12,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 22
         versionCode 19
-        versionName "v12.0.0"
+        versionName "v12.0.1"
 
         // 开启multidex
         multiDexEnabled true
@@ -88,8 +88,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.retrofit2:retrofit-adapters:2.3.0'
     implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
-    implementation 'com.qiniu:happy-dns:0.2.+'
-    implementation files('libs/AMap_Location_V3.2.1_20161228.jar')
+//    implementation 'com.qiniu:happy-dns:0.2.+'
+//    implementation files('libs/AMap_Location_V3.2.1_20161228.jar')
     implementation project(':qrcode')
     implementation files('libs/pldroid-player-2.0.6.jar')
 }

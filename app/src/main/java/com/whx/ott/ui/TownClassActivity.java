@@ -241,6 +241,7 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
         @Override
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                KeyBoardUtils.closeKeyBoard(etKeyWords, TownClassActivity.this);
                 String word = etKeyWords.getText().toString().trim();
                 if (TextUtils.isEmpty(word)) {
                     keyWord = "";
@@ -477,6 +478,7 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
         map.put(GRADEID, mList.get(2).get(GRADEID));
         map.put(SUBJECTID, mList.get(3).get(SUBJECTID));
         map.put(TEACHERID, mList.get(4).get(TEACHERID));
+        map.put("key_word",keyWord);
         mClassPresenter.getTownClassList(map);
         }
 
@@ -490,6 +492,7 @@ public class TownClassActivity extends Activity implements View.OnFocusChangeLis
         map.put(GRADEID, mList.get(2).get(GRADEID));
         map.put(SUBJECTID, mList.get(3).get(SUBJECTID));
         map.put(TEACHERID, mList.get(4).get(TEACHERID));
+        map.put("key_word",keyWord);
         mClassPresenter.loadmoreTownList(map);
     }
 

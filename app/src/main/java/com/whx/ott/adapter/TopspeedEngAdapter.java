@@ -32,9 +32,10 @@ public class TopspeedEngAdapter extends RecyclerView.Adapter<TopspeedEngAdapter.
         this.textcolors = textcolors;
     }
 
-    public TopspeedEngAdapter(Context context, List<SoulcoursesBean> tvs) {
+    public TopspeedEngAdapter(Context context, List<SoulcoursesBean> tvs, String years) {
         this.context = context;
         this.tvs = tvs;
+        this.years = years;
     }
 
     @Override
@@ -55,9 +56,11 @@ public class TopspeedEngAdapter extends RecyclerView.Adapter<TopspeedEngAdapter.
         if (soul_id.equals(4 + "")) {
             holder.tv.setTextColor(context.getResources().getColor(R.color.gsjdc));
             holder.tv_year.setTextColor(context.getResources().getColor(R.color.gsjdc));
+            holder.iv.setImageResource(R.drawable.gsjdcbg);
         } else if (soul_id.equals(5 + "")) {
             holder.tv_year.setTextColor(context.getResources().getColor(R.color.dcjyf));
             holder.tv.setTextColor(context.getResources().getColor(R.color.dcjyf));
+            holder.iv.setImageResource(R.drawable.dcjyfbg);
         }
 //        setUpEvent(holder);
     }

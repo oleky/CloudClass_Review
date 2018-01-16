@@ -59,7 +59,16 @@
         android:focusable="false"
         android:layout_alignBottom="@+id/id_teachers_new"
         />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/w_16"
+        android:text="关键词："
+        android:textColor="@color/white"
+        android:layout_marginLeft="@dimen/w_52"
+        android:focusable="false"
+        android:layout_alignBottom="@+id/et_keywords"
+        />
 
     <com.whx.ott.widget.RecyclerViewTV
         android:layout_width="wrap_content"
@@ -103,13 +112,26 @@
         android:layout_below="@+id/id_subjects_new"
         android:layout_marginLeft="@dimen/w_112"
         android:layout_marginTop="@dimen/h_11" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/h_42"
+        android:id="@+id/et_keywords"
+        android:hint="可通过关键词搜索"
+        android:textColor="@color/yellow"
+        android:textSize="@dimen/w_16"
+        android:minWidth="@dimen/w_100"
+        android:gravity="center"
+        android:background="@drawable/keywords_selector"
+        android:layout_below="@+id/id_teachers_new"
+        android:layout_marginLeft="@dimen/w_112"
+        android:layout_marginTop="@dimen/h_11" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:src="@color/white"
         android:id="@+id/id_divider"
-        android:layout_marginTop="@dimen/h_300"/>
+        android:layout_marginTop="@dimen/h_350"/>
 
         <com.whx.ott.widget.RecyclerViewTV
             android:layout_width="match_parent"

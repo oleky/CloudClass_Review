@@ -92,12 +92,19 @@ public class NewFeatureActivity extends Activity {
                 case 1:
                     if (soulNum == 5 || soulNum == 4) {
                         MyRcGlDataEng();
+//                        teacherView(3);
+                    } else if (soulNum == 0) {
+                        soulNum = 1;
+                        MyRcGlData();
+//                        updateUI2(1);
                     } else {
                         MyRcGlData();
+//                        teacherView(1);
                     }
                     break;
                 default:
                     MyRcGlData();
+//                    teacherView(1);
                     break;
             }
         }
@@ -270,7 +277,7 @@ public class NewFeatureActivity extends Activity {
         rv_teachers.setLayoutManager(layoutManager);
         rv_teachers.setFocusable(false);
         teacherBeanList = manager.getTeacherList(subject_id);
-        Log.e(TAG, "teacherView: " + teacherBeanList);
+//        Log.e(TAG, "teacherView: " + teacherBeanList);
         teachers.clear();
         for (int i = 0; i < teacherBeanList.size(); i++) {
             teachers.add(teacherBeanList.get(i).getTeacher_name());
@@ -353,6 +360,7 @@ public class NewFeatureActivity extends Activity {
     }
 
     private void onViewItemClickEng() {
+        teacher_id=0;
         updateUIEng(type);
     }
 
@@ -406,6 +414,7 @@ public class NewFeatureActivity extends Activity {
     }
 
     private void onViewItemClick1(int subject_id) {
+        teacher_id=0;
         teacherView(subject_id);
         updateUI2(subject_id);
     }
@@ -539,16 +548,8 @@ public class NewFeatureActivity extends Activity {
         gridLayoutManagerEng.setOrientation(LinearLayoutManager.HORIZONTAL);
         rv_classnames.setLayoutManager(gridLayoutManagerEng);
         rv_classnames.setFocusable(false);
-//        ivs.clear();
-//        textcolors.clear();
-//        if (soulNum == 4) {
-//            ivs.add(R.drawable.gsjdcbg);
-//            textcolors.add(soulNum);
-//        } else if (soulNum == 5) {
-//            ivs.add(R.drawable.dcjyfbg);
-//            textcolors.add(soulNum);
-//        }
-        topspeedEngAdapter = new TopspeedEngAdapter(NewFeatureActivity.this, soulcoursesBeanList);
+
+        topspeedEngAdapter = new TopspeedEngAdapter(NewFeatureActivity.this, soulcoursesBeanList, years_name);
         rv_classnames.setAdapter(topspeedEngAdapter);
         topspeedEngAdapter.notifyDataSetChanged();
         rv_classnames.setOnItemListener(new RecyclerViewTV.OnItemListener() {
@@ -589,7 +590,7 @@ public class NewFeatureActivity extends Activity {
         rv_classnames.setLayoutManager(gridlayoutManager);
         rv_classnames.setFocusable(false);
 
-        videoDataAdapter = new VideoDataAdapter(soulcoursesBeanList, this);
+        videoDataAdapter = new VideoDataAdapter(soulcoursesBeanList, years_name, this);
         rv_classnames.setAdapter(videoDataAdapter);
         videoDataAdapter.notifyDataSetChanged();
         videoDataAdapter.setOnItemClickListener(new VideoDataAdapter.OnItemClickListener() {

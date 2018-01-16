@@ -10,9 +10,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,7 @@ import com.whx.ott.bridge.RecyclerViewBridge;
 import com.whx.ott.db.TownDBManager;
 import com.whx.ott.presenter.HighClassPresenter;
 import com.whx.ott.presenter.viewinface.TeseClassView;
+import com.whx.ott.util.KeyBoardUtils;
 import com.whx.ott.util.SharedpreferenceUtil;
 import com.whx.ott.widget.CustomProgressDialog;
 import com.whx.ott.widget.GridLayoutManagerTV;
@@ -66,7 +70,8 @@ public class TownFeatureActivity extends Activity implements View.OnFocusChangeL
     private String macAdress = "";
     private RecyclerViewTV years_gp, terms_gp, grades_gp, subjects_gp, teachers_gp,results_gp;
     private View                oldView;
-
+    private EditText etKeyWords;
+    private String keyWord = "";
 
     private YearsAdapter        yearsAdapter;
     private TownSoulplateAdapter        soulplateAdapter;
@@ -103,26 +108,31 @@ public class TownFeatureActivity extends Activity implements View.OnFocusChangeL
                 case 1:
                     singleList.set(0,(HashMap<String,String>)msg.obj);
                     updateUI(singleList, start_item, end_item);
+                    keyWord = "";
                     break;
                 case 2:
                     singleList.set(1,(HashMap<String,String>)msg.obj);
                     updateUI(singleList, start_item, end_item);
-
+                    etKeyWords.setText("");
+                    keyWord = "";
                     break;
                 case 3:
                     singleList.set(2,(HashMap<String,String>)msg.obj);
                     updateUI(singleList, start_item, end_item);
-
+                    etKeyWords.setText("");
+                    keyWord = "";
                     break;
                 case 4:
                     singleList.set(3,(HashMap<String,String>)msg.obj);
                     updateUI(singleList, start_item, end_item);
-
+                    etKeyWords.setText("");
+                    keyWord = "";
                     break;
                 case 5:
                     singleList.set(4,(HashMap<String,String>)msg.obj);
                     updateUI(singleList, start_item, end_item);
-
+                    etKeyWords.setText("");
+                    keyWord = "";
                     break;
                 case 6:
                     updateUI(singleList, start_item, end_item);
@@ -207,6 +217,7 @@ public class TownFeatureActivity extends Activity implements View.OnFocusChangeL
         teachers_gp.setLayoutManager(linearLayoutManager5);
         results_gp.setLayoutManager(gridLayoutManager);
 
+        initEdit();
         initYear();
         initTerm();
         initGrade();
@@ -214,7 +225,35 @@ public class TownFeatureActivity extends Activity implements View.OnFocusChangeL
         initTeacher();
     }
 
+    private void initEdit() {
+        etKeyWords = findViewById(R.id.et_keywords);
+        etKeyWords.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        etKeyWords.setOnEditorActionListener(mOnEditorActionListener);
+        etKeyWords.setOnClickListener(v -> KeyBoardUtils.openKeyBoard(etKeyWords, TownFeatureActivity.this));
+        etKeyWords.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                KeyBoardUtils.closeKeyBoard(etKeyWords, TownFeatureActivity.this);
+            }
+        });
+    }
 
+    private TextView.OnEditorActionListener mOnEditorActionListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                KeyBoardUtils.closeKeyBoard(etKeyWords, TownFeatureActivity.this);
+                String word = etKeyWords.getText().toString().trim();
+                if (TextUtils.isEmpty(word)) {
+                    keyWord = "";
+                } else {
+                    keyWord = word;
+                }
+                handler.sendEmptyMessageDelayed(6, 200);
+                return true;
+            }
+            return false;
+        }
+    };
 
     /**
      * 分类栏操作
@@ -439,6 +478,7 @@ public class TownFeatureActivity extends Activity implements View.OnFocusChangeL
         map.put(GRADEID, mList.get(2).get(GRADEID));
         map.put(SUBJECTID, mList.get(3).get(SUBJECTID));
         map.put(TEACHERID, mList.get(4).get(TEACHERID));
+        map.put("key_word", keyWord);
         mClassPresenter.getTownSoulplateList(map);
         }
 
@@ -452,6 +492,7 @@ public class TownFeatureActivity extends Activity implements View.OnFocusChangeL
         map.put(GRADEID, mList.get(2).get(GRADEID));
         map.put(SUBJECTID, mList.get(3).get(SUBJECTID));
         map.put(TEACHERID, mList.get(4).get(TEACHERID));
+        map.put("key_word", keyWord);
         mClassPresenter.loadmoreTownSoulList(map);
     }
 

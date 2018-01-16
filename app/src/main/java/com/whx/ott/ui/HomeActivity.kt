@@ -55,6 +55,8 @@ class HomeActivity : Activity(), SearchView {
 
     private fun initGallery() {
         val imageList = FilmInfoTest.getfilmInfo()
+        val highAbl: Boolean by DelegatesExt.preference(this, "high_ab", false)
+        val townAbl: Boolean by DelegatesExt.preference(this, "town_ab", false)
         mAdapter = ImageAdapter(this, imageList)
         fancyCoverFlow.apply {
             setSpacing(-150)
@@ -63,22 +65,41 @@ class HomeActivity : Activity(), SearchView {
             setOnItemClickListener { parent, view, position, id ->
                 when (imageList.get(position % imageList.size).rs) {
                     R.mipmap.jichu_icon ->{
-                        val intent = Intent(this@HomeActivity, HighClassActivity::class.java)
-                        startActivity(intent)
+                        if (highAbl){
+                            showToast("高中课代理期限已过")
+                        }else{
+                            val intent = Intent(this@HomeActivity, HighClassActivity::class.java)
+                            startActivity(intent)
+                        }
+
                     }
                     R.mipmap.tese_icon ->{
-                        val intent = Intent(this@HomeActivity, NewFeatureActivity::class.java)
-                        val soulplateList: MutableList<Soulplates> = SharedpreferenceUtil.queryObj2Sp(this@HomeActivity, "soulplatelist") as MutableList<Soulplates>
-                        intent.putExtra("soulplate_list", soulplateList as Serializable)
-                        startActivity(intent)
+                        if (highAbl){
+                            showToast("高中课代理期限已过")
+                        }else{
+                            val intent = Intent(this@HomeActivity, NewFeatureActivity::class.java)
+                            val soulplateList: MutableList<Soulplates> = SharedpreferenceUtil.queryObj2Sp(this@HomeActivity, "soulplatelist") as MutableList<Soulplates>
+                            intent.putExtra("soulplate_list", soulplateList as Serializable)
+                            startActivity(intent)
+                        }
+
                     }
                     R.mipmap.town_jichu ->{
-                        val intent = Intent(this@HomeActivity, TownClassActivity::class.java)
-                        startActivity(intent)
+                        if (townAbl){
+                            showToast("小初课代理期限已过")
+                        }else{
+                            val intent = Intent(this@HomeActivity, TownClassActivity::class.java)
+                            startActivity(intent)
+                        }
+
                     }
                     R.mipmap.town_tese ->{
-                        val intent = Intent(this@HomeActivity, TownFeatureActivity::class.java)
-                        startActivity(intent)
+                        if (townAbl){
+                            showToast("小初课代理期限已过")
+                        }else{
+                            val intent = Intent(this@HomeActivity, TownFeatureActivity::class.java)
+                            startActivity(intent)
+                        }
                     }
                     R.mipmap.me_icon ->{
                         val intent = Intent(this@HomeActivity, MineNewRcActivity::class.java)

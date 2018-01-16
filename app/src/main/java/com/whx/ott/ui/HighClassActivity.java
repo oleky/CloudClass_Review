@@ -9,12 +9,10 @@ import android.os.Message;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.pili.pldroid.player.PLNetworkManager;
 import com.whx.ott.R;
 import com.whx.ott.adapter.GradesAdapter;
 import com.whx.ott.adapter.SearchResultAdapter;
@@ -40,7 +38,6 @@ import com.whx.ott.widget.LinearLayoutManagerTV;
 import com.whx.ott.widget.MainUpView;
 import com.whx.ott.widget.RecyclerViewTV;
 
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,9 +56,6 @@ public class HighClassActivity extends Activity implements View.OnFocusChangeLis
     public static final String TEACHERID    = "teacher_id";
     public static final String START        = "start";
     public static final String END          = "end";
-    private static final String[] DEFAULT_PLAYBACK_DOMAIN_ARRAY = {
-            "http://whxjykj-cloudclass.oss-cn-shanghai.aliyuncs.com"
-    };
 
     VideoPathBean test;
     private int start_item  = 0;            //分页开始
@@ -130,11 +124,6 @@ public class HighClassActivity extends Activity implements View.OnFocusChangeLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basic_high);
-        try {
-            PLNetworkManager.getInstance().startDnsCacheService(this, DEFAULT_PLAYBACK_DOMAIN_ARRAY);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
         mClassPresenter= new HighClassPresenter(this);
         initData();
         initRecycler();
@@ -560,6 +549,5 @@ public class HighClassActivity extends Activity implements View.OnFocusChangeLis
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        PLNetworkManager.getInstance().stopDnsCacheService(this);
     }
 }
